@@ -26,15 +26,8 @@ This framework is intended for users of the Keepa API.
 
 Composer
 -----
-```json
-...
-  "require": {
-    "php": "^5 || ^7",
-    ...
-    "keepa/api_php": "^1",
-    ...
-  }
-...
+```bash
+composer require keepa/php_api
 ```
 
 <a name="examples"></a>Quick Example
