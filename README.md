@@ -21,8 +21,7 @@ This framework is intended for users of the Keepa API.
 
 <a name="features"></a>Features
 --------
-* Retrieves content from the API asynchronously and in parallel via Deferred callbacks (Java 8 Lambda friendly)
-* Parses API response to easy to use Java objects
+* Parses API response to easy to use PHP objects
 * Provides methods that facilitate the work with price history data
 
 Composer
