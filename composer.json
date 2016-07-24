@@ -1,5 +1,6 @@
 {
   "name": "keepa/php_api",
+  "license": "Apache-2.0",
   "description": "API Framework for Keepa.com",
   "require": {
     "php": "^5 || ^7",
