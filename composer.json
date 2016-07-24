@@ -1,0 +1,12 @@
+{
+  "name": "keepa/php_api",
+  "description": "API Framework for Keepa.com",
+  "require": {
+    "php": "^5 || ^7",
+    "netresearch/jsonmapper": "^0.11.0",
+    "phpunit/phpunit": "5.4.*"
+  },
+  "autoload": {
+    "psr-4": {"Keepa\\": "src/"}
+  }
+}
