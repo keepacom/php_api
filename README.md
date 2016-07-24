@@ -55,7 +55,7 @@ use Keepa\helper\ProductType;
 use Keepa\KeepaAPI;
 use Keepa\objects\AmazonLocale;
 
-        $api = new KeepaAPI("YOUR API KEY");
+        $api = new KeepaAPI("YOUR-API-KEY");
         $r = Request::getProductRequest(AmazonLocale::DE, 0, "2015-12-31", "2018-01-01", 0, false, ['B001G73S50']);
 
         $response = $api->sendRequestWithRetry($r);
@@ -85,6 +85,6 @@ use Keepa\objects\AmazonLocale;
                     }
 					break;
 				default:
-					echo sprintf("%s",$response,PHP_EOL);
+					print_r($response);
 			}
 ```
