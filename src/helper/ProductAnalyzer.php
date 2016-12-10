@@ -12,7 +12,7 @@ class ProductAnalyzer
      * @param $end int end of the interval (keepa time minutes), can be in the future (Integer.MAX_VALUE).
      * @param $isMinimum bool whether to find the minimum or maximum
      * @return int extremePoint (value/price) in the given interval or -1 if no extreme point was found.
-     * @deprecated use {@link ProductAnalyzer#getExtremePointInInterval(int[], int, int, boolean, CsvType)} instead.
+     * @deprecated use {@link ProductAnalyzer#getExtremePointInInterval(int[], int, int, boolean, CSVType)} instead.
      */
     public static function getExtremePointInInterval($csv, $start, $end, $isMinimum)
     {
@@ -46,10 +46,10 @@ class ProductAnalyzer
      * @param $csv int[] value/price history csv
      * @param $start int start of the interval (keepa time minutes), can be 0.
      * @param $end int end of the interval (keepa time minutes), can be in the future (Integer.MAX_VALUE).
-     * @param $type CsvType the type of the csv data. If the csv includes shipping costs the extreme point will be the landing price (price + shipping).
+     * @param $type CSVType  the type of the csv data. If the csv includes shipping costs the extreme point will be the landing price (price + shipping).
      * @return int[]extremePoints (time, lowest value/price, time, highest value/price) in the given interval or -1 if no extreme point was found. If the csv includes shipping costs it will be the landing price (price + shipping).
      */
-    public static function getExtremePointsInIntervalWithTime($csv, $start, $end, CsvType $type)
+    public static function getExtremePointsInIntervalWithTime($csv, $start, $end, CSVType $type)
     {
         if ($csv == null || $start >= $end || count($csv) < ($type->isWithShipping ? 6 : 4))
             return [-1, -1, -1, -1];
@@ -121,10 +121,10 @@ class ProductAnalyzer
      * Get the last value/price change.
      *
      * @param $csv int[] value/price history csv
-     * @param $type CsvType the type of the csv data. If the csv includes shipping costs the extreme point will be the landing price (price + shipping).
+     * @param $type CSVType  the type of the csv data. If the csv includes shipping costs the extreme point will be the landing price (price + shipping).
      * @return int the last value/price change delta. If the csv includes shipping costs it will be the delta of the the landing prices (price + shipping).
      */
-    public static function getDeltaLast($csv, CsvType $type)
+    public static function getDeltaLast($csv, CSVType $type)
     {
         if ($type->isWithShipping) {
             if ($csv == null || count($csv) < 6 || $csv[count($csv) - 1] == -1 || $csv[count($csv) - 5] == -1)
@@ -151,10 +151,10 @@ class ProductAnalyzer
      * Get the last value/price.
      *
      * @param $csv int[] value/price history csv
-     * @param $type CsvType the type of the csv data.
+     * @param $type CSVType  the type of the csv data.
      * @return int the last value/price. If the csv includes shipping costs it will be the landing price (price + shipping).
      */
-    public static function getLast($csv, CsvType $type)
+    public static function getLast($csv, CSVType $type)
     {
         if ($csv == null || count($csv) == 0) return -1;
 
@@ -171,10 +171,10 @@ class ProductAnalyzer
      * Get the time (keepa time minutes) of the last entry. This does not correspond to the last update time, but to the last time we registered a price/value change.
      *
      * @param $csv int[] value/price history csv
-     * @param $type CsvType the type of the csv data.
+     * @param $type CSVType  the type of the csv data.
      * @return int keepa time minutes of the last entry
      */
-    public static function getLastTime($csv, CsvType $type)
+    public static function getLastTime($csv, CSVType $type)
     {
         return $csv == null || count($csv) == 0 ? -1 : $csv[count($csv) - ($type->isWithShipping ? 3 : 2)];
     }
@@ -184,10 +184,10 @@ class ProductAnalyzer
      *
      * @param $csv int[] value/price history csv
      * @param $time int value/price lookup time (keepa time minutes)
-     * @param $type CsvType the type of the csv data.
+     * @param $type CSVType  the type of the csv data.
      * @return int the price or value of the product at the specified time. -1 if no value was found or if the product was out of stock. If the csv includes shipping costs it will be the landing price (price + shipping).
      */
-    public static function getValueAtTime($csv, $time, CsvType $type)
+    public static function getValueAtTime($csv, $time, CSVType $type)
     {
         if ($csv == null || count($csv) == 0) return -1;
         $i = 0;
@@ -248,10 +248,10 @@ class ProductAnalyzer
     /**
      * @param $csv int[] value/price history csv
      * @param $time int time to begin the search
-     * @param $type CsvType the type of the csv data.
+     * @param $type CSVType  the type of the csv data.
      * @return int the closest value/price found to the specified time. If the csv includes shipping costs it will be the landing price (price + shipping).
      */
-    public static function getClosestValueAtTime($csv, $time, CsvType $type)
+    public static function getClosestValueAtTime($csv, $time, CSVType $type)
     {
         if ($csv == null || count($csv) == 0) return -1;
         $i = 0;
@@ -309,10 +309,10 @@ class ProductAnalyzer
      * finds the lowest and highest value/price of the csv history
      *
      * @param $csv int[] value/price history csv
-     * @param $type CsvType the type of the csv data.
+     * @param $type CSVType  the type of the csv data.
      * @return int[] [0] = low, [1] = high.  If the csv includes shipping costs the extreme point will be the landing price (price + shipping). [-1, -1] if insufficient data.
      */
-    public static function getLowestAndHighest($csv, CsvType $type)
+    public static function getLowestAndHighest($csv, CSVType $type)
     {
         $minMax = self::getExtremePointsInIntervalWithTime($csv, 0, PHP_INT_MAX, $type);
         return [$minMax[1], $minMax[3]];
@@ -322,10 +322,10 @@ class ProductAnalyzer
      * finds the lowest and highest value/price of the csv history including the dates of the occurrences (in keepa time minutes).
      *
      * @param $csv int[] value/price history csv
-     * @param $type CsvType the type of the csv data.
+     * @param $type CSVType  the type of the csv data.
      * @return int[] [0] = low time, [1] = low, [2] = high time, [3] = high.  If the csv includes shipping costs the extreme point will be the landing price (price + shipping). [-1, -1, -1, -1] if insufficient data.
      */
-    public static function getLowestAndHighestWithTime($csv, CsvType $type)
+    public static function getLowestAndHighestWithTime($csv, CSVType $type)
     {
         return self::getExtremePointsInIntervalWithTime($csv, 0, PHP_INT_MAX, $type);
     }
@@ -335,11 +335,11 @@ class ProductAnalyzer
      *
      * @param $csv int[] value/price history csv
      * @param $now int current keepa time minutes
-     * @param $type CsvType the type of the csv data.
+     * @param $type CSVType  the type of the csv data.
      * @param $days double number of days the weighted mean will be calculated for (e.g. 90 days, 60 days, 30 days)
      * @return int the weighted mean or -1 if insufficient history csv length (less than a day). If the csv includes shipping costs it will be the wieghted mean of the landing price (price + shipping).
      */
-    public static function calcWeightedMean($csv, $now, $days, CsvType $type)
+    public static function calcWeightedMean($csv, $now, $days, CSVType $type)
     {
         $avg = -1;
 
@@ -426,10 +426,10 @@ class ProductAnalyzer
      * @param $csv int[] value/price history csv
      * @param $start int start of the interval (keepa time minutes), can be 0.
      * @param $end int end of the interval (keepa time minutes), can be in the future (Integer.MAX_VALUE).
-     * @param $type CsvType the type of the csv data.
+     * @param $type CSVType  the type of the csv data.
      * @return bool was out of stock in interval, null if the csv is too short to tell.
      */
-    public static function getOutOfStockInInterval($csv, $start, $end, CsvType $type)
+    public static function getOutOfStockInInterval($csv, $start, $end, CSVType $type)
     {
         if ($type->isWithShipping) {
             if ($csv == null || count($csv) < 6)
@@ -455,11 +455,11 @@ class ProductAnalyzer
      * @param $now int current keepa time minutes
      * @param $start int start of the interval (keepa time minutes), can be 0.
      * @param $end int end of the interval (keepa time minutes), can be in the future (Integer.MAX_VALUE).
-     * @param $type CsvType the type of the csv data.
+     * @param $type CSVType  the type of the csv data.
      * @param $trackingSince int the product object's trackingSince value
      * @return int percentage between 0 and 100 or -1 if insufficient data. 100 = 100% out of stock in the interval.
      */
-    public static function getOutOfStockPercentageInInterval($csv, $now, $start, $end, CsvType $type, $trackingSince)
+    public static function getOutOfStockPercentageInInterval($csv, $now, $start, $end, CSVType $type, $trackingSince)
     {
         if (!$type->isPrice) return -1;
         if ($start >= $end) return -1;

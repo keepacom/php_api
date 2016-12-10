@@ -40,8 +40,8 @@ composer require keepa/php_api
 <?php
 use Keepa\API\Request;
 use Keepa\API\ResponseStatus;
-use Keepa\helper\CsvType;
-use Keepa\helper\CsvTypeWrapper;
+use Keepa\helper\CSVType;
+use Keepa\helper\CSVTypeWrapper;
 use Keepa\helper\KeepaTime;
 use Keepa\helper\ProductAnalyzer;
 use Keepa\helper\ProductType;
@@ -60,7 +60,7 @@ use Keepa\objects\AmazonLocale;
                         if ($product->productType == ProductType::STANDARD || $product->productType == ProductType::DOWNLOADABLE) {
 
                             //get basic data of product and print to stdout
-                            $currentAmazonPrice = ProductAnalyzer::getLast($product->csv[CsvType::AMAZON], CsvTypeWrapper::getCSVTypeFromIndex(CsvType::AMAZON));
+                            $currentAmazonPrice = ProductAnalyzer::getLast($product->csv[CSVType::AMAZON], CSVTypeWrapper::getCSVTypeFromIndex(CSVType::AMAZON));
 
 							//check if the product is in stock -1 -> out of stock
 							if ($currentAmazonPrice == -1) {
@@ -70,7 +70,7 @@ use Keepa\objects\AmazonLocale;
                             }
 
 							// get weighted mean of the last 90 days for Amazon
-							$weightedMean90days = ProductAnalyzer::calcWeightedMean($product->csv[CsvType::AMAZON], KeepaTime::nowMinutes(),90, CsvTypeWrapper::getCSVTypeFromIndex(CsvType::AMAZON));
+							$weightedMean90days = ProductAnalyzer::calcWeightedMean($product->csv[CSVType::AMAZON], KeepaTime::nowMinutes(),90, CSVTypeWrapper::getCSVTypeFromIndex(CSVType::AMAZON));
 
 						} else {
 

@@ -4,13 +4,13 @@ namespace Keepa\helper;
 /**
  * Amazon Locale Domain Enum
  */
-class CsvType
+class CSVType
 {
     const AMAZON = 0;
     const MARKET_NEW = 1; //NEW only in php7
     const USED = 2;
-    const SALES = 4;
-    const LISTPRICE = 5;
+    const SALES = 3;
+    const LISTPRICE = 4;
     const COLLECTIBLE = 5;
     const REFURBISHED = 6;
     const NEW_FBM_SHIPPING = 7;
@@ -26,8 +26,8 @@ class CsvType
     const COUNT_REVIEWS = 17;
     const BUY_BOX_SHIPPING = 18;
     const USED_NEW_SHIPPING = 19;
-    const USED_VERY_GOOD_SHIPPING = 19;
-    const USED_GOOD_SHIPPING = 20;
+    const USED_VERY_GOOD_SHIPPING = 20;
+    const USED_GOOD_SHIPPING = 21;
     const USED_ACCEPTABLE_SHIPPING = 22;
     const COLLECTIBLE_NEW_SHIPPING = 23;
     const COLLECTIBLE_VERY_GOOD_SHIPPING = 24;

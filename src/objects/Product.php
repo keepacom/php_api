@@ -290,7 +290,7 @@ class Product
 
     /**
      * Integer[][] - two dimensional price history array.<br>
-     * First dimension: {@link Product.CsvType}<br>
+     * First dimension: {@link Product.CSVType}<br>
      * Second dimension:<br>
      * Each array has the format timestamp, price, […]. To get an uncompressed timestamp use {@link KeepaTime#keepaMinuteToUnixInMillis(int)}.<br>
      * Example: "csv[0]": [411180,4900, ... ]<br>

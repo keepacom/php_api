@@ -23,7 +23,7 @@ class DealRequest
 
     /**
      * Determines the type of the deal. Even though it is an integer array, it can contain only one entry. Multiple types per query are not yet supported.
-     * Uses {@link Product.CsvType} coding. Only those applicable with {@link Product.CsvType#isDealRelevant} set to true.
+     * Uses {@link Product.CSVType} coding. Only those applicable with {@link Product.CSVType#isDealRelevant} set to true.
      * @var $priceTypes integer[]
      */
     public $priceTypes;

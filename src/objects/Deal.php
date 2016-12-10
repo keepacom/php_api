@@ -26,21 +26,21 @@ class Deal
     /**
      * Contains the absolute difference between the current value and the one at the beginning of the respective date range interval.
      * The value 0 means it did not change or could not be calculated. First dimension uses the Date Range indexing, second the Price Type indexing.
-     * <p>First dimension uses {@link Product.CsvType}, second domension {@link DealInterval}</p>
+     * <p>First dimension uses {@link Product.CSVType}, second domension {@link DealInterval}</p>
      * $var mixed|null int[][]
      */
     public $delta = null; // delta to average. negativ = gestiegen!, positiv = gesunken, 0 = gleich geblieben / nicht berechenbar!
 
     /**
      * Same as {@link #delta}, but given in percent instead of absolute values.
-     * <p>First dimension uses {@link Product.CsvType}, second domension {@link DealInterval}</p>
+     * <p>First dimension uses {@link Product.CSVType}, second domension {@link DealInterval}</p>
      * @var mixed|null int[][]
      */
     public $deltaPercent = null; // positiv = gesunken, negativ = gestiegen, 0 = gleich geblieben / nicht berechenbar!
 
     /**
      * Contains the absolute difference of the current and the previous price / rank. The value 0 means it did not change or could not be calculated.
-     * <p>Uses {@link Product.CsvType} indexing</p>
+     * <p>Uses {@link Product.CSVType} indexing</p>
      * @var int[]|null
      */
     public $deltaLast = null; // differenz zum vorherigen wert, negativ = gesunken, ..., 0 = gleich geblieben / nicht berechenbar!
@@ -48,7 +48,7 @@ class Deal
     /**
      * Contains the weighted averages in the respective date range and price type.<br>
      * <b>Note:</b> The day interval (index 0) is actually the average of the last 48 hours, not 24 hours. This is due to the way our deals work.
-     * <p>First dimension uses {@link Product.CsvType}, second domension {@link DealInterval}</p>
+     * <p>First dimension uses {@link Product.CSVType}, second domension {@link DealInterval}</p>
      * @var mided|null int[][]
      */
     public $a1vg = null; // durchschnittspreis des letzten 3 monats (ggf. kleineres interval)
@@ -60,7 +60,7 @@ class Deal
      * Shipping and Handling costs are not included. Amazon is considered to be part of the marketplace, so if
      * Amazon has the overall lowest new price, the marketplace new price in the corresponding time interval will
      * be identical to the Amazon price (except if there is only one marketplace offer).
-     * <p>Uses {@link Product.CsvType} indexing</p>
+     * <p>Uses {@link Product.CSVType} indexing</p>
      * @var int
      */
     public $current = null;
