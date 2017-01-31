@@ -49,9 +49,9 @@ class Deal
      * Contains the weighted averages in the respective date range and price type.<br>
      * <b>Note:</b> The day interval (index 0) is actually the average of the last 48 hours, not 24 hours. This is due to the way our deals work.
      * <p>First dimension uses {@link Product.CSVType}, second domension {@link DealInterval}</p>
-     * @var mided|null int[][]
+     * @var mixed|null int[][]
      */
-    public $a1vg = null; // durchschnittspreis des letzten 3 monats (ggf. kleineres interval)
+    public $avg = null; // durchschnittspreis des letzten 3 monats (ggf. kleineres interval)
 
     /**
      * Contains the prices / ranks of the product of the time we last updated it. Uses the Price Type indexing.
