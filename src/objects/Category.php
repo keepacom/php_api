@@ -34,4 +34,10 @@ final class Category
      * @var int|null
      */
     public $parent;
+
+    /**
+     * The parent category's Id. Always a positive Long value. If it is 0 the category is a root category and has no parent category.
+     * @var int|null
+     */
+    public $highestRank;
 }

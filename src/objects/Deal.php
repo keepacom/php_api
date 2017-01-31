@@ -61,7 +61,7 @@ class Deal
      * Amazon has the overall lowest new price, the marketplace new price in the corresponding time interval will
      * be identical to the Amazon price (except if there is only one marketplace offer).
      * <p>Uses {@link Product.CSVType} indexing</p>
-     * @var int
+     * @var mixed|null int[]
      */
     public $current = null;
 
