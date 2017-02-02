@@ -39,7 +39,7 @@ composer require keepa/php_api
 ```php
 <?php
 
-/* maybe required - depens if youre using a framework or not
+/* maybe required - depends if youre using a framework which maybe automaticly using this file
 require_once "vendor/autoload.php";
 */ 
 
