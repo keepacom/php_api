@@ -4,8 +4,10 @@
   "description": "API Framework for Keepa.com",
   "require": {
     "php": "^5 || ^7",
-    "netresearch/jsonmapper": "^0.11.0",
-    "phpunit/phpunit": "5.4.*"
+    "netresearch/jsonmapper": "^0.11.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~5.7"
   },
   "autoload": {
     "psr-4": {"Keepa\\": "src/"}
