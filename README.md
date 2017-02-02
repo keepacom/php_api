@@ -38,6 +38,11 @@ composer require keepa/php_api
 
 ```php
 <?php
+
+/* maybe required - depends if youre using a framework which automaticly loading this file
+require_once "vendor/autoload.php";
+*/ 
+
 use Keepa\API\Request;
 use Keepa\API\ResponseStatus;
 use Keepa\helper\CSVType;
