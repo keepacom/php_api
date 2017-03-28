@@ -20,8 +20,8 @@ class KeepaAPI
         $this->userAgent = "KEEPA-PHP Framework-" . "1.0";
         $this->serializer = new JsonMapper();
 
-        /*if (PHP_INT_SIZE != 8)
-            throw new \Exception("This Framework works only on x64 Platforms/PHP!");*/
+        if (PHP_INT_SIZE != 8)
+            throw new \Exception("This Framework works only on x64 Platforms/PHP!");
     }
 
     /**
