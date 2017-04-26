@@ -7,9 +7,9 @@ use PHPUnit\Framework\TestCase;
 abstract class abstractTest extends TestCase
 {
     /* @var $api \Keepa\KeepaAPI */
-    protected $api = null;
+    public $api = null;
 
-    protected function setUp()
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         $apiKey = getenv("apikey");
         self::assertNotNull($apiKey);
