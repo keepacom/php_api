@@ -34,6 +34,9 @@ class CSVType
     const COLLECTIBLE_GOOD_SHIPPING = 25;
     const COLLECTIBLE_ACCEPTABLE_SHIPPING = 26;
     const REFURBISHED_SHIPPING = 27;
+    const RESERVED_1 = 28;
+    const RESERVED_2 = 29;
+    const TRADE_IN = 30;
 
     /**
      * @var $index int

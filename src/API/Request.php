@@ -96,6 +96,27 @@ class Request
         return $r;
     }
 
+
+    /**
+     * Retrieve an ASIN list of the most popular products based on sales in a specific category.
+     *
+     * @param domainId Amazon locale of the product {@link AmazonLocale}
+     * @param category The category node id of the category you want to request the best sellers list for
+     * @return A ready to send request.
+     *
+     * @param int $domainID Amazon locale of the product <a href='psi_element://AmazonLocale'>AmazonLocale</a>
+     * @param string $categoryID The category node id of the category you want to request the best sellers list for. You can find category node ids via the category search request53, via the deals29 (search/select the category and click on "Show API query") or on Amazon. Alternatively you can also provide a product group (e.g. "Beauty"), which can be found in the productGroup field of product object.
+     * @return Request
+     */
+    public static function getBestSellerRequest($domainID, $categoryID)
+    {
+        $r = new Request();
+        $r->path = "bestsellers";
+        $r->parameter["domain"] = $domainID;
+        $r->parameter["category"] = $categoryID;
+        return $r;
+    }
+
     /**
      * Search for Amazon products using keywords with a maximum of 50 results per search term.
      *
