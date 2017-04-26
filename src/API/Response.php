@@ -81,6 +81,12 @@ class Response
     public $sellers = null;
 
     /**
+     * Results of the deals request
+     * @var \Keepa\objects\BestSellers
+     */
+    public $bestSellersList = null;
+
+    /**
      * Contains information about any error that might have occurred.
      * @var KeepaRequestError|null
      */
