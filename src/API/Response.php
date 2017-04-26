@@ -92,6 +92,18 @@ class Response
      */
     public $error = null;
 
+    /**
+     * Contains information about any error that might have occurred.
+     * @var \Keepa\objects\Tracking[]
+     */
+    public $trackings = null;
+
+    /**
+     * Contains information about any error that might have occurred.
+     * @var string[]|null
+     */
+    public $asinList = null;
+
     function __construct(Request $request)
     {
         $this->request = $request;

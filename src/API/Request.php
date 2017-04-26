@@ -102,7 +102,7 @@ class Request
      *
      * @param domainId Amazon locale of the product {@link AmazonLocale}
      * @param category The category node id of the category you want to request the best sellers list for
-     * @return A ready to send request.
+     * @return Request A ready to send request.
      *
      * @param int $domainID Amazon locale of the product <a href='psi_element://AmazonLocale'>AmazonLocale</a>
      * @param string $categoryID The category node id of the category you want to request the best sellers list for. You can find category node ids via the category search request53, via the deals29 (search/select the category and click on "Show API query") or on Amazon. Alternatively you can also provide a product group (e.g. "Beauty"), which can be found in the productGroup field of product object.
@@ -192,6 +192,133 @@ class Request
 
         if ($offers != null && $offers > 0)
             $r->parameter["offers"] = $offers;
+
+        return $r;
+    }
+
+
+    /**
+     * Add tracking to your list.
+     *
+     * @param TrackingRequest $trackingRequest trackingRequest The trackingRequest contains all request parameters.
+     * @return Request ready to send request.
+     */
+    public static function getTrackingAddRequest($trackingRequest)
+    {
+        return self::getTrackingBatchAddRequest([$trackingRequest]);
+    }
+
+    /**
+     * Add multiple tracking to your list. Much more efficient than individual additions.
+     *
+     * @param TrackingRequest[] $trackingRequest trackingRequests The trackingRequests (up to 1000).
+     * @return Request ready to send request.
+     */
+    public static function getTrackingBatchAddRequest(array $trackingRequest)
+    {
+        $r = new Request();
+        $r->path = "tracking";
+        $r->parameter["type"] = "add";
+        $r->postData = json_encode($trackingRequest);
+        return $r;
+    }
+
+
+    /**
+     * Removes all your trackings from your list.
+     *
+     * @return Request ready to send request.
+     */
+    public static function getTrackingRemoveAllRequest()
+    {
+        $r = new Request();
+        $r->path = "tracking";
+        $r->parameter["type"] = "removeAll";
+        return $r;
+    }
+
+    /**
+     * Remove a tracking from your list.
+     *
+     * @var string $asin
+     * @return Request ready to send request.
+     */
+    public static function getTrackingRemoveRequest($asin)
+    {
+        $r = new Request();
+        $r->path = "tracking";
+        $r->parameter["type"] = "remove";
+        $r->parameter["asin"] = $asin;
+        return $r;
+    }
+
+    /**
+     * Get all trackings from your list. If you track a lot of products this may be a resource intensive operation. Use responsibly.
+     *
+     * @var bool $asinsOnly Wether or not to only request an ASIN list of tracked products or to return all tracking objects (much larger response).
+     * @return Request ready to send request.
+     */
+    public static function getTrackingListRequest($asinsOnly)
+    {
+        $r = new Request();
+        $r->path = "tracking";
+        $r->parameter["type"] = "list";
+        if ($asinsOnly)
+            $r->parameter["asins-only"] = 1;
+
+        return $r;
+    }
+
+    /**
+     * Get a single tracking from your list.
+     *
+     * @param string $asin The ASIN to retrieve the tracking for.
+     * @return Request ready to send request.
+     */
+    public static function getTrackingGetRequest($asin)
+    {
+        $r = new Request();
+        $r->path = "tracking";
+        $r->parameter["type"] = "get";
+        $r->parameter["asin"] = $asin;
+
+        return $r;
+    }
+
+
+    /**
+     * Get your recent notifications.
+     * @param int $since Retrieve all available notifications that occurred since this date, in {@link KeepaTime}. Use 0 to request all.
+     * @param bool $revise Whether or not to request notifications already marked as read.
+     * @return Request ready to send request.
+     */
+    public static function getTrackingNotificationRequest($since, $revise)
+    {
+        $r = new Request();
+        $r->path = "tracking";
+        $r->parameter["since"] = $since;
+        $r->parameter["revise"] = $revise ? "1" : "0";
+        $r->parameter["type"] = "notification";
+
+        return $r;
+    }
+
+
+    /**
+     * Updates the webhook URL our service will call whenever a notification is triggered. The URL can also be updated and tested via the website.
+     * A push notification will be a HTTP POST call with a single notification object as its content.
+     * Your server must respond with a status code of 200 to confirm the successful retrieval.
+     * If delivery fails a second attempt will be made with a 15 seconds delay.
+     *
+     * @param string $url The new webhook URL
+     * @return Request ready to send request.
+     */
+    public static function getTrackingWebhookRequest($url)
+    {
+        $r = new Request();
+        $r->path = "tracking";
+        $r->parameter["type"] = "webhook";
+        $r->parameter["url"] = $url;
 
         return $r;
     }

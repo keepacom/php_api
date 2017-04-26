@@ -4,7 +4,7 @@ namespace Keepa\helper;
 use Keepa\helper\ProductType;
 
 /**
- * Amazon Locale Domain Enum
+ * ProductTypeWrapper Enum
  */
 class ProductTypeWrapper
 {
