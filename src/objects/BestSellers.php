@@ -3,10 +3,10 @@ namespace Keepa\objects;
 
 /**
  * About:
- * A Deal object represents a product that has recently changed (usually in price or sales rank). It contains a summary of the product and information about the changes.
+ * A best sellers ASIN list of a specific category.
  * <p>
  * Returned by:
- * The Deal object is returned by the Browsing Deals request.
+ * Request Best Sellers
  */
 class BestSellers
 {
