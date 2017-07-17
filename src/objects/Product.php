@@ -58,13 +58,13 @@ class Product
 
     /**
      * Array of category node ids
-     * @var int[]
+     * @var int[]|null
      */
     public $categories = null;
 
     /**
      * Category node id of the products' root category. 0 if no root category known
-     * @var int
+     * @var int|null
      */
     public $rootCategory = 0;
 
