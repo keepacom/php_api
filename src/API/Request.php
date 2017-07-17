@@ -178,7 +178,7 @@ class Request
      * @param $offers int If specified (= not null) Determines the number of marketplace offers to retrieve. <b>Not available for Amazon China.</b>
      * @return Request ready to send request.
      */
-    public static function getProductRequest($domainID, $offers, $statsStartDate, $statsEndDate, $update, $history, array $asins)
+    public static function getProductRequest($domainID, $offers, $statsStartDate, $statsEndDate, $update, $history, array $asins, $params = null)
     {
         $r = new Request();
         $r->path = "product";
@@ -193,6 +193,11 @@ class Request
         if ($offers != null && $offers > 0)
             $r->parameter["offers"] = $offers;
 
+        if ($params) {
+            foreach ($params as $key => $val) {
+                $r->parameter[$key] = $val;
+            }
+        }
         return $r;
     }
 
