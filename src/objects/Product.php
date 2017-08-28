@@ -32,12 +32,14 @@ class Product
     public $variationCSV = null;
 
     /**
+     * @deprecated use first upcList entry instead.
      * The UPC of the product. Caution: leading zeros are truncated.
      * @var string
      */
     public $upc = 0;
 
     /**
+     * @deprecated use first eanList entry instead.
      * The EAN of the product. Caution: leading zeros are truncated.
      * @var string
      */
@@ -312,4 +314,16 @@ class Product
      * @var string[]|null
      */
     public $frequentlyBoughtTogether = null;
+
+    /**
+     * A list of UPC assigned to this product. The first index is the primary UPC. null if not available.
+     * @var string[]|null
+     */
+    public $upcList = null;
+
+    /**
+     * A list of EAN assigned to this product. The first index is the primary EAN. null if not available.
+     * @var string[]|null
+     */
+    public $eanList = null;
 }
