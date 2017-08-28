@@ -59,4 +59,15 @@ class ProductRequestTest extends abstractTest
         self::assertNotNull($response->products[0]->csv[CSVType::RATING]);
         self::assertNotNull($response->products[0]->csv[CSVType::COUNT_REVIEWS]);
     }
+
+    public function testFrequentlyBoughtTogether()
+    {
+        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 1, true, ['B00F8JDCO4'], ["rating" => 1]);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products[0]->frequentlyBoughtTogether);
+        self::assertGreaterThan(0, count($response->products[0]->frequentlyBoughtTogether));
+    }
 }

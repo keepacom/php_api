@@ -306,4 +306,10 @@ class Product
      * @var string|null
      */
     public $type = null;
+
+    /**
+     * Amazon internal product type categorization.
+     * @var string[]|null
+     */
+    public $frequentlyBoughtTogether = null;
 }
