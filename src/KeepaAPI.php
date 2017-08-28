@@ -17,7 +17,7 @@ class KeepaAPI
     public function __construct($accessKey)
     {
         $this->accessKey = $accessKey;
-        $this->userAgent = "KEEPA-PHP Framework-" . "1.13";
+        $this->userAgent = "KEEPA-PHP Framework-" . "1.13.3";
         $this->serializer = new JsonMapper();
 
         if (PHP_INT_SIZE != 8)
