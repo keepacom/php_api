@@ -69,7 +69,7 @@ class KeepaAPI
         if ($responseCode == 200) {
             try {
                 $jo = json_decode($output);
-                if ($jo === false)
+                if ($jo == null || $jo === false)
                     throw new \Exception("Failed to parse JSON");
 
                 $response = $this->serializer->map($jo, new Response($r));
