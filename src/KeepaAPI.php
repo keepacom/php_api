@@ -82,8 +82,8 @@ class KeepaAPI
         } else {
             try {
                 $jo = json_decode($output);
-                if ($jo === false)
-                    throw new \Exception("Failed to parse JSON");
+                if ($jo == null || $jo === false)
+                    throw new \Exception("Failed to parse JSON (" . $responseCode . "): " . $jo);
                 $response = $this->serializer->map($jo, new Response($r));
 
                 switch ($responseCode) {
