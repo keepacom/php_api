@@ -147,7 +147,7 @@ class KeepaAPI
                 usleep($delay * 1000);
 
             $result = $this->sendRequest($r);
-            switch ($result->status == ResponseStatus::OK) {
+            switch ($result->status) {
                 case ResponseStatus::OK:
                     return $result;
                 case ResponseStatus::FAIL:
