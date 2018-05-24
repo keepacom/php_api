@@ -17,4 +17,14 @@ class BestSellerRequestTest extends abstractTest
         self::assertGreaterThan(1, count($response->bestSellersList->asinList));
     }
 
+    public function testLastUpdate()
+    {
+        $request = Request::getBestSellerRequest(AmazonLocale::US, "281052");
+
+        $response = $this->api->sendRequestWithRetry($request);
+
+        self::assertEquals($response->status, "OK");
+        self::assertNotNull($response->bestSellersList->lastUpdate);
+    }
+
 }

@@ -7,7 +7,7 @@ namespace Keepa\helper;
 class CSVType
 {
     const AMAZON = 0;
-    const MARKET_NEW = 1; //NEW only in php7
+    const MARKET_NEW = 1;
     const USED = 2;
     const SALES = 3;
     const LISTPRICE = 4;
@@ -37,6 +37,7 @@ class CSVType
     const RESERVED_1 = 28;
     const RESERVED_2 = 29;
     const TRADE_IN = 30;
+    const RENT = 31;
 
     /**
      * @var $index int

@@ -36,8 +36,14 @@ final class Category
     public $parent;
 
     /**
-     * The parent category's Id. Always a positive Long value. If it is 0 the category is a root category and has no parent category.
+     * The highest (root category) sales rank we have observed of a product that is listed in this category. Note: Estimate, as the value is from the Keepa product database and not retrieved from Amazon.
      * @var int|null
      */
     public $highestRank;
+
+    /**
+     * Number of products that are listed in this category. Note: Estimate, as the value is from the Keepa product database and not retrieved from Amazon.
+     * @var int|null
+     */
+    public $productCount;
 }

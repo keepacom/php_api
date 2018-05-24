@@ -17,7 +17,7 @@ class KeepaAPI
     public function __construct($accessKey)
     {
         $this->accessKey = $accessKey;
-        $this->userAgent = "KEEPA-PHP Framework-" . "1.13.3";
+        $this->userAgent = "KEEPA-PHP Framework-" . "1.26";
         $this->serializer = new JsonMapper();
 
         if (PHP_INT_SIZE != 8)
@@ -28,15 +28,15 @@ class KeepaAPI
      * Issue a request to the Keepa Price Data API.
      * If your tokens are depleted, this method will fail.
      *
-     * @param r Request the API Request {@link Request}
-     * @return Response for {@link Response}
+     * @param Request $r
+     * @return Response|object
      * @throws \Exception
      */
     public function sendRequest(Request $r)
     {
         $url = "https://api.keepa.com/" . $r->path . "/?key=" . $this->accessKey . "&" . $r->query();
-        //$url = "https://api.keepa.com/product/?key=" . $this->accessKey . "&" . "domain=3&asin=B016XONOAO,B016XONOAO";
 
+        /* @var Response */
         $response = new Response($r);
 
         // create curl resource
@@ -84,6 +84,7 @@ class KeepaAPI
                 $jo = json_decode($output);
                 if ($jo == null || $jo === false)
                     throw new \Exception("Failed to parse JSON (" . $responseCode . "): " . $jo);
+
                 $response = $this->serializer->map($jo, new Response($r));
 
                 switch ($responseCode) {
@@ -127,8 +128,9 @@ class KeepaAPI
      * If your API contigent is depleted, this method will retry the request as soon as there are new tokens available. May take minutes.
      * Will fail it the request failed too many times.
      *
-     * @param r Request the API Request {@link Request}
-     * @return
+     * @param Request $r
+     * @return Response
+     * @throws \Exception
      */
     public function sendRequestWithRetry(Request $r)
     {

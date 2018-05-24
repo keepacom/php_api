@@ -166,6 +166,11 @@ class CSVTypeWrapper
              * Refurbished price history including shipping costs.
              */
             self::$instance[CSVType::TRADE_IN] = new CSVType(30, true, false, false, false);
+
+            /**
+             * Refurbished price history including shipping costs.
+             */
+            self::$instance[CSVType::RENT] = new CSVType(31, true, false, false, true);
         }
 
         if (isset(self::$instance[$index])) return self::$instance[$index];
