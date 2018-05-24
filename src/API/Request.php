@@ -84,15 +84,25 @@ class Request
      *
      * @param int $domainID Amazon locale of the product <a href='psi_element://AmazonLocale'>AmazonLocale</a>
      * @param array|\int[] $seller The seller id of the merchant you want to request. For batch requests a comma separated list of sellerIds (up to 100). The seller id is part of the offer object and can also be found on Amazon on seller profile pages in the seller parameter of the URL.
+     * @param bool $storefront Valid values: 0 (false) and 1 (true). If specified the seller object will contain additional information about what items the seller is listing on Amazon.
+     *                   This includes a list of ASINs as well as the total amount of items the seller has listed.
+     *                   The following seller object fields will be set if data is available: asinList, asinListLastSeen.
+     *                   If no data is available no additional tokens will be consumed. The ASIN list can contain up to 100,000 items.
+     *                   As using the storefront parameter does not trigger any new collection it does not increase the processing time
+     *                   of the request, though the response may be much bigger in size.
      * @return Request
      * Example: A2L77EE7U53NWQ (Amazon.com Warehouse Deals)
      */
-    public static function getSellerRequest($domainID, array $seller)
+    public static function getSellerRequest($domainID, array $seller, $storefront = false)
     {
         $r = new Request();
         $r->path = "seller";
         $r->parameter["domain"] = $domainID;
         $r->parameter["seller"] = implode(",", $seller);
+
+        if ($storefront)
+            $r->parameter["storefront"] = "1";
+
         return $r;
     }
 

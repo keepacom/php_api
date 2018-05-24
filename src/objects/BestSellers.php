@@ -18,6 +18,12 @@ class BestSellers
     public $domainId;
 
     /**
+     * States the last time we have updated the list, in Keepa Time minutes.
+     * @var int
+     */
+    public $lastUpdate;
+
+    /**
      * The category node id used by Amazon. Represents the identifier of the category. Also part of the Product object's categories and rootCategory fields. Always a positive Long value.
      * @var int
      */

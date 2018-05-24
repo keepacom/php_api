@@ -63,31 +63,44 @@ class Seller
      */
     public $isScammer = null;
 
-    /*public enum MerchantCsvType {
-        RATING(0, false),
-        RATING_COUNT(1, false);
+    /**
+     * Boolean value indicating whether or not the seller currently has FBA listings.<br>
+     * This value is usually correct, but could be set to false even if the seller has FBA listings, since we are not always aware of all<br>
+     * seller listings. This can especially be the case with sellers with only a few listings consisting of slow-selling products.
+     * @var bool|null
+     */
+    public $hasFBA = null;
 
-        //If the values are prices.
-        public final boolean isPrice;
+    /**
+     * Only available if the <i>storefront</i> parameter was used and only updated if the <i>update</i> parameter was utilized.<br><br>
+     * String array containing up to 100,000 storefront ASINs, sorted by freshest first. The corresponding <br>
+     * time stamps can be found in the <i>asinListLastSeen</i> field.<br>
+     * Example: ["B00M0QVG3W", "B00M4KCH2A"]
+     * @var string[]|null
+     */
+    public $asinList;
 
-        public final int index;
-        public static final MerchantCsvType[] values = MerchantCsvType.values();
+    /**
+     *  Only available if the <i>storefront</i> parameter was used and only updated if the <i>update</i> parameter was utilized.<br><br>
+     *  Contains the last time (in Keepa Time minutes) we were able to verify each ASIN in the _asinList_ field.<br>
+     *  <i>asinList</i> and <i>asinListLastSeen</i> share the same indexation, so the corresponding time stamp<br>
+     *  for `asinList[10]` would be `asinListLastSeen[10]`.
+     *  <p>Use {@link KeepaTime#keepaMinuteToUnixInMillis(int)} (long)} to get an uncompressed timestamp (Unix epoch time).</p>
+     *  <br>
+     *  Example: [2711319, 2711311]
+     * @var int[]|null
+     */
+    public $asinListLastSeen;
 
-        MerchantCsvType(int i, boolean price) {
-            index = i;
-            isPrice = price;
-        }
-
-        public static MerchantCsvType getCSVTypeFromIndex(int index) {
-            for (MerchantCsvType type : MerchantCsvType.values) {
-                if (type.index == index) return type;
-            }
-            return RATING;
-        }
-    }
-
-    @Override
-    public String toString() {
-        return gson.toJson(this);
-    }*/
+    /**
+     *    Only available if the <i>storefront</i> parameter was used and only updated if the <i>update</i> parameter was utilized.<br><br>
+     *  Contains the total amount of listings of this seller. Includes historical data<br>
+     *  <i>asinList</i> and <i>asinListLastSeen</i> share the same indexation, so the corresponding time stamp<br>
+     *  for `asinList[10]` would be `asinListLastSeen[10]`. Has the format: Keepa Time minutes, count, ...
+     *  <p>Use {@link KeepaTime#keepaMinuteToUnixInMillis(int)} (long)} to get an uncompressed timestamp (Unix epoch time).</p>
+     *  <br>
+     *  Example: [2711319, 1200, 2711719, 1187]
+     * @var int[]|null
+     */
+    public $totalStorefrontAsins = null;
 }

@@ -174,6 +174,28 @@ class Product
     public $format = null;
 
     /**
+     * A list of the product features / bullet points. null if not available.
+     * An entry can contain HTML markup in rare cases. We currently limit each entry to a maximum of 1000 characters
+     * (if the feature is longer it will be cut off). This limitation may change in the future without prior notice.
+     * @var string[]|null
+     */
+    public $features = null;
+
+    /**
+     * A description of the product. null if not available. Most description contain HTML markup.<br>
+     * We limit the product description to a maximum of 2000 characters (if the description is<br>
+     * longer it will be cut off). This limitation may change in the future without prior notice.
+     * @var string|null
+     */
+    public $description = null;
+
+    /**
+     * The item's format. null if not available.
+     * @var int|null
+     */
+    public $hazardousMaterialType = null;
+
+    /**
      * The package's height in millimeter. 0 or -1 if not available.
      * @var int
      */
@@ -216,7 +238,7 @@ class Product
     public $isEligibleForTradeIn = false;
 
     /**
-     * Whether or not the product has reviews.
+     * Whether or not the product is eligible for super saver shipping by Amazon (not FBA).
      * @var bool
      */
     public $isEligibleForSuperSaverShipping = false;
@@ -314,6 +336,18 @@ class Product
      * @var string[]|null
      */
     public $frequentlyBoughtTogether = null;
+
+    /**
+     * Contains current promotions for this product. Only Amazon US promotions by Amazon (not 3rd party) are collected. In rare cases data can be incomplete.
+     * @var \Keepa\helper\PromotionObject[]|null
+     */
+    public $promotions = null;
+
+    /**
+     * Whether or not the current new price is MAP restricted. Can be used to differentiate out of stock vs. MAP restricted prices (as in both cases the current price is -1).
+     * @var bool|null
+     */
+    public $newPriceIsMAP = false;
 
     /**
      * A list of UPC assigned to this product. The first index is the primary UPC. null if not available.
