@@ -147,4 +147,15 @@ class ProductRequestTest extends abstractTest
         self::assertNotNull($response->products[0]->promotions[0]->promotionId);
         self::assertNotNull($response->products[0]->promotions[0]->type);
     }
+
+    public function testOffersOrder()
+    {
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 1, true, ['B00V84EH6A'], ["rating" => 1]);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertGreaterThan(0, count($response->products[0]->promotions));
+        self::assertNotNull($response->products[0]->liveOffersOrder);
+    }
 }
