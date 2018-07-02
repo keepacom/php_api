@@ -69,7 +69,7 @@ use Keepa\objects\AmazonLocale;
 
 							//check if the product is in stock -1 -> out of stock
 							if ($currentAmazonPrice == -1) {
-                                echo sprintf("%s %s is currently out of stock! %s",$product->asin,$product->title,PHP_EOL);
+                                echo sprintf("%s %s is currently not sold by Amazon (out of stock) %s",$product->asin,$product->title,PHP_EOL);
                             } else {
                                 echo sprintf("%s %s Current Amazon Price: %s %s",$product->asin,$product->title,$currentAmazonPrice,PHP_EOL);
                             }
