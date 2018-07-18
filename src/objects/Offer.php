@@ -139,6 +139,18 @@ class Offer
     public $isAmazon = null;
 
     /**
+     * Whether or not this offer is fulfilled by Amazon.
+     * @var boolean|null
+     */
+    public $isFBA = null;
+
+    /**
+     * Indicating whether or not our system identified that the offering merchant attempts to scam users.
+     * @var boolean|null
+     */
+    public $isCustomizeable = null;
+
+    /**
      * A Prime exclusive offer can only be ordered if the buyer has an active Prime subscription.
      * @var bool|null
      */
