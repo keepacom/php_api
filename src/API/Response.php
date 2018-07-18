@@ -39,10 +39,28 @@ class Response
     public $refillRate = null;
 
     /**
-     * time the request took, in milliseconds
+     * total time the request took (local, including latencies and connection establishment), in milliseconds
      * @var int
      */
     public $requestTime = null;
+
+    /**
+     * time the request's processing took (remote), in milliseconds
+     * @var int
+     */
+    public $processingTimeInMs = 0;
+
+    /**
+     * Token flow reduction
+     * @var float
+     */
+    public $tokenFlowReduction = -1;
+
+    /**
+     * Tokens used for call
+     * @var int
+     */
+    public $tokensConsumed = 0;
 
     /**
      * Status of the request.
@@ -91,6 +109,12 @@ class Response
      * @var KeepaRequestError|null
      */
     public $error = null;
+
+    /**
+     * Contains request specific additional output.
+     * @var string|null
+     */
+    public $additional = null;
 
     /**
      * Contains information about any error that might have occurred.

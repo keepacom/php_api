@@ -68,6 +68,36 @@ class ProductRequestTest extends abstractTest
     /**
      * @throws \Exception
      */
+    public function testIsFBA()
+    {
+        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, false, ['B001G73S50']);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertNotNull($response->products);
+        self::assertNotNull($response->products[0]->offers);
+        self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products[0]->offers[0]->isFBA);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testIsCustomizeable()
+    {
+        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, false, ['B001G73S50']);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertNotNull($response->products);
+        self::assertNotNull($response->products[0]->offers);
+        self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products[0]->offers[0]->isCustomizeable);
+    }
+
+    /**
+     * @throws \Exception
+     */
     public function testNullCategory()
     {
         $request = Request::getProductRequest(AmazonLocale::US, 0, null, null, 0, false, ['B00EA0XEMC']);
