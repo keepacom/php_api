@@ -174,6 +174,66 @@ class Product
     public $format = null;
 
     /**
+     * The item’s author. null if not available.
+     * @var string|null
+     */
+    public $author = null;
+
+    /**
+     * The item’s binding. null if not available. If the item is not a book it is usually the product category instead.
+     * @var string|null
+     */
+    public $binding = null;
+
+    /**
+     * The number of items of this product. -1 if not available.
+     * @var int
+     */
+    public $numberOfItems = -1;
+
+    /**
+     * The number of pages of this product. -1 if not available.
+     * @var int
+     */
+    public $numberOfPages = -1;
+
+    /**
+     * The item’s publication date in one of the following three formats:<br>
+     * YYYY or YYYYMM or YYYYMMDD (Y= year, M = month, D = day)<br>
+     * -1 if not available.<br><br>
+     * Examples:<br>
+     * 1978 = the year 1978<br>
+     * 200301 = January 2003<br>
+     * 20150409 = April 9th, 2015
+     * @var int
+     */
+    public $publicationDate = -1;
+
+    /**
+     * The item’s release date in one of the following three formats:<br>
+     * YYYY or YYYYMM or YYYYMMDD (Y= year, M = month, D = day)<br>
+     * -1 if not available.<br><br>
+     * Examples:<br>
+     * 1978 = the year 1978<br>
+     * 200301 = January 2003<br>
+     * 20150409 = April 9th, 2015
+     * @var int
+     */
+    public $releaseDate = -1;
+
+    /**
+     * An item can have one or more languages. Each language entry has a name and a type.
+     * Some also have an audio format. null if not available.<br><br>
+     * Examples:<br>
+     * [ [ “English”, “Published” ], [ “English”, “Original Language” ] ]<br>
+     * With audio format:<br>
+     * [ [ “Englisch”, “Originalsprache”, “DTS-HD 2.0” ], [ “Deutsch”, null, “DTS-HD 2.0” ] ]
+     * @var mixed|null
+     */
+    public $languages = null;
+
+
+    /**
      * A list of the product features / bullet points. null if not available.
      * An entry can contain HTML markup in rare cases. We currently limit each entry to a maximum of 1000 characters
      * (if the feature is longer it will be cut off). This limitation may change in the future without prior notice.
@@ -226,6 +286,15 @@ class Product
     public $packageQuantity = -1;
 
     /**
+     * Contains the lowest priced matching eBay listing Ids.
+     * Always contains two entries, the first one is the listing id of the lowest priced listing in new condition,
+     * the second in used condition. null or 0 if not available.<br>
+     * Example: [ 273344490183, 0
+     * @var integer[]|null
+     */
+    public $ebayListingIds = null;
+
+    /**
      * Indicates if the item is considered to be for adults only.
      * @var bool
      */
@@ -256,6 +325,22 @@ class Product
      * @var int
      */
     public $lastPriceChange = 0; // minutes Keepa Epoch
+
+
+    /**
+     * States the last time we have updated the eBay prices for this product, in Keepa Time minutes.<br>
+     * If no matching products were found the integer is negative.
+     * Use {@link KeepaTime#keepaMinuteToUnixInMillis(int)} (long)} to get an uncompressed timestamp (Unix epoch time).
+     * @var int
+     */
+    public $lastEbayUpdate = 0;
+
+    /**
+     * States the last time we have updated the product rating and review count, in Keepa Time minutes.<br>
+     * Use {@link KeepaTime#keepaMinuteToUnixInMillis(int)} (long)} to get an uncompressed timestamp (Unix epoch time).
+     * @var int
+     */
+    public $lastRatingUpdate = 0;
 
     /**
      * Keepa product type {@link Product.ProductType}. Must always be evaluated first.
@@ -359,6 +444,20 @@ class Product
      * @var \Keepa\helper\PromotionObject[]|null
      */
     public $promotions = null;
+
+
+    /**
+     * Contains coupon details if any are available for the product. null if not available.
+     * Integer array with always two entries: The first entry is the discount of a one time coupon, the second is a subscribe and save coupon.
+     * Entry value is either 0 if no coupon of that type is offered, positive for an absolute discount or negative for a percentage discount.
+     * The coupons field is always accessible, but only updated if the offers parameter was used in the Product Request.
+     * <p>Example:<br>
+     *        [ 200, -15 ] - Both coupon types available: $2 one time discount or 15% for subscribe and save.<br>
+     *      [ -7, 0 ] - Only one time coupon type is available offering a 7% discount.
+     * </p>
+     * @var int[]|null
+     */
+    public $coupon = null;
 
     /**
      * Whether or not the current new price is MAP restricted. Can be used to differentiate out of stock vs. MAP restricted prices (as in both cases the current price is -1).

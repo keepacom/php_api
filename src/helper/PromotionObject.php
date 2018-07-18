@@ -19,6 +19,7 @@ class PromotionObject
     const BuyQuantityXGetSimpleShippingFreeX = "BuyQuantityXGetSimpleShippingFreeX";
 
     /**
+     * The type of promotion
      * @var string|null
      */
     public $type = null;
@@ -34,6 +35,7 @@ class PromotionObject
     public $benefitDescription = null;
 
     /**
+     * unique Id of this promotion.
      * @var string|null
      */
     public $promotionId = null;

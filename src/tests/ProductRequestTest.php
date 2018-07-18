@@ -10,6 +10,9 @@ use Keepa\objects\AmazonLocale;
 
 class ProductRequestTest extends abstractTest
 {
+    /**
+     * @throws \Exception
+     */
     public function testRun()
     {
         $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, false, ['B001G73S50']);
@@ -20,6 +23,9 @@ class ProductRequestTest extends abstractTest
         self::assertEquals(1, count($response->products));
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testStats()
     {
         $request = Request::getProductRequest(AmazonLocale::DE, 0, "2015-12-31", "2018-01-01", 0, false, ['B001G73S50']);
@@ -31,6 +37,9 @@ class ProductRequestTest extends abstractTest
         self::assertEquals(1, count($response->products));
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testStatsLightingDeals()
     {
         $request = Request::getProductRequest(AmazonLocale::DE, 0, "2015-12-31", "2018-01-01", 0, false, ['B00B84Y4F4']);
@@ -42,6 +51,9 @@ class ProductRequestTest extends abstractTest
         self::assertNotNull($response->products[0]->stats->lightningDealInfo);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testOffers()
     {
         $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, false, ['B001G73S50']);
@@ -53,6 +65,9 @@ class ProductRequestTest extends abstractTest
         self::assertEquals(1, count($response->products));
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testNullCategory()
     {
         $request = Request::getProductRequest(AmazonLocale::US, 0, null, null, 0, false, ['B00EA0XEMC']);
@@ -63,9 +78,12 @@ class ProductRequestTest extends abstractTest
         self::assertEquals(1, count($response->products));
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testRatingRequest()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 1, true, ['B00F8JDCO4'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B00F8JDCO4'], ["rating" => 1]);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -74,9 +92,12 @@ class ProductRequestTest extends abstractTest
         self::assertNotNull($response->products[0]->csv[CSVType::COUNT_REVIEWS]);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testFrequentlyBoughtTogether()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 1, true, ['B00F8JDCO4'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B00F8JDCO4'], ["rating" => 1]);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -85,18 +106,24 @@ class ProductRequestTest extends abstractTest
         self::assertGreaterThan(0, count($response->products[0]->frequentlyBoughtTogether));
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testDescription()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 1, true, ['B00F8JDCO4'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B00F8JDCO4'], ["rating" => 1]);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
         self::assertNotNull($response->products[0]->description);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testFeatures()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 1, true, ['B00F8JDCO4'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B00F8JDCO4'], ["rating" => 1]);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -104,9 +131,12 @@ class ProductRequestTest extends abstractTest
         self::assertGreaterThan(0, count($response->products[0]->features));
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testHazardousMaterialType()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 0, null, null, 1, true, ['B00EAN1APM'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 0, null, null, 0, true, ['B00EAN1APM'], ["rating" => 1]);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -114,9 +144,12 @@ class ProductRequestTest extends abstractTest
         self::assertEquals(HazardousMaterialType::ORM_D_Class, $response->products[0]->hazardousMaterialType);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testRent()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 1, true, ['1616195479'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['1616195479'], ["rating" => 1]);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -124,9 +157,12 @@ class ProductRequestTest extends abstractTest
         self::assertGreaterThan(0, count($response->products[0]->csv[CSVType::RENT]));
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testMap()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 1, true, ['B008CZCS2S'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['B008CZCS2S'], ["rating" => 1]);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -134,9 +170,12 @@ class ProductRequestTest extends abstractTest
         self::assertTrue($response->products[0]->newPriceIsMAP);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testPromotions()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 0, null, null, 1, true, ['B00V84EH6A'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 0, null, null, 0, true, ['B00V84EH6A'], ["rating" => 1]);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -148,14 +187,165 @@ class ProductRequestTest extends abstractTest
         self::assertNotNull($response->products[0]->promotions[0]->type);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testOffersOrder()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 1, true, ['B00V84EH6A'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['B00V84EH6A'], ["rating" => 1]);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
         self::assertEquals(1, count($response->products));
         self::assertGreaterThan(0, count($response->products[0]->promotions));
         self::assertNotNull($response->products[0]->liveOffersOrder);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testAuthor()
+    {
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022'], ["rating" => 1]);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products[0]->author);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testBinding()
+    {
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022'], ["rating" => 1]);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products[0]->binding);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testNumberOfItems()
+    {
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['B00V84EH6A'], ["rating" => 1]);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertGreaterThan(0, $response->products[0]->numberOfItems);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testNumberOfPages()
+    {
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022'], ["rating" => 1]);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertGreaterThan(0, $response->products[0]->numberOfPages);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testPublicationDate()
+    {
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022'], ["rating" => 1]);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertGreaterThan(0, $response->products[0]->publicationDate);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testReleaseDate()
+    {
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['B071QY1WLY'], ["rating" => 1]);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertGreaterThan(0, $response->products[0]->releaseDate);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testLanguages()
+    {
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022'], ["rating" => 1]);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products[0]->languages);
+        self::assertGreaterThan(0, count($response->products[0]->languages));
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testEbayListing()
+    {
+        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['0007151667'], ["rating" => 1]);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products[0]->languages);
+        self::assertGreaterThan(0, $response->products[0]->ebayListingIds);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testEbayLastUpdate()
+    {
+        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['0007151667'], ["rating" => 1]);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products[0]->languages);
+        self::assertNotEquals(0, $response->products[0]->lastEbayUpdate);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testOfferRatingUpdate()
+    {
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022'], ["rating" => 1]);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products[0]->languages);
+        self::assertGreaterThan(0, $response->products[0]->lastRatingUpdate);
+    }
+
+
+    /**
+     * @throws \Exception
+     */
+    public function testCoupons()
+    {
+        $request = Request::getProductRequest(AmazonLocale::US, 0, null, null, 0, true, ['B00V84EH6A'], ["rating" => 1]);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertGreaterThan(0, count($response->products[0]->coupon));
     }
 }

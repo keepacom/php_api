@@ -29,4 +29,16 @@ class KeepaApiTest extends abstractTest
         self::assertEquals(ResponseStatus::PAYMENT_REQUIRED, $response->status);
     }
 
+    public function testConsumeInformation()
+    {
+        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B00F8JDCO4'], ["rating" => 1]);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertGreaterThan(-1, $response->tokenFlowReduction);
+        self::assertGreaterThan(0, $response->requestTime);
+        self::assertGreaterThan(0, $response->processingTimeInMs);
+        self::assertGreaterThan(0, $response->tokensConsumed);
+
+    }
 }
