@@ -43,6 +43,22 @@ class Stats
     public $avg90 = null;
 
     /**
+     * Contains the weighted mean for the last 180 days.<br>
+     * <p>Uses {@link Product.CsvType} indexing.</p>
+     * If no offer was available in the given interval or there is insufficient data it has the value -1.
+     * @var int[]|null
+     */
+    public $avg180 = null;
+
+    /**
+     * Contains the prices registered at the start of the interval specified in the product request's stats parameter.<br>
+     * <p>Uses {@link Product.CsvType} indexing.</p>
+     * If no offer was available in the given interval or there is insufficient data it has the value -1.
+     * @var int[]|null
+     */
+    public $atIntervalStart = null;
+
+    /**
      * Contains the lowest prices registered for this product. <br>
      * First dimension uses {@link Product.CSVType} indexing <br>
      * Second dimension is either null, if there is no data available for the price type, or
@@ -113,4 +129,61 @@ class Stats
      * @var mixed|null
      */
     public $lightningDealInfo = null;
+
+
+    /**
+     * the total count of offers this product has (all conditions combined). The offer count per condition can be found in the current field.
+     * @var int
+     */
+    public $totalOfferCount = -2;
+
+    /**
+     * the last time the offers information was updated. Use {@link KeepaTime#keepaMinuteToUnixInMillis(int)} (long)} to get an uncompressed timestamp (Unix epoch time).
+     * @var int
+     */
+    public $lastOffersUpdate = -1;
+
+    /**
+     * Contains the total stock available per item condition (of the retrieved offers) for 3rd party FBA
+     * (fulfillment by Amazon, Warehouse Deals included) or FBM (fulfillment by merchant) offers. Uses the {@link Offer.OfferCondition} indexing.
+     * @var int[]|null
+     */
+    public $stockPerCondition3rdFBA = null;
+
+    /**
+     * Contains the total stock available per item condition (of the retrieved offers) for 3rd party FBM
+     * (fulfillment by Amazon, Warehouse Deals included) or FBM (fulfillment by merchant) offers. Uses the {@link Offer.OfferCondition} indexing.
+     * @var int[]|null
+     */
+    public $stockPerConditionFBM = null;
+
+    /**
+     * Only set when the offers parameter was used. The stock of Amazon, if Amazon has an offer. Max. reported stock is 10. Otherwise -2.
+     * @var int
+     */
+    public $stockAmazon = -2;
+
+    /**
+     * Only set when the offers parameter was used. The stock of buy box offer. Max. reported stock is 10. If the boy box is empty/unqualified: -2.
+     * @var int
+     */
+    public $stockBuyBox = -2;
+
+    /**
+     * Only set when the offers parameter was used. The count of actually retrieved offers for this request.
+     * @var int
+     */
+    public $retrievedOfferCount = -2;
+
+    /**
+     * Only set when the offers parameter was used. The buy box price, if existent. Otherwise -2.
+     * @var int
+     */
+    public $buyBoxPrice = -2;
+
+    /**
+     * Only set when the offers parameter was used. If the product is an add-on item (add-on Items ship with orders that include $25 or more of items shipped by Amazon).
+     * @var bool|null
+     */
+    public $isAddonItem = null;
 }
