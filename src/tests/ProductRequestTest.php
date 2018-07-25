@@ -92,7 +92,7 @@ class ProductRequestTest extends abstractTest
         self::assertNotNull($response->products);
         self::assertNotNull($response->products[0]->offers);
         self::assertEquals(1, count($response->products));
-        self::assertNotNull($response->products[0]->offers[0]->isCustomizeable);
+        self::assertNull($response->products[0]->offers[0]->isCustomizeable);
     }
 
     /**
@@ -197,7 +197,7 @@ class ProductRequestTest extends abstractTest
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
         self::assertEquals(1, count($response->products));
-        self::assertTrue($response->products[0]->newPriceIsMAP);
+        self::assertNotNull($response->products[0]->newPriceIsMAP);
     }
 
     /**
