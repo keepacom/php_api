@@ -89,6 +89,16 @@ class Product
      */
     public $trackingSince = 0;
 
+
+    /**
+     * States the time the item was first listed on Amazon, in Keepa Time minutes.<br>
+     * It is updated in conjunction with the offers request, but always accessible.<br>
+     * We are unable to collect this information for many products, in which case the field will have the value 0.
+     * Use {@link KeepaTime#keepaMinuteToUnixInMillis(int)} (long)} to get an uncompressed timestamp (Unix epoch time).
+     * @var int
+     */
+    public $listedSince = 0;
+
     /**
      * An item's brand. null if not available.
      * @var string|null
@@ -336,6 +346,12 @@ class Product
     public $lastEbayUpdate = 0;
 
     /**
+     * Availability of the Amazon offer {@link Product.AvailabilityType}.
+     * @var int
+     */
+    public $availabilityAmazon = -1;
+
+    /**
      * States the last time we have updated the product rating and review count, in Keepa Time minutes.<br>
      * Use {@link KeepaTime#keepaMinuteToUnixInMillis(int)} (long)} to get an uncompressed timestamp (Unix epoch time).
      * @var int
@@ -463,7 +479,7 @@ class Product
      * Whether or not the current new price is MAP restricted. Can be used to differentiate out of stock vs. MAP restricted prices (as in both cases the current price is -1).
      * @var bool|null
      */
-    public $newPriceIsMAP = false;
+    public $newPriceIsMAP = null;
 
     /**
      * A list of UPC assigned to this product. The first index is the primary UPC. null if not available.
