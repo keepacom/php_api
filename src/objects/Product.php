@@ -197,7 +197,7 @@ class Product
     public $binding = null;
 
     /**
-     * The item’s binding. null if not available. If the item is not a book it is usually the product category instead.
+     * Represents the category tree as an ordered array of CategoryTreeEntry objects.
      * @var \Keepa\helper\CategoryTreeEntry[]|null
      */
     public $categoryTree = null;
