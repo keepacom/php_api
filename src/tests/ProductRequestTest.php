@@ -378,4 +378,21 @@ class ProductRequestTest extends abstractTest
         self::assertEquals(1, count($response->products));
         self::assertGreaterThan(0, count($response->products[0]->coupon));
     }
+
+
+    /**
+     * @throws \Exception
+     */
+    public function testCategoryTree()
+    {
+        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, false, ['B001G73S50']);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertNull($response->categories);
+        self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products[0]->categoryTree);
+        self::assertGreaterThan(0, count($response->products[0]->categoryTree));
+    }
+
 }
