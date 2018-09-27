@@ -2,6 +2,7 @@
 namespace Keepa;
 
 use JsonMapper;
+use Keepa\API\CurlClient;
 use Keepa\API\Request;
 use Keepa\API\Response;
 use Keepa\API\ResponseStatus;
@@ -13,12 +14,17 @@ class KeepaAPI
     private $accessKey = null;
     private $userAgent = null;
     private $serializer = null;
+    private $httpClient = null;
 
-    public function __construct($accessKey)
+    public function __construct($accessKey, $httpClient = null)
     {
+        if(!$httpClient)
+            $httpClient = new CurlClient;
+
         $this->accessKey = $accessKey;
         $this->userAgent = "KEEPA-PHP Framework-" . "1.36";
         $this->serializer = new JsonMapper();
+        $this->httpClient = $httpClient;
 
         if (PHP_INT_SIZE != 8)
             throw new \Exception("This Framework works only on x64 Platforms/PHP!");
@@ -40,32 +46,23 @@ class KeepaAPI
         $response = new Response($r);
 
         // create curl resource
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);
-        curl_setopt($ch, CURLOPT_ENCODING, "gzip");
+        $this->httpClient
+            ->setUrl($url)
+            ->setUserAgent($this->userAgent);
 
         if ($r->postData != null) {
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $r->postData);
+            $this->httpClient
+                ->setPostData($r->postData);
         }
-
-        //return the transfer as a string
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
 
         $responseTime = microtime(true);
 
+        $this->httpClient->get();
+
         // $output contains the output string
-        $output = curl_exec($ch);
+        $output = $this->httpClient->getBody();
 
-        if ($output === false)
-            throw new \Exception(curl_error($ch));
-
-        $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $responseCode = $this->httpClient->getResponseCode();
         if ($responseCode == 200) {
             try {
                 $jo = json_decode($output);
@@ -115,7 +112,6 @@ class KeepaAPI
 
 
         // close curl resource to free up system resources
-        curl_close($ch);
         $response->url = $url;
         $response->requestTime = intval((microtime(true) - $responseTime) * 1000);
 
