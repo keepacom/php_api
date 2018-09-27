@@ -13,6 +13,7 @@ use Keepa\KeepaAPI;
 use Keepa\objects\AmazonLocale;
 
 $api = new KeepaAPI("771ftntmq9f04bpasd0j903sh7le7tk8vo0irulj98cm6ulgl8ieu805ctmpdf4k");
+$api->setHttpClient(new \Keepa\API\CurlClient);
 $r = Request::getProductRequest(AmazonLocale::DE, 0, "2015-12-31", "2018-01-01", 0, true, ['B001G73S50']);
 
 while (true) {
