@@ -3,6 +3,7 @@ namespace Keepa;
 
 use JsonMapper;
 use Keepa\API\CurlClient;
+use Keepa\API\HttpClientInterface;
 use Keepa\API\Request;
 use Keepa\API\Response;
 use Keepa\API\ResponseStatus;
@@ -16,15 +17,11 @@ class KeepaAPI
     private $serializer = null;
     private $httpClient = null;
 
-    public function __construct($accessKey, $httpClient = null)
+    public function __construct($accessKey)
     {
-        if(!$httpClient)
-            $httpClient = new CurlClient;
-
         $this->accessKey = $accessKey;
         $this->userAgent = "KEEPA-PHP Framework-" . "1.36";
         $this->serializer = new JsonMapper();
-        $this->httpClient = $httpClient;
 
         if (PHP_INT_SIZE != 8)
             throw new \Exception("This Framework works only on x64 Platforms/PHP!");
@@ -45,24 +42,23 @@ class KeepaAPI
         /* @var Response */
         $response = new Response($r);
 
-        // create curl resource
-        $this->httpClient
+        // create client
+        $client = $this->getHttpClient()
             ->setUrl($url)
             ->setUserAgent($this->userAgent);
 
         if ($r->postData != null) {
-            $this->httpClient
-                ->setPostData($r->postData);
+            $client->setPostData($r->postData);
         }
 
         $responseTime = microtime(true);
 
-        $this->httpClient->get();
+        $client->get();
 
         // $output contains the output string
-        $output = $this->httpClient->getBody();
+        $output = $client->getBody();
 
-        $responseCode = $this->httpClient->getResponseCode();
+        $responseCode = $client->getResponseCode();
         if ($responseCode == 200) {
             try {
                 $jo = json_decode($output);
@@ -158,5 +154,23 @@ class KeepaAPI
                     return $result;
             }
         }
+    }
+
+    public function setHttpClient($client)
+    {
+        $this->httpClient = $client;
+    }
+
+    /**
+     * Returns a suitable HttpClient
+     * @return HttpClientInterface
+     */
+    protected function getHttpClient()
+    {
+        if(!$this->httpClient){
+            $this->httpClient = new CurlClient;
+        }
+
+        return $this->httpClient;
     }
 }
