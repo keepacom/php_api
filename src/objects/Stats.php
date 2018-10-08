@@ -118,6 +118,15 @@ class Stats
      */
     public $outOfStockPercentage90 = null;
 
+    /**
+     * Contains the 30 day out of stock percentage<br>
+     * <p>Uses {@link Product.CsvType} indexing.</p>
+     * It has the value -1 if there is insufficient data or the CsvType is not a price.<br>
+     * <p>Examples: 0 = never was out of stock, 100 = was out of stock 100% of the time, 25 = was out of stock 25% of the time</p>
+     * @var int[]|null
+     */
+    public $outOfStockPercentage30 = null;
+
 
     /**
      * Can be used to identify past, upcoming and current lightning deal offers.
@@ -182,8 +191,80 @@ class Stats
     public $buyBoxPrice = -2;
 
     /**
+     * Only set when the offers parameter was used. The buy box shipping cost, if existent. Otherwise -2.
+     * @var int
+     */
+    public $buyBoxShipping = -2;
+
+    /**
+     * Only set when the offers parameter was used. Whether or not a seller won the buy box. If there are only sellers with bad offers none qualifies for the buy box.
+     * @var  bool|null
+     */
+    public $buyBoxIsUnqualified = null;
+
+    /**
+     * Only set when the offers parameter was used. Whether or not the buy box is listed as being shippable.
+     * @var bool|null
+     */
+    public $buyBoxIsShippable = null;
+
+    /**
+     * Only set when the offers parameter was used. If the buy box is a pre-order.
+     * @var bool|null
+     */
+    public $buyBoxIsPreorder = null;
+
+    /**
+     * Only set when the offers parameter was used. Whether or not the buy box is fulfilled by Amazon.
+     * @var bool|null
+     */
+    public $buyBoxIsFBA = null;
+
+    /**
+     * Only set when the offers parameter was used. Whether or not the buy box offer is in used condition.
+     * @var bool|null
+     */
+    public $buyBoxIsUsed = null;
+
+    /**
+     * Only set when the offers parameter was used. If Amazon is the seller in the buy box.
+     * @var bool|null
+     */
+    public $buyBoxIsAmazon = null;
+
+    /**
+     * Only set when the offers parameter was used. If the buy box price is hidden on Amazon due to MAP restrictions (minimum advertised price).
+     * @var bool|null
+     */
+    public $buyBoxIsMAP = null;
+
+    /**
      * Only set when the offers parameter was used. If the product is an add-on item (add-on Items ship with orders that include $25 or more of items shipped by Amazon).
      * @var bool|null
      */
     public $isAddonItem = null;
+
+    /**
+     * Only set when the offers parameter was used. Contains the seller ids (if any) of the lowest priced live FBA offer(s). Multiple entries if multiple offers share the same price.
+     * @var string[]|null
+     */
+    public $sellerIdsLowestFBA = null;
+
+    /**
+     * Only set when the offers parameter was used. Contains the seller ids (if any) of the lowest priced live FBM offer(s). Multiple entries if multiple offers share the same price.
+     * @var string[]|null
+     */
+    public $sellerIdsLowestFBM = null;
+
+    /**
+     * Only set when the offers parameter was used. Count of retrieved live FBA offers.
+     * @var int|null
+     */
+    public $offerCountFBA = -2;
+
+    /**
+     * Only set when the offers parameter was used. Count of retrieved live FBM offers.
+     * @var int|null
+     */
+    public $offerCountFBM = -2;
 }

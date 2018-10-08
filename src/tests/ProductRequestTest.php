@@ -217,6 +217,41 @@ class ProductRequestTest extends abstractTest
         self::assertNotNull($response->products[0]->promotions[0]->type);
     }
 
+
+    /**
+     * @throws \Exception
+     */
+    public function testVariations()
+    {
+        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B008DV76YQ'], ["rating" => 1]);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products[0]->variations);
+        self::assertGreaterThan(0, $response->products[0]->variations);
+        self::assertNotNull($response->products[0]->variations[0]->asin);
+        self::assertNotNull($response->products[0]->variations[0]->attributes);
+        self::assertNotNull($response->products[0]->variations[0]->attributes[0]->dimension);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testFBAFees()
+    {
+        $request = Request::getProductRequest(AmazonLocale::US, 0, null, null, 0, true, ['B00V84EH6A'], ["rating" => 1]);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products[0]->fbaFees);
+        self::assertNotNull($response->products[0]->fbaFees->pickAndPackFee);
+        self::assertNotNull($response->products[0]->fbaFees->pickAndPackFeeTax);
+        self::assertNotNull($response->products[0]->fbaFees->storageFee);
+        self::assertNotNull($response->products[0]->fbaFees->storageFeeTax);
+    }
+
     /**
      * @throws \Exception
      */
