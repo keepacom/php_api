@@ -94,7 +94,7 @@ class Product
     /**
      * States the time the item was first listed on Amazon, in Keepa Time minutes.<br>
      * It is updated in conjunction with the offers request, but always accessible.<br>
-     * We are unable to collect this information for many products, in which case the field will have the value 0.
+     * This timestamp is only available for some products. If not available the field has the value 0.
      * Use {@link KeepaTime#keepaMinuteToUnixInMillis(int)} (long)} to get an uncompressed timestamp (Unix epoch time).
      * @var int
      */
@@ -191,7 +191,7 @@ class Product
     public $author = null;
 
     /**
-     * The item’s binding. null if not available. If the item is not a book it is usually the product category instead.
+     * Represents the category tree as an ordered array of CategoryTreeEntry objects.
      * @var string|null
      */
     public $binding = null;
@@ -468,6 +468,12 @@ class Product
      */
     public $promotions = null;
 
+    /**
+     * Contains the dimension attributes for up to 50 variations of this product. Only available on parent ASINs.
+     * @var \Keepa\helper\VariationObject[]|null
+     */
+    public $variations = null;
+
 
     /**
      * Contains coupon details if any are available for the product. null if not available.
@@ -487,6 +493,13 @@ class Product
      * @var bool|null
      */
     public $newPriceIsMAP = null;
+
+
+    /**
+     * FBA fees for this product. If FBA fee information has not yet been collected for this product the field will be null.
+     * @var \Keepa\helper\FBAFeesObject|null
+     */
+    public $fbaFees = null;
 
     /**
      * A list of UPC assigned to this product. The first index is the primary UPC. null if not available.
