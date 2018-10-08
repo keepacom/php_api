@@ -27,6 +27,10 @@ class CurlClient implements HttpClientInterface
         $this->ch = curl_init();
         $this->setOpt(CURLOPT_ENCODING, 'gzip');
         $this->setOpt(CURLOPT_RETURNTRANSFER, true);
+
+        // was default disabled before, should be fine from now on
+        /*$this->setOpt(CURLOPT_SSL_VERIFYHOST, false);
+        $this->setOpt(CURLOPT_SSL_VERIFYPEER, false);*/
     }
 
     /**
@@ -52,7 +56,7 @@ class CurlClient implements HttpClientInterface
      */
     public function setPostData($data)
     {
-        $this->postData = array_merge($this->postData, $data);
+        $this->postData = $data;
         $this->setOpt(CURLOPT_POST, true);
         $this->setOpt(CURLOPT_POSTFIELDS, $this->postData);
         return $this;
