@@ -128,6 +128,12 @@ class Response
      */
     public $asinList = null;
 
+    /**
+     * Estimated count of all matched products.
+     * @var int|null
+     */
+    public $totalResults = null;
+
     function __construct(Request $request)
     {
         $this->request = $request;
