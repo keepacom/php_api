@@ -149,7 +149,7 @@ class KeepaAPI
                     $lastResponse = $result;
                     $retry++;
                     $delay = min(2 * $expoDelay + 100, self::MAX_DELAY);
-                    continue;
+                    continue 2;
                 default:
                     return $result;
             }
