@@ -7,6 +7,7 @@ use Keepa\helper\CSVTypeWrapper;
 use Keepa\helper\HazardousMaterialType;
 use Keepa\helper\ProductAnalyzer;
 use Keepa\objects\AmazonLocale;
+use Keepa\objects\ProductFinderRequest;
 
 class ProductRequestTest extends abstractTest
 {
@@ -210,6 +211,9 @@ class ProductRequestTest extends abstractTest
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
         self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products);
+        self::assertGreaterThan(0, count($response->products));
+        self::assertNotNull($response->products[0]->promotions);
         self::assertGreaterThan(0, count($response->products[0]->promotions));
         self::assertNotNull($response->products[0]->promotions[0]->benefitDescription);
         self::assertNotNull($response->products[0]->promotions[0]->eligibilityRequirementDescription);
@@ -262,6 +266,9 @@ class ProductRequestTest extends abstractTest
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
         self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products);
+        self::assertGreaterThan(0, count($response->products));
+        self::assertNotNull($response->products[0]->promotions);
         self::assertGreaterThan(0, count($response->products[0]->promotions));
         self::assertNotNull($response->products[0]->liveOffersOrder);
     }
@@ -411,6 +418,9 @@ class ProductRequestTest extends abstractTest
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
         self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products);
+        self::assertGreaterThan(0, count($response->products));
+        self::assertNotNull($response->products[0]->coupon);
         self::assertGreaterThan(0, count($response->products[0]->coupon));
     }
 
@@ -428,6 +438,21 @@ class ProductRequestTest extends abstractTest
         self::assertEquals(1, count($response->products));
         self::assertNotNull($response->products[0]->categoryTree);
         self::assertGreaterThan(0, count($response->products[0]->categoryTree));
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testFinder()
+    {
+        $fr = new ProductFinderRequest();
+        $fr->avg1_AMAZON_gte = 1;
+
+        $request = Request::getFinderRequest(AmazonLocale::DE, $fr);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertGreaterThan(0, count($response->asinList));
     }
 
 }

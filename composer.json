@@ -4,11 +4,13 @@
   "description": "API Framework for Keepa.com",
   "require": {
     "ext-curl": "*",
+    "ext-json": "*",
     "php": "^5 || ^7",
     "netresearch/jsonmapper": "^0.11.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "~5.7"
+    "phpunit/phpunit": "~5.7",
+    "larapack/dd": "^1.1"
   },
   "autoload": {
     "psr-4": {"Keepa\\": "src/"}
