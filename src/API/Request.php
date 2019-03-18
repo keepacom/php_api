@@ -2,6 +2,7 @@
 namespace Keepa\API;
 
 use Keepa\helper\KeepaTime;
+use Keepa\objects\ProductFinderRequest;
 
 /**
  * Common Request
@@ -334,6 +335,26 @@ class Request
         $r->path = "tracking";
         $r->parameter["type"] = "webhook";
         $r->parameter["url"] = $url;
+
+        return $r;
+    }
+
+    /**
+     * Query our product database to find products matching your criteria. Almost all product fields can be searched for and sorted by.
+     * The product finder request provides the same core functionality as our Product Finder.
+     *
+     * @param $domainId
+     * @param ProductFinderRequest $request
+     * @return Request
+     */
+    public static function getFinderRequest($domainId, ProductFinderRequest $request)
+    {
+        $r = new Request();
+        $r->path = "query";
+        $r->parameter["domain"] = $domainId;
+        $r->parameter["selection"] = json_encode(array_filter((array)$request, function ($var) {
+            return !is_null($var);
+        }));
 
         return $r;
     }
