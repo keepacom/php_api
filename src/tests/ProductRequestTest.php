@@ -455,4 +455,19 @@ class ProductRequestTest extends abstractTest
         self::assertGreaterThan(0, count($response->asinList));
     }
 
+    /**
+     * @throws \Exception
+     */
+    public function testItemDimensions()
+    {
+        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['B00V84EH6A'], ["rating" => 1]);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertGreaterThan(0, $response->products[0]->itemWidth);
+        self::assertGreaterThan(0, $response->products[0]->itemHeight);
+        self::assertGreaterThan(0, $response->products[0]->itemLength);
+        self::assertGreaterThan(0, $response->products[0]->itemWeight);
+    }
 }
