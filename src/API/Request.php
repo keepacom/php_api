@@ -359,6 +359,20 @@ class Request
         return $r;
     }
 
+    /**
+     * Get your token status.
+     *
+     * @return Request ready to send request.
+     */
+    public static function getTokenStatusRequest()
+    {
+        $r = new Request();
+        $r->path = "token";
+
+        return $r;
+    }
+
+
     public function query()
     {
         if ($this->parameter == null || count($this->parameter) == 0)
