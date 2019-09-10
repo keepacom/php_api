@@ -128,7 +128,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testFrequentlyBoughtTogether()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B00F8JDCO4'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B00F8JDCO4']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -142,7 +142,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testDescription()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B00F8JDCO4'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B00F8JDCO4']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -154,7 +154,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testFeatures()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B00F8JDCO4'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B00F8JDCO4']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -167,7 +167,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testHazardousMaterialType()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 0, null, null, 0, true, ['B00EAN1APM'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 0, null, null, 0, true, ['B00EAN1APM']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -180,7 +180,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testRent()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['1616195479'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['1616195479']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -193,7 +193,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testMap()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['B008CZCS2S'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['B008CZCS2S']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -206,7 +206,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testPromotions()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 0, null, null, 0, true, ['B00V84EH6A'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 0, null, null, 0, true, ['B006XISCNA']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -227,7 +227,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testVariations()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B008DV76YQ'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B00OJ732J6']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -244,7 +244,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testFBAFees()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 0, null, null, 0, true, ['B00V84EH6A'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 0, null, null, 0, true, ['B00V84EH6A']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -261,15 +261,13 @@ class ProductRequestTest extends abstractTest
      */
     public function testOffersOrder()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['B00V84EH6A'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['B00V84EH6A']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
         self::assertEquals(1, count($response->products));
         self::assertNotNull($response->products);
         self::assertGreaterThan(0, count($response->products));
-        self::assertNotNull($response->products[0]->promotions);
-        self::assertGreaterThan(0, count($response->products[0]->promotions));
         self::assertNotNull($response->products[0]->liveOffersOrder);
     }
 
@@ -278,7 +276,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testAuthor()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -291,7 +289,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testBinding()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -304,7 +302,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testNumberOfItems()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['B00V84EH6A'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['B00V84EH6A']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -317,7 +315,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testNumberOfPages()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -330,7 +328,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testPublicationDate()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -343,7 +341,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testReleaseDate()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['B071QY1WLY'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['B071QY1WLY']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -356,7 +354,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testLanguages()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -370,7 +368,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testEbayListing()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['0007151667'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['0007151667']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -384,7 +382,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testEbayLastUpdate()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['0007151667'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['0007151667']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -398,7 +396,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testOfferRatingUpdate()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -413,7 +411,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testCoupons()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 0, null, null, 0, true, ['B00V84EH6A'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B01825GBK2']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -460,7 +458,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testItemDimensions()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['B00V84EH6A'], ["rating" => 1]);
+        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['B00V84EH6A']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");

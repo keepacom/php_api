@@ -90,7 +90,7 @@ class Deal
     /**
      * Array of Amazon category node ids {@link Category#catId} this product is listed in. Can be empty.<br>
      * Example: [569604]
-     * @var int|null
+     * @var int[]|null
      */
     public $categories = null;
 
