@@ -129,6 +129,12 @@ class Response
     public $asinList = null;
 
     /**
+     * A list of sellerIds.
+     * @var string[]|null
+     */
+    public $sellerIdList = null;
+
+    /**
      * Estimated count of all matched products.
      * @var int|null
      */
