@@ -18,5 +18,8 @@ class AmazonLocale
     const ES = 9;
     const IN = 10;
     const MX = 11;
-    const AU = 12;
+    const BR = 12;
+    const AU = 13;
+    const NL = 14;
+    const TR = 15;
 }
