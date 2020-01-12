@@ -193,7 +193,10 @@ class Request
     {
         $r = new Request();
         $r->path = "product";
-        $r->parameter["asin"] = implode(",", $asins);
+
+        if (!empty($asins))
+            $r->parameter["asin"] = implode(",", $asins);
+
         $r->parameter["domain"] = $domainID;
         $r->parameter["update"] = $update;
         $r->parameter["history"] = $history ? "1" : "0";
