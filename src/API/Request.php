@@ -36,6 +36,27 @@ class Request
     }
 
     /**
+     * This request provides access to all current and upcoming lightning deals.
+     * You can request a specific lightning deal by specifying an ASIN or get the complete list.
+     * Our lightning deals information is updated every 10 minutes.
+     *
+     *
+     * @param int domainId Amazon locale of the product {@link AmazonLocale}
+     * @param string asin The ASIN to retrieve the lightning deal for or null to retrieve all lightning deals
+     * @return Request
+     */
+    public static function getLightningDealRequest($domainId, $asin = null)
+    {
+        $r = new Request();
+        $r->path = "lightningdeal";
+        $r->parameter["domain"] = $domainId;
+        if ($asin != null)
+            $r->parameter["asin"] = $asin;
+
+        return $r;
+    }
+
+    /**
      * Retrieve category objects using their node ids and (optional) their parent tree.
      *
      * @param int $domainID Locale of the product <a href='psi_element://AmazonLocale'>AmazonLocale</a>

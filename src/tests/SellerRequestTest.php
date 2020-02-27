@@ -59,5 +59,6 @@ class SellerRequestTest extends abstractTest
         self::assertNotNull($response->sellers);
         self::assertEquals(1, count($response->sellers));
         self::assertGreaterThan(0, count($response->sellers['A2L77EE7U53NWQ']->totalStorefrontAsins));
+        self::assertNotNull($response->sellers['A2L77EE7U53NWQ']->shipsFromChina);
     }
 }
