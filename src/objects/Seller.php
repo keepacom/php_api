@@ -64,6 +64,12 @@ class Seller
     public $isScammer = null;
 
     /**
+     * Indicating whether or not the offer ships from China.
+     * @var bool|null
+     */
+    public $shipsFromChina = null;
+
+    /**
      * Boolean value indicating whether or not the seller currently has FBA listings.<br>
      * This value is usually correct, but could be set to false even if the seller has FBA listings, since we are not always aware of all<br>
      * seller listings. This can especially be the case with sellers with only a few listings consisting of slow-selling products.
@@ -103,4 +109,37 @@ class Seller
      * @var int[]|null
      */
     public $totalStorefrontAsins = null;
+
+
+    /**
+     * Statistics about the primary categories of this seller. Based on our often incomplete and outdated product offers data.
+     * @var MerchantCategoryStatistics[]|null
+     */
+    public $sellerCategoryStatistics = null;
+
+    /**
+     * Statistics about the primary brands of this seller. Based on our often incomplete and outdated product offers data.
+     * @var MerchantBrandStatistics[]|null
+     */
+    public $sellerBrandStatistics = null;
+
+
+    /**
+     *
+     * @var int
+     */
+    public $currentRating = null;
+
+    /**
+     *
+     * @var int
+     */
+    public $currentRatingCount = null;
+
+    /**
+     *
+     * @var int
+     */
+    public $ratingsLast30Days = null;
+
 }

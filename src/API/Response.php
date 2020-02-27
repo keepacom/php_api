@@ -1,5 +1,4 @@
-<?php
-namespace Keepa\API;
+<?php namespace Keepa\API;
 
 /**
  * Common Keepa API Response
@@ -139,6 +138,12 @@ class Response
      * @var int|null
      */
     public $totalResults = null;
+
+    /**
+     * A list of lightning deals.
+     * @var \Keepa\objects\LightningDeal[]|null
+     */
+    public $lightningDeals = null;
 
     function __construct(Request $request)
     {
