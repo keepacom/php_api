@@ -72,6 +72,9 @@ class KeepaAPI
                 $response->status = ResponseStatus::REQUEST_FAILED;
                 throw $e;
             }
+        } else if($responseCode == 503) // backend down, retry again..
+        {
+            $response->status = ResponseStatus::FAIL;
         } else {
             try {
                 $jo = json_decode($output);
