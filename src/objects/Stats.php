@@ -239,6 +239,50 @@ class Stats
     public $buyBoxIsMAP = null;
 
     /**
+     * The minimum order quantity of the buy box. -1 if not available, 0 if no limit exists.
+     * @var bool|null
+     */
+    public $buyBoxMinOrderQuantity = null;
+
+	/**
+     * The maximum order quantity of the buy box. -1 if not available, 0 if no limit exists.
+     * @var bool|null
+     */
+	public $buyBoxMaxOrderQuantity = null;
+
+	/**
+     * The availability message of the buy box. null if not available.
+     * Example: “In Stock.”
+     * @var string|null
+     */
+	public $buyBoxAvailabilityMessage = null;
+
+	/**
+     * The default shipping country of the buy box seller. null if not available. Example: “US”
+     * @var string|null
+     */
+	public $buyBoxShippingCountry = null;
+
+	/**
+     * If the buy box is Prime exclusive. null if not available.
+     * @var bool|null
+     */
+	public $buyBoxIsPrimeExclusive = null;
+
+	/**
+     * If the buy box is Prime eligible. null if not available.
+     * @var bool|null
+     */
+	public $buyBoxIsPrimeEligible = null;
+
+	/**
+     * If the buy box is a Prime Pantry offer. null if not available.
+     * @var bool|null
+     */
+	public $buyBoxIsPrimePantry = null;
+
+
+    /**
      * Only set when the offers parameter was used. If the product is an add-on item (add-on Items ship with orders that include $25 or more of items shipped by Amazon).
      * @var bool|null
      */

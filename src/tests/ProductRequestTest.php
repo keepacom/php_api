@@ -165,19 +165,6 @@ class ProductRequestTest extends abstractTest
     /**
      * @throws \Exception
      */
-    public function testHazardousMaterialType()
-    {
-        $request = Request::getProductRequest(AmazonLocale::US, 0, null, null, 0, true, ['B00EAN1APM']);
-
-        $response = $this->api->sendRequestWithRetry($request);
-        self::assertEquals($response->status, "OK");
-        self::assertNotNull($response->products[0]->hazardousMaterialType);
-        self::assertEquals(HazardousMaterialType::ORM_D_Class, $response->products[0]->hazardousMaterialType);
-    }
-
-    /**
-     * @throws \Exception
-     */
     public function testRent()
     {
         $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['1616195479']);
@@ -199,26 +186,6 @@ class ProductRequestTest extends abstractTest
         self::assertEquals($response->status, "OK");
         self::assertEquals(1, count($response->products));
         self::assertNotNull($response->products[0]->newPriceIsMAP);
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public function testPromotions()
-    {
-        $request = Request::getProductRequest(AmazonLocale::US, 0, null, null, 0, true, ['B006XISCNA']);
-
-        $response = $this->api->sendRequestWithRetry($request);
-        self::assertEquals($response->status, "OK");
-        self::assertEquals(1, count($response->products));
-        self::assertNotNull($response->products);
-        self::assertGreaterThan(0, count($response->products));
-        self::assertNotNull($response->products[0]->promotions);
-        self::assertGreaterThan(0, count($response->products[0]->promotions));
-        self::assertNotNull($response->products[0]->promotions[0]->benefitDescription);
-        self::assertNotNull($response->products[0]->promotions[0]->eligibilityRequirementDescription);
-        self::assertNotNull($response->products[0]->promotions[0]->promotionId);
-        self::assertNotNull($response->products[0]->promotions[0]->type);
     }
 
 
@@ -467,5 +434,24 @@ class ProductRequestTest extends abstractTest
         self::assertGreaterThan(0, $response->products[0]->itemHeight);
         self::assertGreaterThan(0, $response->products[0]->itemLength);
         self::assertGreaterThan(0, $response->products[0]->itemWeight);
+    }
+
+
+    /**
+     * @throws \Exception
+     */
+    public function testSalesRanks()
+    {
+        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['B07HB4TJH1']);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products[0]->salesRanks);
+        foreach($response->products[0]->salesRanks as $caId => $historie)
+        {
+            self::assertGreaterThan(0, $caId);
+            self::assertGreaterThan(0, count($historie));
+        }
     }
 }
