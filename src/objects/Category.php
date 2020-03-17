@@ -24,6 +24,12 @@ final class Category
     public $name;
 
     /**
+     * The context free category name.
+     * @var string|null
+     */
+    public $contextFreeName;
+
+    /**
      * List of all sub categories. null or [] (empty array) if the category has no sub categories.
      * @var int[]|null
      */

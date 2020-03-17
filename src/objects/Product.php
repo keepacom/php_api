@@ -33,26 +33,6 @@ class Product
     public $variationCSV = null;
 
     /**
-     * @deprecated use first upcList entry instead.
-     * The UPC of the product. Caution: leading zeros are truncated.
-     * @var string
-     */
-    public $upc = 0;
-
-    /**
-     * @deprecated use first eanList entry instead.
-     * The EAN of the product. Caution: leading zeros are truncated.
-     * @var string
-     */
-    public $ean = 0;
-
-    /**
-     * The manufacturer’s part number.
-     * @var string|null
-     */
-    public $mpn = null;
-
-    /**
      * Comma separated list of image names of the product. Full Amazon image path:<br>
      * https://images-na.ssl-images-amazon.com/images/I/_image name_
      * @var string|null
@@ -107,24 +87,6 @@ class Product
     public $brand = null;
 
     /**
-     * The item's label. null if not available.
-     * @var string|null
-     */
-    public $label = null;
-
-    /**
-     * The item's department. null if not available.
-     * @var string|null
-     */
-    public $department = null;
-
-    /**
-     * The item's publisher. null if not available.
-     * @var string|null
-     */
-    public $publisher = null;
-
-    /**
      * The item's productGroup. null if not available.
      * @var string|null
      */
@@ -135,18 +97,6 @@ class Product
      * @var string|null
      */
     public $partNumber = null;
-
-    /**
-     * The item's studio. null if not available.
-     * @var string|null
-     */
-    public $studio = null;
-
-    /**
-     * The item's genre. null if not available.
-     * @var string|null
-     */
-    public $genre = null;
 
     /**
      * The item's model. null if not available.
@@ -171,12 +121,6 @@ class Product
      * @var string|null
      */
     public $edition = null;
-
-    /**
-     * The item's platform. null if not available.
-     * @var string|null
-     */
-    public $platform = null;
 
     /**
      * The item's format. null if not available.
@@ -265,12 +209,6 @@ class Product
      * @var string|null
      */
     public $description = null;
-
-    /**
-     * The item's format. null if not available.
-     * @var int|null
-     */
-    public $hazardousMaterialType = null;
 
     /**
      * The package's height in millimeter. 0 or -1 if not available.
@@ -377,10 +315,24 @@ class Product
     public $lastEbayUpdate = 0;
 
     /**
-     * Availability of the Amazon offer {@link Product.AvailabilityType}.
+     * Availability of the Amazon offer {@link Product.AvailabilityType}. If Amazon offer exists but does not hold the buy box the value will be 2 (unknown).
+     * To request the Amazon availability in such cases the offers parameter is required.
      * @var int
      */
     public $availabilityAmazon = -1;
+
+    /**
+     * Contains subcategory rank histories. Each key represents the categoryId of the rank with the history in the corresponding value.
+     * @var array|null
+     */
+    public $salesRanks = null;
+
+	/**
+     * The category node id of the main sales rank. -1 if not available.
+     * @var int
+     */
+	public $salesRankReference = -1;
+
 
     /**
      * States the last time we have updated the product rating and review count, in Keepa Time minutes.<br>
