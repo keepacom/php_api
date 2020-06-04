@@ -171,6 +171,32 @@ class Request
         return $r;
     }
 
+
+    /**
+     * Search for Amazon products using keywords with a maximum of 50 results per search term.
+     *
+     * @param int $domainID Amazon locale of the product <a href='psi_element://AmazonLocale'>AmazonLocale</a>
+     * @param string $term $term The term you want to search for.
+     * @param bool $stats If specified (= not null) the product object will have a stats field with quick access to current prices, min/max prices and the weighted mean values of the last x days, where x is the value of the stats parameter.
+     * @param int $page values 0 - 9. Each search result page provides up to 10 results. To retrieve more results iterate the page parameter and keep all other parameters identical. Start with page 0 and stop when the response contains less than 10 results or you have reached page 9, which is the limit. When not using the page parameter the first 40 results will be returned.
+     * @return Request
+     */
+    public static function getProductSearchRequestPage($domainID, $term, $stats,$page)
+    {
+        $r = new Request();
+        $r->path = "search";
+        $r->parameter["domain"] = $domainID;
+        $r->parameter["type"] = "product";
+        $r->parameter["term"] = $term;
+        $r->parameter["page"] = $page;
+
+        if ($stats != null && $stats > 0)
+            $r->parameter["stats"] = $stats;
+
+        return $r;
+    }
+
+
     /**
      * Search for Amazon products using keywords with a maximum of 50 results per search term.
      *
@@ -198,16 +224,17 @@ class Request
     }
 
     /**
-     * Retrieves the product object28 for the specified ASIN and domain.
+     * Retrieves the product for the specified ASIN and domain.
      * If our last update is older than 1 hour it will be automatically refreshed before delivered to you to ensure you get near to real-time pricing data.
      *
      * @param $domainID int Amazon locale of the product {@link AmazonLocale}
-     * @param $asins string[] ASINs to request, must contain between 1 and 100 ASINs - or max 20 ASINs if the offers parameter is used.
+     * @param $offers int If specified (= not null) Determines the number of marketplace offers to retrieve. <b>Not available for Amazon China.</b>
      * @param $statsStartDate string Must ISO8601 coded date (with or without time in UTC). Example: 2015-12-31 or 2015-12-31T14:51Z. If specified (= not null) the product object will have a stats field with quick access to current prices, min/max prices and the weighted mean values in the interval specified statsStartDate to statsEndDate. .
      * @param $statsEndDate string the end of the stats interval. See statsStartDate.
-     * @param $history bool Whether or not to include the product's history data (csv field). If you do not evaluate the csv field set to false to speed up the request and reduce traffic.
      * @param $update int If the product's last refresh is older than <i>update</i>-hours force a refresh. Use this to speed up requests if up-to-date data is not required. Might cost an extra token if 0 (= live data). Default 1.
-     * @param $offers int If specified (= not null) Determines the number of marketplace offers to retrieve. <b>Not available for Amazon China.</b>
+     * @param $history bool Whether or not to include the product's history data (csv field). If you do not evaluate the csv field set to false to speed up the request and reduce traffic.
+     * @param $asins string[] ASINs to request, must contain between 1 and 100 ASINs - or max 20 ASINs if the offers parameter is used.
+     * @param array $params Array of additional request parameters
      * @return Request ready to send request.
      */
     public static function getProductRequest($domainID, $offers, $statsStartDate, $statsEndDate, $update, $history, array $asins, $params = null)
