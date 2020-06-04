@@ -339,7 +339,6 @@ class Product
      */
     public $salesRankReferenceHistory = null;
 
-
     /**
      * States the last time we have updated the product rating and review count, in Keepa Time minutes.<br>
      * Use {@link KeepaTime#keepaMinuteToUnixInMillis(int)} (long)} to get an uncompressed timestamp (Unix epoch time).
