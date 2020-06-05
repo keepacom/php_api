@@ -3,7 +3,7 @@ namespace Keepa\tests;
 
 use Keepa\helper\KeepaTime;
 
-class KeepaTimeTest extends abstractTest
+class KeepaTimeTest extends AbstractTest
 {
     public function testKeepaHours()
     {

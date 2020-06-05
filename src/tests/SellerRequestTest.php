@@ -4,7 +4,7 @@ namespace Keepa\tests;
 use Keepa\API\Request;
 use Keepa\objects\AmazonLocale;
 
-class SellerRequestTest extends abstractTest
+class SellerRequestTest extends AbstractTest
 {
     const SELLER_ID = "A2L77EE7U53NWQ";
 

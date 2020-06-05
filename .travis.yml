@@ -1,0 +1,22 @@
+language: php
+php:
+- '7.1'
+- '7.2'
+- '7.3'
+- '7.4'
+before_script:
+- |
+  echo "TRAVIS_PHP_VERSION:" $TRAVIS_PHP_VERSION;
+  php -v;
+  php -r 'echo "PHP: ".PHP_VERSION."\n";';
+  if [ $(echo "$TRAVIS_PHP_VERSION <= 7.1" | bc -l) -eq 1 ]; then
+    echo using PHPUnit 7.5.9
+    curl -sSfL -o ~/.phpenv/versions/$TRAVIS_PHP_VERSION/bin/phpunit https://phar.phpunit.de/phpunit-7.5.9.phar;
+  fi
+- travis_retry composer self-update
+- travis_retry composer install --no-interaction --prefer-source --no-dev
+script:
+- phpunit -c phpunit.xml
+env:
+  global:
+  - secure: mcVBUZ4dyDjB2PmDgfUoyiIc3WH1NbpVVRTP+xoezbNnxGmOCKoMUqwAx87+pawJd/zLoyCCHsbCnZIKvSCgkBaBj8hMv3dkT645x/4prDRbrUftx4xfg/iU80VvwfrNIzpYs20ujyTbXM5cLTDat5CkR15Ey1WeOCXjscEfjWZrmFfYxg6gmDxDVfUS/E3M9b2rfiSUQ5mErNRoD2+olpXGBVCFfZVtUeWMcd7k8gmyBDws5gxueJcOmgP39AtmJBr/s3PKLvNbuEfKNnccieL0dgGVCWKgAYSBwQMHPN9j2My6E0kY99lvvAz8Z6ymD4PP7pLIYCk9xcNkDwmtKx68MMXxPhx9i9TygOJ82bw3w+Be6gA1l+ZHNwF7xM3U4ZGXiXTMFI41UBtYcvGxMQvrP2LZeHtB94+xl7nxxXMFnQusv7o0NBnpOAp8UY4L6kVwtVmcLXLdUGxEiKBtPhPE1dwhvm6G0uoyM9kNsi0brJgenOOmhVYbRLMX3DgZeRs9FBe5hRGQ+3Vqlzwsk11U7sMNeZoXcxLlrslUQfhW2861D0Hjf1o0y0hHwuDGldaaRFn1cMO/4RPj00+arFSU1PJooCHdUeqAj95Yr1/7iABidZeyX0cnyLgZflyBgihYOOlIib7NRTdYbF4HaHke32w9xkivVm3KBywsYsY=

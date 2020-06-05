@@ -9,7 +9,7 @@ use Keepa\helper\ProductAnalyzer;
 use Keepa\objects\AmazonLocale;
 use Keepa\objects\ProductFinderRequest;
 
-class ProductRequestTest extends abstractTest
+class ProductRequestTest extends AbstractTest
 {
     /**
      * @throws \Exception
@@ -378,7 +378,7 @@ class ProductRequestTest extends abstractTest
      */
     public function testCoupons()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B01825GBK2']);
+        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B00FLP2D68']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
