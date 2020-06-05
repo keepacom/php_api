@@ -7,7 +7,7 @@ use Keepa\helper\KeepaTime;
 use Keepa\KeepaAPI;
 use Keepa\objects\AmazonLocale;
 
-class KeepaApiTest extends abstractTest
+class KeepaApiTest extends AbstractTest
 {
     public function testFail()
     {

@@ -335,7 +335,7 @@ class Product
 
     /**
      * The category node id history of the main sales rank (format: timestamp, categoryId, […]).  null if not available.
-     * @var int[]
+     * @var int[]|null
      */
     public $salesRankReferenceHistory = null;
 

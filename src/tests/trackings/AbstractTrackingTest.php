@@ -11,17 +11,13 @@ use Keepa\helper\tracking\NotifyIfTypeWrapper;
 use Keepa\objects\AmazonLocale;
 use Keepa\objects\tracking\TrackingNotifyIf;
 use Keepa\objects\tracking\TrackingThresholdValue;
-use Keepa\tests\abstractTest;
+use Keepa\tests\AbstractTest;
 
-abstract class AbstractTrackingTest extends abstractTest
+abstract class AbstractTrackingTest extends AbstractTest
 {
-    function __construct($name = null, array $data = [], $dataName = '')
+    public function setUp(): void
     {
-        parent::__construct($name, $data, $dataName);
-    }
-
-    public function setUp()
-    {
+        parent::setUp();
         $this->addTracking("B001G73S50");
     }
 
@@ -60,7 +56,7 @@ abstract class AbstractTrackingTest extends abstractTest
         self::assertNotNull($response->trackings);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $request = Request::getTrackingRemoveAllRequest();
         $response = $this->api->sendRequestWithRetry($request);

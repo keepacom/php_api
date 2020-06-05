@@ -7,6 +7,7 @@ use Keepa\API\HttpClientInterface;
 use Keepa\API\Request;
 use Keepa\API\Response;
 use Keepa\API\ResponseStatus;
+use Keepa\objects\AmazonLocale;
 
 class KeepaAPI
 {
@@ -16,11 +17,12 @@ class KeepaAPI
     private $userAgent = null;
     private $serializer = null;
     private $httpClient = null;
+    private static $VERSION = "1.70";
 
     public function __construct($accessKey)
     {
         $this->accessKey = $accessKey;
-        $this->userAgent = "KEEPA-PHP Framework-" . "1.40";
+        $this->userAgent = "KEEPA-PHP Framework-" . self::$VERSION . " | " . phpversion();
         $this->serializer = new JsonMapper();
 
         if (PHP_INT_SIZE != 8)
@@ -175,5 +177,19 @@ class KeepaAPI
         }
 
         return $this->httpClient;
+    }
+
+    /**
+     * check if the provided token is valid
+     * @return bool
+     */
+    public function ping()
+    {
+        $request = Request::getTokenStatusRequest();
+        $response = $this->sendRequestWithRetry($request);
+        if($response->status == "OK")
+            return true;
+        else
+            return false;
     }
 }
