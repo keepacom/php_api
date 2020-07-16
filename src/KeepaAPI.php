@@ -17,7 +17,7 @@ class KeepaAPI
     private $userAgent = null;
     private $serializer = null;
     private $httpClient = null;
-    private static $VERSION = "1.70";
+    private static $VERSION = "2.0.0";
 
     public function __construct($accessKey)
     {
