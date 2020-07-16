@@ -14,6 +14,8 @@
   limitations under the License.
 -->
 
+![Test Image 5](https://travis-ci.org/keepacom/php_api.svg?branch=master)
+
 Keepa API Framework
 ==============================
 

@@ -6,7 +6,7 @@ use Keepa\helper\CSVType;
 use Keepa\helper\KeepaTime;
 use Keepa\objects\AmazonLocale;
 
-class CsvTypeTest extends abstractTest
+class CsvTypeTest extends AbstractTest
 {
     public function testAmazon()
     {

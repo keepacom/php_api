@@ -11,7 +11,7 @@ use Keepa\helper\tracking\NotifyIfTypeWrapper;
 use Keepa\objects\AmazonLocale;
 use Keepa\objects\tracking\TrackingNotifyIf;
 use Keepa\objects\tracking\TrackingThresholdValue;
-use Keepa\tests\abstractTest;
+use Keepa\tests\AbstractTest;
 
 class TrackingRequestTest extends AbstractTrackingTest
 {
