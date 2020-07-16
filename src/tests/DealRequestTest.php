@@ -4,7 +4,7 @@ namespace Keepa\tests;
 use Keepa\API\DealRequest;
 use Keepa\API\Request;
 
-class DealRequestTest extends abstractTest
+class DealRequestTest extends AbstractTest
 {
     public function testRun()
     {

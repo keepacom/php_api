@@ -4,7 +4,7 @@ namespace Keepa\tests;
 use Keepa\API\Request;
 use Keepa\objects\AmazonLocale;
 
-class ProductSearchRequestTest extends abstractTest
+class ProductSearchRequestTest extends AbstractTest
 {
     public function testBasic()
     {
