@@ -265,6 +265,57 @@ class Request
 
 
     /**
+     * Retrieves the product for the specified ASIN and domain.
+     * If our last update is older than 1 hour it will be automatically refreshed before delivered to you to ensure you get near to real-time pricing data.
+     *
+     * @param $domainID int Amazon locale of the product {@link AmazonLocale}
+     * @param $offers int If specified (= not null) Determines the number of marketplace offers to retrieve. <b>Not available for Amazon China.</b>
+     * @param $statsStartDate string Must ISO8601 coded date (with or without time in UTC). Example: 2015-12-31 or 2015-12-31T14:51Z. If specified (= not null) the product object will have a stats field with quick access to current prices, min/max prices and the weighted mean values in the interval specified statsStartDate to statsEndDate. .
+     * @param $statsEndDate string the end of the stats interval. See statsStartDate.
+     * @param $buybox bool If specified and true the product and statistics object will include all available buy box related data
+     * @param $update int If the product's last refresh is older than <i>update</i>-hours force a refresh. Use this to speed up requests if up-to-date data is not required. Might cost an extra token if 0 (= live data). Default 1.
+     * @param $history bool Whether or not to include the product's history data (csv field). If you do not evaluate the csv field set to false to speed up the request and reduce traffic.
+     * @param $rental bool If true the rental price will be collected when available. <b>Can only be used in conjunction with the offers parameter.  Not available for Amazon China.
+     * @param $rating bool If true the product object will include our existing RATING and COUNT_REVIEWS history of the csv field, regardless if the offers parameter is used <b>Not available for Amazon China.
+     * @param $fbafees bool If true fbaFees will be retrieved. <b>Can only be used in conjunction with the offers parameter. Not available for Amazon China, India and Brazil.
+     * @param $onlyLiveOffers bool
+     * @param $days int If specified and has positive value X the product object will limit all historical data to the recent X days.
+     * @param $asins string[] ASINs to request, must contain between 1 and 100 ASINs - or max 20 ASINs if the offers parameter is used.
+     * @param array $params Array of additional request parameters
+     * @return Request ready to send request.
+     */
+    public static function getDetailedProductRequest($domainID, $offers, $statsStartDate, $statsEndDate, $buybox, $update, $history, $rental, $rating, $fbafees, $onlyLiveOffers, $days, array $asins, $params = null)
+    {
+        $r = new Request();
+        $r->path = "product";
+
+        if (!empty($asins))
+            $r->parameter["asin"] = implode(",", $asins);
+
+        $r->parameter["domain"] = $domainID;
+        $r->parameter["buybox"] = $buybox ? "1" : "0";
+        $r->parameter["update"] = $update;
+        $r->parameter["rental"] = $rental ? "1" : "0";
+        $r->parameter["rating"] = $rating ? "1" : "0";
+        $r->parameter["fbafees"] = $fbafees ? "1" : "0";
+        $r->parameter["only-live-offers"] = $onlyLiveOffers ? "1" : "0";
+        $r->parameter["history"] = $history ? "1" : "0";
+
+        if ($statsStartDate != null && $statsEndDate != null)
+            $r->parameter["stats"] = $statsStartDate . "," . $statsEndDate;
+
+        if ($offers != null && $offers > 0)
+            $r->parameter["offers"] = $offers;
+
+        if ($params) {
+            foreach ($params as $key => $val) {
+                $r->parameter[$key] = $val;
+            }
+        }
+        return $r;
+    }
+
+    /**
      * Add tracking to your list.
      *
      * @param TrackingRequest $trackingRequest trackingRequest The trackingRequest contains all request parameters.

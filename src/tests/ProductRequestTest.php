@@ -3,9 +3,6 @@ namespace Keepa\tests;
 
 use Keepa\API\Request;
 use Keepa\helper\CSVType;
-use Keepa\helper\CSVTypeWrapper;
-use Keepa\helper\HazardousMaterialType;
-use Keepa\helper\ProductAnalyzer;
 use Keepa\objects\AmazonLocale;
 use Keepa\objects\ProductFinderRequest;
 
@@ -453,5 +450,60 @@ class ProductRequestTest extends AbstractTest
             self::assertGreaterThan(0, $caId);
             self::assertGreaterThan(0, count($historie));
         }
+    }
+
+
+    /**
+     * @throws \Exception
+     */
+    public function testRental()
+    {
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['1616195479']);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertGreaterThan(0, count($response->products[0]->csv[CSVType::RENT]));
+        self::assertNotNull($response->products[0]->rentalDetails);
+        self::assertNotNull($response->products[0]->rentalPrices);
+        self::assertNotNull($response->products[0]->rentalSellerId);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testLaunchpad()
+    {
+        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['B01LWJUPT5']);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertTrue($response->products[0]->launchpad);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testAmazonDelay()
+    {
+        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['B07GSBJ7F3']);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products[0]->availabilityAmazonDelay);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testDetailedProductRequest()
+    {
+        $request = Request::getDetailedProductRequest(AmazonLocale::DE, 20, null, null, 1, true,true,true,true,true,true,365,['B07GSBJ7F3']);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
     }
 }

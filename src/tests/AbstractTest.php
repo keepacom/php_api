@@ -19,14 +19,20 @@ abstract class AbstractTest extends TestCase
                 exit(254);
             }
 
-            $this->api = new KeepaAPI($apiKey);
-
-            $success = $this->api->ping();
-            if($success == false)
+            try {
+                $this->api = new KeepaAPI($apiKey);
+                $success = $this->api->ping();
+                if($success == false)
+                {
+                    echo "Keepa API-Key seems wrong..".PHP_EOL;
+                    exit(253);
+                }
+            } catch (\Exception $e)
             {
-                echo "Keepa API-Key seems wrong..".PHP_EOL;
-                exit(253);
+                echo "Keepa API something is wrong..".$e->getMessage();
+                exit(254);
             }
+
         }
     }
 }
