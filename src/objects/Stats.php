@@ -250,12 +250,18 @@ class Stats
      */
 	public $buyBoxMaxOrderQuantity = null;
 
-	/**
+    /**
      * The availability message of the buy box. null if not available.
      * Example: “In Stock.”
      * @var string|null
      */
-	public $buyBoxAvailabilityMessage = null;
+    public $buyBoxAvailabilityMessage = null;
+
+    /**
+     * The seller id of the buy box offer, if existent. Otherwise "-2" or null
+     * @var string|null
+     */
+    public $buyBoxSellerId = null;
 
 	/**
      * The default shipping country of the buy box seller. null if not available. Example: “US”
@@ -329,4 +335,10 @@ class Stats
      * @var int|null
      */
     public $salesRankDrops180 = -1;
+
+    /**
+     * The count of sales rank drops (from high value to low value) within the last 365 days which are considered to indicate sales.
+     * @var int|null
+     */
+    public $salesRankDrops360 = -1;
 }
