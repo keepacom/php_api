@@ -13,11 +13,9 @@ class AmazonLocale
     const FR = 4;
     const JP = 5;
     const CA = 6;
-    const CN = 7;
+    const RESERVED2 = 7;
     const IT = 8;
     const ES = 9;
     const IN = 10;
     const MX = 11;
-    const BR = 12;
-    const AU = 13;
 }

@@ -315,8 +315,7 @@ class Product
     public $lastEbayUpdate = 0;
 
     /**
-     * Availability of the Amazon offer {@link Product.AvailabilityType}. If Amazon offer exists but does not hold the buy box the value will be 2 (unknown).
-     * To request the Amazon availability in such cases the offers parameter is required.
+     * Availability of the Amazon offer {@link Product.AvailabilityType}.
      * @var int
      */
     public $availabilityAmazon = -1;
@@ -338,6 +337,43 @@ class Product
      * @var int[]|null
      */
     public $salesRankReferenceHistory = null;
+
+    /**
+     * If the product is listed in the launchpad
+     * @var boolean|null
+     */
+    public $launchpad = false;
+
+    /**
+     * Rental details
+     * @var string|null
+     */
+    public $rentalDetails = false;
+
+    /**
+     * Rental details
+     * @var \Keepa\helper\RentalObject|null
+     */
+    public $rentalPrices = false;
+
+    /**
+     * Rental seller id
+     * @var string|null
+     */
+    public $rentalSellerId = null;
+
+    /**
+     * Amazon offer shipping delay. Integer array with 2 entries, indicating min and max shipping delay in hours.
+     * @var int[]|null
+     */
+    public $availabilityAmazonDelay = null;
+
+    /**
+     * Audience rating. The rating suggests the age for which the media is appropriate.
+     * Example: PG-13 (Parents Strongly Cautioned)
+     * @var string|null
+     */
+    public $audienceRating = null;
 
     /**
      * States the last time we have updated the product rating and review count, in Keepa Time minutes.<br>
