@@ -487,7 +487,7 @@ class ProductRequestTest extends AbstractTest
      */
     public function testAmazonDelay()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['B07GSBJ7F3']);
+        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['3866440995']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
