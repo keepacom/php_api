@@ -56,6 +56,20 @@ abstract class AbstractTrackingTest extends AbstractTest
         self::assertNotNull($response->trackings);
     }
 
+    protected function addMinimalTracking($asin)
+    {
+        /* @var TrackingRequest $trackingRequest */
+        $trackingRequest = new TrackingRequest();
+        $trackingRequest->asin = $asin;
+        $trackingRequest->mainDomainId = AmazonLocale::DE;
+
+        $request = Request::getTrackingAddRequest($trackingRequest);
+        $response = $this->api->sendRequestWithRetry($request);
+
+        self::assertEquals($response->status, "OK");
+        self::assertNotNull($response->trackings);
+    }
+
     protected function tearDown(): void
     {
         $request = Request::getTrackingRemoveAllRequest();
