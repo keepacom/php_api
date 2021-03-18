@@ -13,7 +13,7 @@ use Keepa\objects\tracking\TrackingNotifyIf;
 use Keepa\objects\tracking\TrackingThresholdValue;
 use Keepa\tests\AbstractTest;
 
-class TrackingRequestList extends AbstractTrackingTest
+class TrackingRequestListTest extends AbstractTrackingTest
 {
     public function testList()
     {
@@ -74,6 +74,26 @@ class TrackingRequestList extends AbstractTrackingTest
         self::assertEquals(1, count($response->asinList));
 
     }
+
+
+    public function testMinimalTracking()
+    {
+        $request = Request::getTrackingListRequest(true);
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertNotNull($response->asinList);
+        self::assertEquals(1, count($response->asinList));
+
+        $this->addMinimalTracking("0321125215");
+
+        $request = Request::getTrackingListRequest(true);
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertNotNull($response->asinList);
+        self::assertEquals(2, count($response->asinList));
+
+    }
+
 
 
     public function testGetTracking()
