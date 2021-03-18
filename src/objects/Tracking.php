@@ -48,13 +48,13 @@ class Tracking
 
     /**
      * Contains all settings for price or value related tracking criteria
-     * @var \Keepa\objects\tracking\TrackingThresholdValue[]
+     * @var \Keepa\objects\tracking\TrackingThresholdValue[]|null
      */
     public $thresholdValues;
 
     /**
      * Contains specific, meta tracking criteria, like out of stock.
-     * @var \Keepa\objects\tracking\TrackingNotifyIf[]
+     * @var \Keepa\objects\tracking\TrackingNotifyIf[]|null
      */
     public $notifyIf;
 
@@ -103,7 +103,7 @@ class Tracking
 
     /**
      * The meta data of this tracking (max length is 500 characters). Used to assign some text to this tracking, like a user reference or a memo.
-     * @var string $metaData
+     * @var string|null $metaData
      */
     public $metaData;
 }
