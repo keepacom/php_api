@@ -2,6 +2,7 @@
 namespace Keepa\tests;
 
 use Keepa\API\Request;
+use Keepa\helper\AvailabilityType;
 use Keepa\helper\CSVType;
 use Keepa\objects\AmazonLocale;
 use Keepa\objects\ProductFinderRequest;
@@ -456,38 +457,58 @@ class ProductRequestTest extends AbstractTest
     /**
      * @throws \Exception
      */
+
     public function testRental()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['1616195479']);
+        // find product
+        $fr = new ProductFinderRequest();
+        $fr->avg1_RENT_gte = 0;
+        $fr->isHighest_RENT = true;
 
+        $request = Request::getFinderRequest(AmazonLocale::US, $fr);
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
-        self::assertEquals(1, count($response->products));
-        self::assertGreaterThan(0, count($response->products[0]->csv[CSVType::RENT]));
-        self::assertNotNull($response->products[0]->rentalDetails);
-        self::assertNotNull($response->products[0]->rentalPrices);
-        self::assertNotNull($response->products[0]->rentalSellerId);
+        self::assertGreaterThan(0, count($response->asinList));
+
+        // test product
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, $response->asinList);
+        $response = $this->api->sendRequestWithRetry($request);
+
+        self::assertEquals($response->status, "OK");
+        self::assertGreaterThan(0, count($response->products));
+
+        for ($i = 0; $i < count($response->products);$i++) {
+            $product = $response->products[$i];
+            self::assertGreaterThan(0, count($product->csv[CSVType::RENT]));
+            self::assertNotNull($product->rentalDetails);
+
+            self::assertNotNull($product->rentalPrices);
+
+            if ($product->rentalDetails) {
+                self::assertNotNull($product->rentalDetails);
+                self::assertNotNull($product->rentalSellerId);
+            }
+        }
     }
 
     /**
      * @throws \Exception
      */
-    public function testLaunchpad()
-    {
-        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['B01LWJUPT5']);
+    /*public function testLaunchpad() {
+        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['B0963X9XLB']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
         self::assertEquals(1, count($response->products));
         self::assertTrue($response->products[0]->launchpad);
-    }
+    }*/
 
     /**
      * @throws \Exception
      */
     public function testAmazonDelay()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['B007FD5YC4']);
+        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['B001G73S50']);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");

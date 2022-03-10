@@ -7,12 +7,23 @@ use Keepa\helper\AvailabilityType;
 use Keepa\helper\CSVType;
 use Keepa\helper\KeepaTime;
 use Keepa\objects\AmazonLocale;
+use Keepa\objects\ProductFinderRequest;
 
 class AvailTypeTest extends AbstractTest
 {
     public function testAmazon()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 1, true, ['B001G73S50']);
+        // find product
+        $fr = new ProductFinderRequest();
+        $fr->availabilityAmazon[] = AvailabilityType::NOW;
+
+        $request = Request::getFinderRequest(AmazonLocale::DE, $fr);
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertGreaterThan(0, count($response->asinList));
+
+        // test product
+        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 1, true, [$response->asinList[0]]);
 
         $response = $this->api->sendRequestWithRetry($request);
 
