@@ -17,7 +17,7 @@ class KeepaAPI
     private $userAgent = null;
     private $serializer = null;
     private $httpClient = null;
-    private static $VERSION = "2.0.2";
+    private static $VERSION = "2.0.3";
 
     public function __construct($accessKey)
     {
@@ -40,7 +40,7 @@ class KeepaAPI
     public function sendRequest(Request $r)
     {
         $url = "https://api.keepa.com/" . $r->path . "/?key=" . $this->accessKey . "&" . $r->query();
-echo $url . PHP_EOL;
+
         /* @var Response */
         $response = new Response($r);
 
