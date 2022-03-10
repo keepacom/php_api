@@ -3000,6 +3000,88 @@ class ProductFinderRequest
     /* @var int $outOfStockPercentage90_gte */
     public $outOfStockPercentage90_gte;
 
+    /* @var int $salesRankDrops180_lte */
+    public $salesRankDrops180_lte;
+
+    /* @var int $salesRankDrops180_gte */
+	public $salesRankDrops180_gte;
+
+    /* @var int $salesRankDrops30_lte */
+	public $salesRankDrops30_lte;
+
+    /* @var int $salesRankDrops30_gte */
+	public $salesRankDrops30_gte;
+
+    /* @var int $salesRankDrops365_lte */
+	public $salesRankDrops365_lte;
+
+    /* @var int $salesRankDrops365_gte */
+	public $salesRankDrops365_gte;
+
+    /* @var int $salesRankDrops90_lte */
+	public $salesRankDrops90_lte;
+
+    /* @var int $salesRankDrops90_gte */
+	public $salesRankDrops90_gte;
+
+    /* @var long $salesRankReference */
+	public $salesRankReference;
+
+    /* @var int $salesRankTopPct_lte */
+	public $salesRankTopPct_lte;
+
+    /* @var byte $salesRankTopPct_gte */
+	public $salesRankTopPct_gte;
+
+    /* @var byte $totalOfferCount_lte */
+	public $totalOfferCount_lte;
+
+    /* @var int $totalOfferCount_gte */
+	public $totalOfferCount_gte;
+
+    /* @var byte[] $warehouseCondition */
+	public $warehouseCondition;
+
+    /* @var boolean $singleVariation */
+	public $singleVariation;
+
+    /* @var boolean $buyBoxIsUnqualified */
+	public $buyBoxIsUnqualified;
+
+    /* @var boolean $buyBoxIsFBA */
+	public $buyBoxIsFBA;
+
+    /* @var int itemDimension_lte */
+	public $itemDimension_lte;
+
+    /* @var int $itemDimension_gte */
+	public $itemDimension_gte;
+
+    /* @var int $itemHeight_lte */
+	public $itemHeight_lte;
+
+    /* @var int itemHeight_gte */
+	public $itemHeight_gte;
+
+    /* @var int $itemLength_lte */
+	public $itemLength_lte;
+
+    /* @var int $itemLength_gte */
+	public $itemLength_gte;
+
+    /* @var int $itemWeight_lte */
+	public $itemWeight_lte;
+
+    /* @var int itemWeight_gte */
+	public $itemWeight_gte;
+
+    /* @var int $itemWidth_lte */
+	public $itemWidth_lte;
+
+    /* @var int $itemWidth_gte */
+	public $itemWidth_gte;
+
+
 
     /* @var string[][] $sort = null */
     public $sort = null;

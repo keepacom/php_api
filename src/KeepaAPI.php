@@ -40,7 +40,7 @@ class KeepaAPI
     public function sendRequest(Request $r)
     {
         $url = "https://api.keepa.com/" . $r->path . "/?key=" . $this->accessKey . "&" . $r->query();
-
+echo $url . PHP_EOL;
         /* @var Response */
         $response = new Response($r);
 

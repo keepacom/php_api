@@ -6,11 +6,12 @@ use Keepa\objects\AmazonLocale;
 
 class SellerRequestTest extends AbstractTest
 {
-    const SELLER_ID = "A2L77EE7U53NWQ";
+    const LOCALE = AmazonLocale::DE;
+    const SELLER_ID = "A8KICS1PHF7ZO";
 
     public function testBasic()
     {
-        $request = Request::getSellerRequest(AmazonLocale::US, [self::SELLER_ID]);
+        $request = Request::getSellerRequest(self::LOCALE, [self::SELLER_ID]);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -20,45 +21,45 @@ class SellerRequestTest extends AbstractTest
 
     public function testFBA()
     {
-        $request = Request::getSellerRequest(AmazonLocale::US, [self::SELLER_ID]);
+        $request = Request::getSellerRequest(self::LOCALE, [self::SELLER_ID]);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
         self::assertNotNull($response->sellers);
-        self::assertTrue($response->sellers['A2L77EE7U53NWQ']->hasFBA);
+        self::assertTrue($response->sellers[self::SELLER_ID]->hasFBA);
     }
 
     public function testAsinList()
     {
-        $request = Request::getSellerRequest(AmazonLocale::US, [self::SELLER_ID], true);
+        $request = Request::getSellerRequest(self::LOCALE, [self::SELLER_ID], true);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
         self::assertNotNull($response->sellers);
         self::assertEquals(1, count($response->sellers));
-        self::assertGreaterThan(0, count($response->sellers['A2L77EE7U53NWQ']->asinList));
+        self::assertGreaterThan(0, count($response->sellers[self::SELLER_ID]->asinList));
     }
 
     public function testAsinListLastSeen()
     {
-        $request = Request::getSellerRequest(AmazonLocale::US, [self::SELLER_ID], true);
+        $request = Request::getSellerRequest(self::LOCALE, [self::SELLER_ID], true);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
         self::assertNotNull($response->sellers);
         self::assertEquals(1, count($response->sellers));
-        self::assertGreaterThan(0, count($response->sellers['A2L77EE7U53NWQ']->asinListLastSeen));
+        self::assertGreaterThan(0, count($response->sellers[self::SELLER_ID]->asinListLastSeen));
     }
 
     public function testStoreFrontAsins()
     {
-        $request = Request::getSellerRequest(AmazonLocale::US, [self::SELLER_ID], true);
+        $request = Request::getSellerRequest(self::LOCALE, [self::SELLER_ID], true);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
         self::assertNotNull($response->sellers);
         self::assertEquals(1, count($response->sellers));
-        self::assertGreaterThan(0, count($response->sellers['A2L77EE7U53NWQ']->totalStorefrontAsins));
-        self::assertNotNull($response->sellers['A2L77EE7U53NWQ']->shipsFromChina);
+        self::assertGreaterThan(0, count($response->sellers[self::SELLER_ID]->totalStorefrontAsins));
+        self::assertNotNull($response->sellers[self::SELLER_ID]->shipsFromChina);
     }
 }
