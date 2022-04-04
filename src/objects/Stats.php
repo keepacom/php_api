@@ -281,11 +281,17 @@ class Stats
      */
 	public $buyBoxIsPrimeEligible = null;
 
-	/**
+    /**
      * If the buy box is a Prime Pantry offer. null if not available.
      * @var bool|null
      */
-	public $buyBoxIsPrimePantry = null;
+    public $buyBoxIsPrimePantry = null;
+
+    /**
+     * A map containing buy box statistics for the interval specified. Each key represents the sellerId of the buy box seller and each object a buy box statistics object.
+     * @var \Keepa\helper\VariationObject[]
+     */
+    public $buyBoxStats = null;
 
 
     /**

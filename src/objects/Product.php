@@ -237,6 +237,7 @@ class Product
     /**
      * Quantity of items in a package. 0 or -1 if not available.
      * @var int
+     * @deprecated
      */
     public $packageQuantity = -1;
 
