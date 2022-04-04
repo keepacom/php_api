@@ -527,4 +527,20 @@ class ProductRequestTest extends AbstractTest
         self::assertEquals($response->status, "OK");
         self::assertEquals(1, count($response->products));
     }
+
+
+    /**
+     * @throws \Exception
+     */
+    public function testBuyBoxStats()
+    {
+
+        $request = Request::getDetailedProductRequest(AmazonLocale::DE, 20, "2015-12-31", "2022-01-01", 1, true,true,true,true,true,true,365,['B097F5K5RY']);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertEquals(1, count($response->products));
+        self::assertGreaterThan(0, count($response->products[0]->stats->buyBoxStats));
+    }
 }
