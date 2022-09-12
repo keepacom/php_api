@@ -130,6 +130,7 @@ class Product
 
     /**
      * The item’s author. null if not available.
+     * @deprecated use the field contributors instead
      * @var string|null
      */
     public $author = null;
@@ -192,6 +193,15 @@ class Product
      * @var mixed|null
      */
     public $languages = null;
+
+
+    /**
+     * The contributors of the item. A contributor can be an author, actor, director, etc. Each contributor entry has a name and a role type.<br><br>
+     * Example:<br>
+     * [ [ “Vin Diesel”, “actor” ] ]
+     * @var mixed|null
+     */
+    public $contributors = null;
 
 
     /**
