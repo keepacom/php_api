@@ -22,7 +22,7 @@ class BuyBoxStatsObject {
     public $avgNewOfferCount = null;
 
     /**
-     * whether or not this offer is fulfilled by Amazon (but not sold by Amazon)
+     * whether or not this offer is fulfilled by Amazon
      * @var bool
      */
     public $isFBA = null;

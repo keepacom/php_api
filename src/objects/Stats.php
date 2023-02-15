@@ -221,7 +221,7 @@ class Stats
     public $buyBoxIsFBA = null;
 
     /**
-     * Only set when the offers parameter was used. Whether or not the buy box offer is in used condition.
+     * Only set when the offers parameter was used. Whether or not there is a used buy box offer.
      * @var bool|null
      */
     public $buyBoxIsUsed = null;
@@ -292,6 +292,49 @@ class Stats
      * @var \Keepa\helper\VariationObject[]
      */
     public $buyBoxStats = null;
+
+    /**
+     * Only set when the offers parameter was used. Price of the used buy box, if existent. Otherwise "-1" or null
+     * @var int|null
+     */
+    public $buyBoxUsedPrice = null;
+
+	/**
+     * Only set when the offers parameter was used. Shipping cost of the used buy box, if existent. Otherwise "-1" or null
+     * @var int|null
+     */
+	public $buyBoxUsedShipping = null;
+
+	/**
+     * Only set when the offers parameter was used. Seller id of the used boy box, if existent. Otherwise null.
+     * @var string|null
+     */
+	public $buyBoxUsedSellerId   = null;
+
+	/**
+     * Only set when the offers parameter was used. Whether or not the used buy box is fulfilled by Amazon.
+     *
+     * @var bool|null
+     */
+	public $buyBoxUsedIsFBA      = null;
+
+	/**
+     * Only set when the offers parameter was used. The used sub type condition of the used buy box offer<br>
+     * <br>The {@link Offer.OfferCondition} condition of the offered product. Integer value:
+     * <br>2 - Used - Like New
+     * <br>3 - Used - Very Good
+     * <br>4 - Used - Good
+     * <br>5 - Used - Acceptable
+     * <br>Note: Open Box conditions will be coded as Used conditions.
+     * @var int|null
+     */
+	public $buyBoxUsedCondition  = null;
+
+	/**
+     * A map containing used buy box statistics for the interval specified. Each key represents the sellerId of the used buy box seller and each object a buy box statistics object.
+     * @var object|null
+     */
+	public $buyBoxUsedStats = null;
 
 
     /**

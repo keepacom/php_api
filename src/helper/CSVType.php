@@ -38,6 +38,8 @@ class CSVType
     const RESERVED_2 = 29;
     const TRADE_IN = 30;
     const RENT = 31;
+    const BUY_BOX_USED_SHIPPING = 32;
+    const PRIME_EXCL = 33;
 
     /**
      * @var $index int
