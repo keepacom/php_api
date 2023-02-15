@@ -68,7 +68,6 @@ class SellerRequestTest extends AbstractTest
         $seller = "ALYY2EOZQ7QUK";
         $request = Request::getSellerRequest(self::LOCALE, [$seller], true);
 
-        echo json_encode($request);
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
         self::assertNotNull($response->sellers);
