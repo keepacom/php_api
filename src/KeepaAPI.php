@@ -41,6 +41,11 @@ class KeepaAPI
     {
         $url = "https://api.keepa.com/" . $r->path . "/?key=" . $this->accessKey . "&" . $r->query();
 
+        $debugRequests = getenv("DEBUG_REQUESTS");
+        if ($debugRequests != null && boolval($debugRequests) == true) {
+            echo $url . PHP_EOL;
+        }
+
         /* @var Response */
         $response = new Response($r);
 

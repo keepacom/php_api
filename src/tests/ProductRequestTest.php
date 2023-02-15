@@ -280,7 +280,15 @@ class ProductRequestTest extends AbstractTest
      */
     public function testNumberOfPages()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['3551354022']);
+        $fr = new ProductFinderRequest();
+        $fr->numberOfPages_gte = 1;
+        $request = Request::getFinderRequest(AmazonLocale::US, $fr);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertGreaterThan(0, count($response->asinList));
+
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, [$response->asinList[0]]);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -376,7 +384,16 @@ class ProductRequestTest extends AbstractTest
      */
     public function testCoupons()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B00FLP2D68']);
+        $fr = new ProductFinderRequest();
+        $fr->couponOneTimeAbsolute_gte = 1;
+
+        $request = Request::getFinderRequest(AmazonLocale::DE, $fr);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertGreaterThan(0, count($response->asinList));
+
+        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, [$response->asinList[0]]);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -471,7 +488,7 @@ class ProductRequestTest extends AbstractTest
         self::assertGreaterThan(0, count($response->asinList));
 
         // test product
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, $response->asinList);
+        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, [$response->asinList[0]]);
         $response = $this->api->sendRequestWithRetry($request);
 
         self::assertEquals($response->status, "OK");
@@ -508,7 +525,18 @@ class ProductRequestTest extends AbstractTest
      */
     public function testAmazonDelay()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['B001G73S50']);
+
+        // find product
+        $fr = new ProductFinderRequest();
+        $fr->availabilityAmazon = 4;
+
+        $request = Request::getFinderRequest(AmazonLocale::DE, $fr);
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertGreaterThan(0, count($response->asinList));
+
+
+        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, [$response->asinList[0]]);
 
         $response = $this->api->sendRequestWithRetry($request);
         self::assertEquals($response->status, "OK");
@@ -534,7 +562,6 @@ class ProductRequestTest extends AbstractTest
      */
     public function testBuyBoxStats()
     {
-
         $request = Request::getDetailedProductRequest(AmazonLocale::DE, 20, "2015-12-31", "2022-01-01", 1, true,true,true,true,true,true,365,['B097F5K5RY']);
 
         $response = $this->api->sendRequestWithRetry($request);
@@ -542,5 +569,20 @@ class ProductRequestTest extends AbstractTest
         self::assertEquals(1, count($response->products));
         self::assertEquals(1, count($response->products));
         self::assertGreaterThan(0, count($response->products[0]->stats->buyBoxStats));
+    }
+
+
+    public function testBuyBoxUsedStats()
+    {
+        $request = Request::getProductRequest(AmazonLocale::US, 20, "2015-12-31", "2023-01-01", 1, true,["B0BDHWDR12"],["stats" => 180,"buybox" => 1]);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertEquals(1, count($response->products));
+        self::assertGreaterThan(0, count($response->products[0]->stats->buyBoxStats));
+        self::assertNotNull($response->products[0]->stats->buyBoxUsedStats);
+        self::assertNotNull($response->products[0]->stats->buyBoxUsedCondition);
+
     }
 }

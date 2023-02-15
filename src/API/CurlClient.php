@@ -28,9 +28,11 @@ class CurlClient implements HttpClientInterface
         $this->setOpt(CURLOPT_ENCODING, 'gzip');
         $this->setOpt(CURLOPT_RETURNTRANSFER, true);
 
-        // was default disabled before, should be fine from now on
-        /*$this->setOpt(CURLOPT_SSL_VERIFYHOST, false);
-        $this->setOpt(CURLOPT_SSL_VERIFYPEER, false);*/
+        $disableVerify = getenv("DISABLE_SSL_VERIFY");
+        if ($disableVerify != null && boolval($disableVerify) == true) {
+            $this->setOpt(CURLOPT_SSL_VERIFYHOST, false);
+            $this->setOpt(CURLOPT_SSL_VERIFYPEER, false);
+        }
     }
 
     /**

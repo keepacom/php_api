@@ -16,7 +16,7 @@ class Seller
      * <p>Use {@link KeepaTime#keepaMinuteToUnixInMillis(int)} (long)} to get an uncompressed timestamp (Unix epoch time).</p>
      * @var int|null
      */
-    public $trackedSince = null; // keepa minutes
+    public $trackedSince = null;
 
     /**
      * The domainId of the products Amazon locale
@@ -55,7 +55,7 @@ class Seller
      * <br>Example: 2711319
      * @var int|null
      */
-    public $lastUpdate = null; // keepa minutes
+    public $lastUpdate = null;
 
     /**
      * Indicating whether or not our system identified that this seller attempts to scam users.
@@ -122,6 +122,110 @@ class Seller
      * @var MerchantBrandStatistics[]|null
      */
     public $sellerBrandStatistics = null;
+
+    /**
+     * The business address. Each entry of the array contains one address line.
+     * The last entry contains the 2 letter country code. null if not available.
+     * Example: [123 Main Street, New York, NY, 10001, US]
+     * @var string[]|null
+     */
+    public $address = null;
+
+	/**
+     * Contains up to 5 of the most recent customer feedbacks.
+     * Each feedback object in the array contains the following fields
+     * @var FeedbackObject[]|null
+     */
+	public $recentFeedback;
+
+	/**
+     * States the time of our last rating data update of this seller, in Keepa Time minutes.
+     * <p>Use {@link KeepaTime#keepaMinuteToUnixInMillis(int)} (long)} to get an uncompressed timestamp (Unix epoch time).</p>
+     * @var int
+     */
+	public $lastRatingUpdate;
+
+	/**
+     * Contains the neutral percentage ratings for the last 30 days, 90 days, 365 days and lifetime, in that order.
+     * A neutral rating is a 3 star rating.
+     * Example: [1, 1, 1, 2]
+     * @var int[]|null
+     */
+	public $neutralRating = null;
+
+	/**
+     * Contains the negative percentage ratings for the last 30 days, 90 days, 365 days and lifetime, in that order.
+     * A negative rating is a 1 or 2 star rating.
+     * Example: [3, 1, 1, 3]
+     * @var int[]|null
+     */
+	public $negativeRating = null;
+
+	/**
+     * Contains the positive percentage ratings for the last 30 days, 90 days, 365 days and lifetime, in that order.
+     * A positive rating is a 4 or 5 star rating.
+     * Example: [96, 98, 98, 95]
+     * @var int[]|null
+     */
+    public $positiveRating = null;
+
+	/**
+     * Contains the rating counts for the last 30 days, 90 days, 365 days and lifetime, in that order.
+     * Example: [3, 10, 98, 321]
+     * @var int[]|null
+     */
+	public $ratingCount = null;
+
+	/**
+     * The customer services address. Each entry of the array contains one address line.
+     * The last entry contains the 2 letter country code. null if not available.
+     * Example: [123 Main Street, New York, NY, 10001, US]
+     * @var string[]|null
+     */
+	public $customerServicesAddress;
+
+	/**
+     * The Trade Register Number. null if not available.
+     * Example: HRB 123 456
+     * @var string|null
+     */
+	public $tradeNumber;
+
+	/**
+     * The VAT number. null if not available.
+     * Example: DE123456789
+     *
+     * @var string|null
+     */
+	public $vatID;
+
+	/**
+     * The phone number. null if not available.
+     * Example: 800 1234 567
+     * @var string|null
+     */
+	public $phoneNumber;
+
+	/**
+     * The business type. null if not available.
+     * Example: Unternehmen in Privatbesitz
+     * @var string|null
+     */
+	public $stringbusinessType;
+
+	/**
+     * The share capital. null if not available.
+     * Example: 25000
+     * @var string|null
+     */
+	public $shareCapital;
+
+	/**
+     * The name of the business representative. null if not available.
+     * Example: Max Mustermann
+     * @var $string|null
+     */
+	public $representative;
 
 
     /**

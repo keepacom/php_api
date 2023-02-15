@@ -157,10 +157,22 @@ class Offer
     public $isCustomizeable = null;
 
     /**
-     * A Prime exclusive offer can only be ordered if the buyer has an active Prime subscription.
+     * This offer has a discounted Prime exclusive price. A Prime exclusive offer can only be ordered if the buyer has an active Prime subscription.
      * @var bool|null
      */
     public $isPrimeExcl = null;
+
+
+    /**
+     * Contains the Prime exclusive price history of this offer, if available. A Prime exclusive offer can only be ordered if the buyer has an active Prime subscription.
+     * It has the format Keepa time minutes, price, [...].
+     * <p>
+     * Most recent Prime exclusive price: primeExclCSV[primeExclCSV.length - 1]
+     * @var null|int[]
+     */
+    public $primeExclCSV;
+
+
 
     /**
      * Contains the available stock of this offer as well as, if available, the stock's history.

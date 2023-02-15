@@ -62,4 +62,18 @@ class SellerRequestTest extends AbstractTest
         self::assertGreaterThan(0, count($response->sellers[self::SELLER_ID]->totalStorefrontAsins));
         self::assertNotNull($response->sellers[self::SELLER_ID]->shipsFromChina);
     }
+
+    public function testRecentFeedback()
+    {
+        $seller = "ALYY2EOZQ7QUK";
+        $request = Request::getSellerRequest(self::LOCALE, [$seller], true);
+
+        echo json_encode($request);
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertNotNull($response->sellers);
+        self::assertEquals(1, count($response->sellers));
+        self::assertGreaterThan(0, count($response->sellers[$seller]->totalStorefrontAsins));
+        self::assertNotNull($response->sellers[$seller]->recentFeedback);
+    }
 }
