@@ -223,7 +223,7 @@ class Seller
 	/**
      * The name of the business representative. null if not available.
      * Example: Max Mustermann
-     * @var $string|null
+     * @var string|null
      */
 	public $representative;
 
