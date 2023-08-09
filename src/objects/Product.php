@@ -296,6 +296,28 @@ class Product
      */
     public $isEligibleForTradeIn = false;
 
+
+    /**
+     * The referral fee percent, null if not available.
+     * Example: 12
+     * @var int|null
+     */
+    public $referralFeePercent = null;
+
+    /**
+     * States the last time we have updated the monthlySold field, in Keepa Time minutes. Undefined if the monthlySold has no value.
+     * Use {@link KeepaTime#keepaMinuteToUnixInMillis(int)} (long)} to get an uncompressed timestamp (Unix epoch time).
+     * @var int|null
+     */
+    public $lastSoldUpdate = null;
+
+    /**
+     * How often this product was bought in the past month. This field represents the bought past month metric found on Amazon search result pages. It is not an estimate. Undefined if it has no value. Most ASINs do not have this value set. The value is variation specific.
+     * Example: 1000 - the ASIN was bought at least 1000 times in the past month.
+     * @var int|null
+     */
+    public $monthlySold = null;
+
     /**
      * Whether or not the product is eligible for super saver shipping by Amazon (not FBA).
      * @var bool
