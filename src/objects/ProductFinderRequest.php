@@ -2987,6 +2987,22 @@ class ProductFinderRequest
     /* @var int $trackingSince_gte */
     public $trackingSince_gte;
 
+
+    /* @var int $monthlySold_lte */
+    public $monthlySold_lte;
+
+    /* @var int $monthlySold_gte */
+    public $monthlySold_gte;
+
+    /* @var bool $buyBoxIsPreorder */
+    public $buyBoxIsPreorder;
+
+        /* @var bool $buyBoxIsBackorder */
+    public $buyBoxIsBackorder;
+
+    /* @var bool $buyBoxIsPrimeExclusive */
+    public $buyBoxIsPrimeExclusive;
+
     /* @var string[] $type */
     public $type;
 

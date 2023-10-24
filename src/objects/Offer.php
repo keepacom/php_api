@@ -182,4 +182,10 @@ class Offer
      * @var int[]
      */
     public $stockCSV;
+
+    /**
+     * Minimum order quantity. 0 if unknown.
+     * @var int
+     */
+    public $minOrderQty;
 }

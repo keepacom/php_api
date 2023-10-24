@@ -184,12 +184,19 @@ class Seller
      */
 	public $customerServicesAddress;
 
-	/**
+    /**
      * The Trade Register Number. null if not available.
      * Example: HRB 123 456
      * @var string|null
      */
-	public $tradeNumber;
+    public $tradeNumber;
+
+    /**
+     * The business name. null if not available.
+     * Example: Keepa GmbH
+     * @var string|null
+     */
+    public $businessName;
 
 	/**
      * The VAT number. null if not available.
@@ -220,12 +227,18 @@ class Seller
      */
 	public $shareCapital;
 
-	/**
+    /**
      * The name of the business representative. null if not available.
      * Example: Max Mustermann
      * @var string|null
      */
-	public $representative;
+    public $representative;
+
+    /**
+     * The email address of the business. null if not available.
+     * Example: info@keepa.com
+     */
+    public $email;
 
 
     /**
