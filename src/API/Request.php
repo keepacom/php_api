@@ -284,7 +284,7 @@ class Request
      * @param array $params Array of additional request parameters
      * @return Request ready to send request.
      */
-    public static function getDetailedProductRequest($domainID, $offers, $statsStartDate, $statsEndDate, $buybox, $update, $history, $rental, $rating, $fbafees, $onlyLiveOffers, $days, array $asins, $params = null)
+    public static function getDetailedProductRequest($domainID, $offers, $statsStartDate, $statsEndDate, $buybox, $update, $history, $rental, $rating, $fbafees, $onlyLiveOffers, int $days, array $asins, $params = null)
     {
         $r = new Request();
         $r->path = "product";
@@ -300,6 +300,13 @@ class Request
         $r->parameter["fbafees"] = $fbafees ? "1" : "0";
         $r->parameter["only-live-offers"] = $onlyLiveOffers ? "1" : "0";
         $r->parameter["history"] = $history ? "1" : "0";
+
+        if (
+            isset($days) &&
+            $days >= 0
+        ) {
+            $r->parameter["days"] = $days;
+        }
 
         if ($statsStartDate != null && $statsEndDate != null)
             $r->parameter["stats"] = $statsStartDate . "," . $statsEndDate;
