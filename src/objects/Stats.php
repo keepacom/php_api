@@ -289,7 +289,7 @@ class Stats
 
     /**
      * A map containing buy box statistics for the interval specified. Each key represents the sellerId of the buy box seller and each object a buy box statistics object.
-     * @var \Keepa\helper\VariationObject[]
+     * @var \Keepa\helper\BuyBoxStatsObject[]
      */
     public $buyBoxStats = null;
 
