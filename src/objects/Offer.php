@@ -188,4 +188,22 @@ class Offer
      * @var int
      */
     public $minOrderQty;
+
+
+    /**
+     * Contains one-time coupon details of this offer. Undefined if none is available.
+     * Positive integer for an absolute discount or negative for a percentage discount.
+     * Example:
+     * 500 - Coupon with a $5 discount.
+     * -15 - Coupon with a 15% discount.
+     * @var int|null
+     */
+    public $coupon;
+
+	/**
+     * Contains the coupon history of this offer, if available.
+     * It has the format Keepa time minutes, coupon, [...].
+     * @var int[]|null
+     */
+	public $couponHistory;
 }

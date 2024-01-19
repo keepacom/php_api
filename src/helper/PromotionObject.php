@@ -25,18 +25,13 @@ class PromotionObject
     public $type = null;
 
     /**
-     * @var string|null
+     * @var int|null
      */
-    public $eligibilityRequirementDescription = null;
-
-    /**
-     * @var string|null
-     */
-    public $benefitDescription = null;
+    public $amount = -1;
 
     /**
      * unique Id of this promotion.
-     * @var string|null
+     * @var int|null
      */
-    public $promotionId = null;
+    public $discountPercent = -1;
 }

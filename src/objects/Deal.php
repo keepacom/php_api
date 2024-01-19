@@ -82,7 +82,7 @@ class Deal
      * The name of the main product image of the product. Make sure you own the rights to use the image.<br>
      * Each entry represents the integer of a US-ASCII (ISO646-US) coded character. Easiest way to convert it to a String in Javascript would be var imageName = String.fromCharCode.apply("", productObject.image);.<br>
      * Example: [54,49,107,51,76,97,121,55,74,85,76,46,106,112,103], which equals "61k3Lay7JUL.jpg".<br>
-     * Full Amazon image path: https://images-na.ssl-images-amazon.com/images/I/_image name_
+     * Full Amazon image path: https://m.media-amazon.com/images/I/_image name_
      * @var int[]|null
      */
     public $image = null;
@@ -115,6 +115,33 @@ class Deal
      * @var int|null
      */
     public $minRating = -1;
+
+    /**
+     * The {@link OfferCondition} condition of the cheapest warehouse deal of this product. Integer value:
+     * <br>0 - Unknown: We were unable to determine the condition or this is not a warehouse deal in our data
+     * <br>2 - Used - Like New
+     * <br>3 - Used - Very Good
+     * <br>4 - Used - Good
+     * <br>5 - Used - Acceptable
+     * @var int|null
+     */
+    public $warehouseCondition;
+
+    /**
+     * The offer comment of the cheapest warehouse deal of this product. null if no warehouse deal found in our data.
+     * @var string|null
+     */
+    public $warehouseConditionComment;
+
+
+    /**
+     * The timestamp indicating the starting point from which the <i>current</i> value has been in effect, in Keepa Time minutes.
+     * <p>Uses {@link Product.CsvType} indexing.</p>
+     * Use {@link KeepaTime#keepaMinuteToUnixInMillis(int)} (long)} to get an uncompressed timestamp (Unix epoch time).
+     * @var int[]|null
+     */
+    public $currentSince;
+
 
     /**
      * Available deal ranges.

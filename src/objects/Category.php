@@ -52,4 +52,11 @@ final class Category
      * @var int|null
      */
     public $productCount;
+
+
+    /**
+     * Determines if this category functions as a standard browse node, rather than serving promotional purposes (for example, 'Specialty Stores').
+     * @var bool|null
+     */
+    public $isBrowseNode;
 }
