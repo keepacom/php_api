@@ -48,6 +48,12 @@ final class Category
     public $highestRank;
 
     /**
+     * The lowest(root category) sales rank we have observed for a product listed in this category. Note: Estimate, as the value is from the Keepa product database and not retrieved from Amazon.
+     * @var int|null
+     */
+    public $lowestRank;
+
+    /**
      * Number of products that are listed in this category. Note: Estimate, as the value is from the Keepa product database and not retrieved from Amazon.
      * @var int|null
      */
@@ -59,4 +65,10 @@ final class Category
      * @var bool|null
      */
     public $isBrowseNode;
-}
+
+
+    /**
+     * The websiteDisplayGroup - available for most root categories.
+     * @var string|null
+     */
+    public $websiteDisplayGroup;
