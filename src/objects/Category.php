@@ -1,4 +1,5 @@
 <?php
+
 namespace Keepa\objects;
 
 final class Category
@@ -72,3 +73,4 @@ final class Category
      * @var string|null
      */
     public $websiteDisplayGroup;
+}
