@@ -325,6 +325,13 @@ class Product
     public $monthlySold = null;
 
     /**
+     * Contains historical values of the monthlySold field. Undefined if it has no value.
+     * Format: [ keepaTime, monthlySold, … ]
+     * @var int[]|null
+     */
+    public $monthlySoldHistory = null;
+
+    /**
      * Whether or not the product is eligible for super saver shipping by Amazon (not FBA).
      * @var bool
      */
