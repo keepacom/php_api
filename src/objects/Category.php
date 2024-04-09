@@ -31,6 +31,12 @@ final class Category
     public $contextFreeName;
 
     /**
+     * The websiteDisplayGroup - available for most root categories.
+     * @var string|null
+     */
+    public $websiteDisplayGroup;
+
+    /**
      * List of all sub categories. null or [] (empty array) if the category has no sub categories.
      * @var int[]|null
      */
@@ -66,11 +72,4 @@ final class Category
      * @var bool|null
      */
     public $isBrowseNode;
-
-
-    /**
-     * The websiteDisplayGroup - available for most root categories.
-     * @var string|null
-     */
-    public $websiteDisplayGroup;
 }

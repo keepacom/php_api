@@ -3061,6 +3061,93 @@ class ProductFinderRequest
     /* @var boolean $singleVariation */
 	public $singleVariation;
 
+    /* @var int variationCount_lte */
+    public $variationCount_lte;
+
+    /* @var int variationCount_gte */
+    public $variationCount_gte;
+
+    /* @var int imageCount_lte */
+    public $imageCount_lte;
+
+    /* @var int imageCount_gte */
+    public $imageCount_gte;
+
+    /* @var int buyBoxStatsAmazon30_lte */
+    public $buyBoxStatsAmazon30_lte;
+
+    /* @var int buyBoxStatsAmazon30_gte */
+    public $buyBoxStatsAmazon30_gte;
+
+    /* @var int buyBoxStatsAmazon90_lte */
+    public $buyBoxStatsAmazon90_lte;
+
+    /* @var int buyBoxStatsAmazon90_gte */
+    public $buyBoxStatsAmazon90_gte;
+
+    /* @var int buyBoxStatsAmazon180_lte */
+    public $buyBoxStatsAmazon180_lte;
+
+    /* @var int buyBoxStatsAmazon180_gte */
+    public $buyBoxStatsAmazon180_gte;
+
+    /* @var int buyBoxStatsAmazon365_lte */
+    public $buyBoxStatsAmazon365_lte;
+
+    /* @var int buyBoxStatsAmazon365_gte */
+    public $buyBoxStatsAmazon365_gte;
+
+    /* @var int buyBoxStatsTopSeller30_lte */
+    public $buyBoxStatsTopSeller30_lte;
+
+    /* @var int buyBoxStatsTopSeller30_gte */
+    public $buyBoxStatsTopSeller30_gte;
+
+    /* @var int buyBoxStatsTopSeller90_lte */
+    public $buyBoxStatsTopSeller90_lte;
+
+    /* @var int buyBoxStatsTopSeller90_gte */
+    public $buyBoxStatsTopSeller90_gte;
+
+    /* @var int buyBoxStatsTopSeller180_lte */
+    public $buyBoxStatsTopSeller180_lte;
+
+    /* @var int buyBoxStatsTopSeller180_gte */
+    public $buyBoxStatsTopSeller180_gte;
+
+    /* @var int buyBoxStatsTopSeller365_lte */
+    public $buyBoxStatsTopSeller365_lte;
+
+    /* @var int buyBoxStatsTopSeller365_gte */
+    public $buyBoxStatsTopSeller365_gte;
+
+    /* @var int buyBoxStatsSellerCount30_lte */
+    public $buyBoxStatsSellerCount30_lte;
+
+    /* @var int buyBoxStatsSellerCount30_gte */
+    public $buyBoxStatsSellerCount30_gte;
+
+    /* @var int buyBoxStatsSellerCount90_lte */
+    public $buyBoxStatsSellerCount90_lte;
+
+    /* @var int buyBoxStatsSellerCount90_gte */
+    public $buyBoxStatsSellerCount90_gte;
+
+    /* @var int buyBoxStatsSellerCount180_lte */
+    public $buyBoxStatsSellerCount180_lte;
+
+    /* @var int buyBoxStatsSellerCount180_gte */
+    public $buyBoxStatsSellerCount180_gte;
+
+    /* @var int buyBoxStatsSellerCount365_lte */
+    public $buyBoxStatsSellerCount365_lte;
+
+    /* @var int buyBoxStatsSellerCount365_gte */
+    public $buyBoxStatsSellerCount365_gte;
+
+    /* @var bool $isHazMat */
+    public $isHazMat;
+
     /* @var boolean $buyBoxIsUnqualified */
 	public $buyBoxIsUnqualified;
 
