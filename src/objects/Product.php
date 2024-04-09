@@ -21,10 +21,20 @@ class Product
     public $domainId = 0;
 
     /**
-     * The ASIN of the parent product (if asin has variations, otherwise null)
+     * The ASIN of the parent product (if the product has variations, otherwise null)
      * @var string|null $parentAsin
      */
     public $parentAsin = null;
+
+    /**
+     * The history of the parentAsin field. This array follows the format: [Keepa time in minutes, previous parent ASIN, ...].<br>
+     * The included timestamp indicates when the previously associated parent ASIN ceased to be valid.<br>
+     * For the current parent ASIN, use the parentAsin field.<br><br>
+     * To convert a Keepa minute timestamp into an uncompressed, Unix epoch time timestamp, use the {@link KeepaTime#keepaMinuteToUnixInMillis(int)} method.<br>
+     * null if the parentAsin field never changed.
+     * @var string[]|null
+     */
+    public $parentAsinHistory = null;
 
     /**
      * Comma separated list of variation ASINs of the product (if asin is parentAsin, otherwise null)
@@ -571,6 +581,12 @@ class Product
      * @var string[]|null
      */
     public $frequentlyBoughtTogether = null;
+
+    /**
+     * True if this product is an Amazon Merch on Demand product
+     * @var bool|null
+     */
+    public $isMerchOnDemand = null;
 
     /**
      * Contains current promotions for this product. Only Amazon US promotions by Amazon (not 3rd party) are collected. In rare cases data can be incomplete.
