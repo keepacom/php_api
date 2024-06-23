@@ -7,12 +7,12 @@ namespace Keepa\helper;
 class HazardousMaterial
 {
     /**
-     * @var int
+     * @var string
      */
     public $aspect;
 
     /**
-     * @var int
+     * @var string
      */
     public $value;
 }
