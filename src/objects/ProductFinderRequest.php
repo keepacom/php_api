@@ -3148,6 +3148,9 @@ class ProductFinderRequest
     /* @var bool $isHazMat */
     public $isHazMat;
 
+    /* @var bool $isHeatSensitive */
+    public $isHeatSensitive;
+
     /* @var boolean $buyBoxIsUnqualified */
 	public $buyBoxIsUnqualified;
 

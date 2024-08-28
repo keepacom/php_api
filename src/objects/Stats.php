@@ -51,6 +51,14 @@ class Stats
     public $avg180 = null;
 
     /**
+     * Contains the weighted mean for the last 365 days.<br>
+     * <p>Uses {@link Product.CsvType} indexing.</p>
+     * If no offer was available in the given interval or there is insufficient data it has the value -1.
+     * @var int[]|null
+     */
+    public $avg365 = null;
+
+    /**
      * Contains the prices registered at the start of the interval specified in the product request's stats parameter.<br>
      * <p>Uses {@link Product.CsvType} indexing.</p>
      * If no offer was available in the given interval or there is insufficient data it has the value -1.
@@ -99,6 +107,39 @@ class Stats
      * @var mixed int[][]
      */
     public $maxInInterval = null;
+
+    /**
+     * Whether the current price is the all-time lowest price. <br>
+     * Uses {@link Product.CsvType} indexing
+     * @var mixed boolean[]|null
+     */
+    public $isLowest = null;
+
+    /**
+     * Whether the current price is the lowest price in the last 90 days. <br>
+     * Uses {@link Product.CsvType} indexing
+     * @var mixed boolean[]|null
+     */
+    public $isLowest90 = null;
+
+    /**
+     * Number of times in the last 30 days Amazon went out of stock.
+     * @var mixed int|null
+     */
+    public $outOfStockCountAmazon30 = null;
+
+    /**
+     * Number of times in the last 90 days Amazon went out of stock.
+     * @var mixed int|null
+     */
+    public $outOfStockCountAmazon90 = null;
+
+    /**
+     * Contains the difference in percent between the current monthlySold value and the average value of the last 90 days.
+     * The value 0 means it did not change or could not be calculated.
+     * @var mixed int|null
+     */
+    public $deltaPercent90_monthlySold = null;
 
     /**
      * Contains the out of stock percentage in the interval specified in the product request's stats parameter.<br>
