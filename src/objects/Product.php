@@ -314,6 +314,20 @@ class Product
     public $referralFeePercent = null;
 
     /**
+     * The variable closing fee. Fees are integers of the respective Amazon locale’s smallest currency unit (e.g. euro cents or yen). null if not available.
+     * Example: 81
+     * @var int|null
+     */
+    public $variableClosingFee = null;
+
+    /**
+     * The product listing URL slug.
+     * Example: Ring-Video-Doorbell-Satin-Nickel-2020-Release
+     * @var string|null
+     */
+    public $urlSlug = null;
+
+    /**
      * The referral fee percent is determined by either the current price or, in the absence of a current offer, the previous one. If neither of these prices is available for reference, the fee percent is calculated based on a standard sales price of 100.00. *null* if not available.
      * Example: 12
      * @var double|null
@@ -454,6 +468,12 @@ class Product
     public $productType = 0;
 
     /**
+     * The item’s type. null if not available.
+     * @var string|null
+     */
+    public $type = null;
+
+    /**
      * Whether or not the product has reviews.
      * @var bool
      */
@@ -536,11 +556,25 @@ class Product
     public $suggestedLowerPrice = null;
 
 
-	/**
+    /**
      * Competitive Price Threshold (CPT) for the Buy Box, if the buy box is suppressed.
      * @var int|null
      */
-	public $competitivePriceThreshold = null;
+    public $competitivePriceThreshold = null;
+
+    /**
+     * If buyBoxEligibleOfferCounts is available, it represents an array of integers, each entry indicating the total number of offers eligible for the Buy Box across specified offer conditions and fulfillment channels. This array contains eight elements, indexed as follows:<br>
+     * 0: New FBA<br>
+     * 1: New FBM<br>
+     * 2: Used FBA<br>
+     * 3: Used FBM<br>
+     * 4: Collectible FBA<br>
+     * 5: Collectible FBM<br>
+     * 6: Refurbished FBA<br>
+     * 7: Refurbished FBM<br>
+     * @var int[]|null
+     */
+    public $buyBoxEligibleOfferCounts = null;
 
 	/**
      * The hazardous material type of this product, if applicable.
@@ -587,6 +621,21 @@ class Product
      * @var bool|null
      */
     public $isMerchOnDemand = null;
+
+    /**
+     * Indicates if the item is heat sensitive (e.g. meltable).
+     * @var bool|null
+     */
+    public $isHeatSensitive = null;
+
+    /**
+     * Indicates the return rate of this product.<br>
+     * - `null` if the return rate is unavailable or average.<br>
+     * - `1` for a low return rate.<br>
+     * - `2` for a high return rate.
+     * @var int|null
+     */
+    public $returnRate = null;
 
     /**
      * Contains current promotions for this product. Only Amazon US promotions by Amazon (not 3rd party) are collected. In rare cases data can be incomplete.
