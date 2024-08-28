@@ -139,7 +139,7 @@ class Stats
      * The value 0 means it did not change or could not be calculated.
      * @var mixed int|null
      */
-    public $deltaPercent90_monthlySold = null;
+    // currently broken due to underscore, public $deltaPercent90_monthlySold = null;
 
     /**
      * Contains the out of stock percentage in the interval specified in the product request's stats parameter.<br>
