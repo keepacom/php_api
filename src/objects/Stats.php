@@ -111,35 +111,35 @@ class Stats
     /**
      * Whether the current price is the all-time lowest price. <br>
      * Uses {@link Product.CsvType} indexing
-     * @var mixed boolean[]|null
+     * @var boolean[]|null
      */
     public $isLowest = null;
 
     /**
      * Whether the current price is the lowest price in the last 90 days. <br>
      * Uses {@link Product.CsvType} indexing
-     * @var mixed boolean[]|null
+     * @var boolean[]|null
      */
     public $isLowest90 = null;
 
     /**
      * Number of times in the last 30 days Amazon went out of stock.
-     * @var mixed int|null
+     * @var int|null
      */
     public $outOfStockCountAmazon30 = null;
 
     /**
      * Number of times in the last 90 days Amazon went out of stock.
-     * @var mixed int|null
+     * @var int|null
      */
     public $outOfStockCountAmazon90 = null;
 
     /**
      * Contains the difference in percent between the current monthlySold value and the average value of the last 90 days.
      * The value 0 means it did not change or could not be calculated.
-     * @var mixed int|null
+     * @var int|null
      */
-    // currently broken due to underscore, public $deltaPercent90_monthlySold = null;
+    public $deltaPercent90_monthlySold = null;
 
     /**
      * Contains the out of stock percentage in the interval specified in the product request's stats parameter.<br>
@@ -176,7 +176,7 @@ class Stats
      * If there is a current lightning deal, both startDate and endDate will be set. startDate will be older than the current time, but endDate will be a future date.
      * If there is only a past deal, both startDate and endDate will be set but be the past.
      * Use {@link KeepaTime#keepaMinuteToUnixInMillis(int)} (long)} to get an uncompressed timestamp (Unix epoch time).
-     * @var mixed|null
+     * @var int[]|null
      */
     public $lightningDealInfo = null;
 
