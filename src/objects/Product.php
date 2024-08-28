@@ -605,12 +605,6 @@ class Product
     public $csv = null;
 
     /**
-     * Amazon internal product type categorization.
-     * @var string|null
-     */
-    public $type = null;
-
-    /**
      * One or two “Frequently Bought Together” ASINs. null if not available. Field is updated when the offers parameter was used.
      * @var string[]|null
      */
