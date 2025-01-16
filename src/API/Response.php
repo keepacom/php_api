@@ -145,6 +145,12 @@ class Response
      */
     public $lightningDeals = null;
 
+    /**
+     * url
+     * @var string
+     */
+    public $url = null;
+
     function __construct(Request $request)
     {
         $this->request = $request;

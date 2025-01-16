@@ -16,7 +16,7 @@ class Request
     //@var string
     public $path;
 
-    public function __construct(array $parameter = null)
+    public function __construct(?array $parameter = null)
     {
         $this->parameter = $parameter;
     }
