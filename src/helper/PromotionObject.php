@@ -17,6 +17,8 @@ class PromotionObject
     const DiscountCheapestNofM = "DiscountCheapestNofM";
     const BuyQuantityXGetQuantityFreeGiftCard = "BuyQuantityXGetQuantityFreeGiftCard";
     const BuyQuantityXGetSimpleShippingFreeX = "BuyQuantityXGetSimpleShippingFreeX";
+    const SNS = "SNS";
+    const PrimeExclusive = "PrimeExclusive";
 
     /**
      * The type of promotion

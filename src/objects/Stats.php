@@ -261,11 +261,26 @@ class Stats
      */
     public $buyBoxIsFBA = null;
 
+
+    /**
+     * The last time the Buy Box price was updated. Use {@link KeepaTime#keepaMinuteToUnixInMillis(int)} (long)} to get an uncompressed timestamp (Unix epoch time).
+     * @var int|null
+     */
+    public $lastBuyBoxUpdate = null;
+
+
     /**
      * Only set when the offers parameter was used. Whether or not there is a used buy box offer.
      * @var bool|null
      */
     public $buyBoxIsUsed = null;
+
+
+    /**
+     * Whether the buy box offer is back-ordered.
+     * @var bool|null
+     */
+    public $buyBoxIsBackorder = null;
 
     /**
      * Only set when the offers parameter was used. If Amazon is the seller in the buy box.
@@ -315,6 +330,12 @@ class Stats
      * @var bool|null
      */
 	public $buyBoxIsPrimeExclusive = null;
+
+    /**
+     * If the buy box is free shipping eligible. null if not available.
+     * @var bool|null
+     */
+    public $buyBoxIsFreeShippingEligible = null;
 
 	/**
      * If the buy box is Prime eligible. null if not available.
@@ -431,4 +452,5 @@ class Stats
      * @var int|null
      */
     public $salesRankDrops360 = -1;
+
 }

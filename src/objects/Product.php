@@ -327,6 +327,21 @@ class Product
      */
     public $urlSlug = null;
 
+
+    /**
+     * The ingredient list of the product. undefined if not available.
+     * Example: Purified Carbonated Water, Natural Flavors
+     * @var string|null
+     */
+    public $ingredients = null;
+
+    /**
+     * True if this product is an Amazon Haul product. undefined otherwise.
+     * Example: true
+     * @var bool|null
+     */
+    public $isHaul;
+
     /**
      * The referral fee percent is determined by either the current price or, in the absence of a current offer, the previous one. If neither of these prices is available for reference, the fee percent is calculated based on a standard sales price of 100.00. *null* if not available.
      * Example: 12
@@ -453,6 +468,13 @@ class Product
      * @var string|null
      */
     public $audienceRating = null;
+
+
+    /**
+     * Unit Count information
+     * @var \Keepa\helper\UnitCountObject|null
+     */
+    public $unitCount;
 
     /**
      * States the last time we have updated the product rating and review count, in Keepa Time minutes.<br>
@@ -681,4 +703,193 @@ class Product
      * @var string[]|null
      */
     public $eanList = null;
+
+
+    /**
+     * The scent of the product. Describes the fragrance associated with the product.
+     * <p>Example: "Lavender"</p>
+     * @var string|null
+     */
+    public $scent = null;
+
+    /**
+     * A brief description of the product.
+     * <p>Example: "A soothing lavender-scented candle."</p>
+     * @var string|null
+     */
+    public $shortDescription = null;
+
+    /**
+     * Active ingredients present in the product.
+     * <p>Example: "Lavender essential oil, Soy wax"</p>
+     * @var string|null
+     */
+    public $activeIngredients = null;
+
+    /**
+     * Special ingredients used in the product that may have unique properties.
+     * <p>Example: "Beeswax blend, Natural dyes"</p>
+     * @var string|null
+     */
+    public $specialIngredients = null;
+
+    /**
+     * The form or physical state of the item.
+     * <p>Example: "Liquid", "Solid", "Gel"</p>
+     * @var string|null
+     */
+    public $itemForm = null;
+
+    /**
+     * Keywords describing the type or category of the item.
+     * <p>Example: "body-lotions"</p>
+     * @var string|null
+     */
+    public $itemTypeKeyword = null;
+
+    /**
+     * Recommended uses for the product to guide customers.
+     * <p>Example: "Aromatherapy, Home Decoration"</p>
+     * @var string|null
+     */
+    public $recommendedUsesForProduct = null;
+
+    /**
+     * The pattern or design featured on the product.
+     * <p>Example: "Striped", "Floral"</p>
+     * @var string|null
+     */
+    public $pattern = null;
+
+    /**
+     * The store name of the item's brand. null if not available.
+     * <p>Example: Hot Wheels</p>
+     * @var string|null
+     */
+    public $brandStoreName = null;
+
+    /**
+     * The brand store URL path. null if not available. To get the full URL, prepend the Amazon domain of the respective locale (e.g. https//www.amazon.com).
+     * <p>Example: /stores/LEGO/page/017EF856-965D-4B56-A171-EA61CAFF45DD</p>
+     * @var string|null
+     */
+    public $brandStoreUrl = null;
+
+    /**
+     * The brand store Name from the URL path. null if not available.
+     * <p>Example: LEGO (from the URL: /stores/LEGO/page/017EF856-965D-4B56-A171-EA61CAFF45DD)</p>
+     * @var string|null
+     */
+    public $brandStoreUrlName = null;
+
+    /**
+     * Provides metadata for videos associated with the product.
+     *
+     * <p>The {@code videos} parameter is mandatory for access. Each object in the array represents
+     * the metadata for a single video. Metadata can be retrieved for all image carousel videos
+     * and up to 10 community videos from the product listing's Videos section. To request live
+     * data for this field, the {@code offers} parameter must also be included. Returns {@code null}
+     * if unavailable.</p>
+     *
+     * <p>Example:</p>
+     * <pre>
+     * "videos": [{
+     *     "title": "Compressed Air Duster",
+     *     "image": "31XBcVI7oTL.jpg",
+     *     "duration": 36,
+     *     "creator": "Seller",
+     *     "name": "Innovation",
+     *     "url": "https://m.media-amazon.com/images/S/vse-vms-transcoding-artifact-us-east-1-prd/d8d8f97e-aa42-42d2-aa4c-6ab1b006edb5/default.jobtemplate.hls.m3u8"
+     * }]
+     * </pre>
+     * @var \Keepa\helper\VideoObject[]|null
+     */
+    public $videos = null;
+
+    /**
+     * Provides A+ Content of this product.
+     *
+     * <p>The {@code aplus} parameter is mandatory for access. To request live
+     * data for this field, the {@code offers} parameter must also be included. Returns {@code null}
+     * if unavailable.</p>
+     * @var \Keepa\helper\APlusObject[]|null
+     */
+    public $aPlus = null;
+
+
+    /**
+     * Specific uses for the product, providing detailed applications.
+     * <p>Example: {"Relaxation", "Decoration"}</p>
+     * @var string[]|null
+     */
+    public $specificUsesForProduct = null;
+
+    /**
+     * The highest business discount percentage, if available.
+     * <p>Example: 14</p>
+     * @var int|null
+     */
+    public $businessDiscount = null;
+
+    /**
+     * KeepaTime timestamp of the last business discount percentage update.
+     * @var int|null
+     */
+    public $lastBusinessDiscountUpdate = null;
+
+    /**
+     * Safety warnings associated with the product to inform users of potential hazards.
+     * <p>Example: "Keep away from open flames."</p>
+     * @var string|null
+     */
+    public $safetyWarning = null;
+
+    /**
+     * Benefits of using the product, highlighting its advantages.
+     * <p>Example: "Promotes relaxation and stress relief."</p>
+     * @var string|null
+     */
+    public $productBenefit = null;
+
+    /**
+     * Indicates whether batteries are required for the product to function.
+     * <p>Example: true or false</p>
+     * @var bool|null
+     */
+    public $batteriesRequired = null;
+
+    /**
+     * Indicates whether batteries are included with the product upon purchase.
+     * <p>Example: true or false</p>
+     * @var bool|null
+     */
+    public $batteriesIncluded = null;
+
+    /**
+     * Keywords describing the target audience for the product.
+     * <p>Example: "Adults, Gift for Her"</p>
+     * @var string|null
+     */
+    public $targetAudienceKeyword = null;
+
+    /**
+     * The style of the product, which may influence its aesthetic appeal.
+     * <p>Example: "Modern", "Vintage"</p>
+     * @var string|null
+     */
+    public $style = null;
+
+    /**
+     * Components included with the product, detailing what is provided upon purchase.
+     * <p>Example: "Candle, Wick, Box"</p>
+     * @var string|null
+     */
+    public $includedComponents = null;
+
+    /**
+     * Material of the product, specifying the primary substances used in its construction.
+     * <p>Example: "Soy Wax, Cotton"</p>
+     * @var string|null
+     */
+    public $material = null;
 }
