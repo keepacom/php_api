@@ -18,6 +18,12 @@ class Deal
     public $asin = null;
 
     /**
+     * The parent ASIN of the product
+     * @var string|null
+     */
+    public $parentAsin = null;
+
+    /**
      * Title of the product. Caution: may contain HTML markup in rare cases.
      * @var string|null
      */

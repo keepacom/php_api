@@ -14,4 +14,10 @@ class VariationObject
      * @var \Keepa\helper\VariationAttributeObject[]|null
      */
     public $attributes = null;
+
+    /**
+     * This variation ASIN's swatch image
+     * @var string|null
+     **/
+    public $image = null;
 }

@@ -704,6 +704,25 @@ class Product
      */
     public $eanList = null;
 
+    /**
+     * A list of GTIN assigned to this product. The first index is the primary GTIN. null if not available.
+     * @var string[]|null
+     */
+    public $gtinList = null;
+
+
+    /**
+     * A list of virtual bundle ASINs. Only available for virtual product bundles.
+     * @var string[]|null
+     */
+    public $bundleItems = null;
+
+    /**
+     * A list of historical or out of stock variations. Requires the historical-variations parameter.
+     * @var string[]|null
+     */
+    public $historicalVariations = null;
+
 
     /**
      * The scent of the product. Describes the fragrance associated with the product.
@@ -888,8 +907,23 @@ class Product
 
     /**
      * Material of the product, specifying the primary substances used in its construction.
+     * <p>Example: [ “Steel”, “Wood” ]</p>
+     * @var string[]|null
+     */
+    public $materials = null;
+
+    /**
+     * Material of the product, specifying the primary substances used in its construction.
      * <p>Example: "Soy Wax, Cotton"</p>
      * @var string|null
      */
     public $material = null;
+
+
+    /**
+     * The special features of the product.
+     * <p>Example: [ “Fast Charging”, “Lightweight” ]</p>
+     * @var string[]|null
+     */
+    public $specialFeatures = null;
 }
