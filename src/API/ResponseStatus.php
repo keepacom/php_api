@@ -11,4 +11,5 @@ class ResponseStatus
     const REQUEST_FAILED = "REQUEST_FAILED";
     const PAYMENT_REQUIRED = "PAYMENT_REQUIRED";
     const METHOD_NOT_ALLOWED = "METHOD_NOT_ALLOWED";
+    const NOT_FOUND = "NOT_FOUND";
 }

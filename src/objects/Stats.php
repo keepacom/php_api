@@ -355,6 +355,13 @@ class Stats
      */
     public $buyBoxStats = null;
 
+
+    /**
+     * The buy box saving basis price (strikethrough, typical price). null if unavailable.
+     * @var int|null
+     */
+    public $buyBoxSavingBasis = null;
+
     /**
      * Only set when the offers parameter was used. Price of the used buy box, if existent. Otherwise "-1" or null
      * @var int|null

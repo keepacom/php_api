@@ -97,6 +97,9 @@ class KeepaAPI
                     case 402:
                         $response->status = ResponseStatus::PAYMENT_REQUIRED;
                         break;
+                    case 404:
+                        $response->status = ResponseStatus::NOT_FOUND;
+                        break;
                     case 405:
                         $response->status = ResponseStatus::METHOD_NOT_ALLOWED;
                         break;
