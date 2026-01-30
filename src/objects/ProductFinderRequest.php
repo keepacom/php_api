@@ -911,6 +911,9 @@ class ProductFinderRequest
     /* @var string[] $brand */
     public $brand;
 
+    /* @var string[] $dealType */
+    public $dealType;
+
     /* @var string[] $buyBoxSellerId */
     public $buyBoxSellerId;
 
@@ -922,6 +925,9 @@ class ProductFinderRequest
 
     /* @var string[] $color */
     public $color;
+
+    /* @var string $historicalParentASIN */
+    public $historicalParentASIN;
 
     /* @var int $couponOneTimeAbsolute_lte */
     public $couponOneTimeAbsolute_lte;
@@ -3003,6 +3009,9 @@ class ProductFinderRequest
     /* @var bool $buyBoxIsPrimeExclusive */
     public $buyBoxIsPrimeExclusive;
 
+    /* @var bool $buyBoxIsPrimeExclusive */
+    public $buyBoxIsPrimeEligible;
+
     /* @var string[] $type */
     public $type;
 
@@ -3478,7 +3487,554 @@ class ProductFinderRequest
     /* @var int $itemWidth_gte */
 	public $itemWidth_gte;
 
+    /* @var int lastPriceChange_AMAZON_lte; */
+    public $lastPriceChange_AMAZON_lte;
 
+    /* @var int lastPriceChange_AMAZON_gte; */
+    public $lastPriceChange_AMAZON_gte;
+
+    /* @var int lastPriceChange_NEW_lte; */
+    public $lastPriceChange_NEW_lte;
+
+    /* @var int lastPriceChange_NEW_gte; */
+    public $lastPriceChange_NEW_gte;
+
+    /* @var int lastPriceChange_USED_lte; */
+    public $lastPriceChange_USED_lte;
+
+    /* @var int lastPriceChange_USED_gte; */
+    public $lastPriceChange_USED_gte;
+
+    /* @var int lastPriceChange_SALES_lte; */
+    public $lastPriceChange_SALES_lte;
+
+    /* @var int lastPriceChange_SALES_gte; */
+    public $lastPriceChange_SALES_gte;
+
+    /* @var int lastPriceChange_LISTPRICE_lte; */
+    public $lastPriceChange_LISTPRICE_lte;
+
+    /* @var int lastPriceChange_LISTPRICE_gte; */
+    public $lastPriceChange_LISTPRICE_gte;
+
+    /* @var int lastPriceChange_COLLECTIBLE_lte; */
+    public $lastPriceChange_COLLECTIBLE_lte;
+
+    /* @var int lastPriceChange_COLLECTIBLE_gte; */
+    public $lastPriceChange_COLLECTIBLE_gte;
+
+    /* @var int lastPriceChange_REFURBISHED_lte; */
+    public $lastPriceChange_REFURBISHED_lte;
+
+    /* @var int lastPriceChange_REFURBISHED_gte; */
+    public $lastPriceChange_REFURBISHED_gte;
+
+    /* @var int lastPriceChange_NEW_FBM_SHIPPING_lte; */
+    public $lastPriceChange_NEW_FBM_SHIPPING_lte;
+
+    /* @var int lastPriceChange_NEW_FBM_SHIPPING_gte; */
+    public $lastPriceChange_NEW_FBM_SHIPPING_gte;
+
+    /* @var int lastPriceChange_LIGHTNING_DEAL_lte; */
+    public $lastPriceChange_LIGHTNING_DEAL_lte;
+
+    /* @var int lastPriceChange_LIGHTNING_DEAL_gte; */
+    public $lastPriceChange_LIGHTNING_DEAL_gte;
+
+    /* @var int lastPriceChange_WAREHOUSE_lte; */
+    public $lastPriceChange_WAREHOUSE_lte;
+
+    /* @var int lastPriceChange_WAREHOUSE_gte; */
+    public $lastPriceChange_WAREHOUSE_gte;
+
+    /* @var int lastPriceChange_NEW_FBA_lte; */
+    public $lastPriceChange_NEW_FBA_lte;
+
+    /* @var int lastPriceChange_NEW_FBA_gte; */
+    public $lastPriceChange_NEW_FBA_gte;
+
+    /* @var int lastPriceChange_COUNT_NEW_lte; */
+    public $lastPriceChange_COUNT_NEW_lte;
+
+    /* @var int lastPriceChange_COUNT_NEW_gte; */
+    public $lastPriceChange_COUNT_NEW_gte;
+
+    /* @var int lastPriceChange_COUNT_USED_lte; */
+    public $lastPriceChange_COUNT_USED_lte;
+
+    /* @var int lastPriceChange_COUNT_USED_gte; */
+    public $lastPriceChange_COUNT_USED_gte;
+
+    /* @var int lastPriceChange_COUNT_REFURBISHED_lte; */
+    public $lastPriceChange_COUNT_REFURBISHED_lte;
+
+    /* @var int lastPriceChange_COUNT_REFURBISHED_gte; */
+    public $lastPriceChange_COUNT_REFURBISHED_gte;
+
+    /* @var int lastPriceChange_COUNT_COLLECTIBLE_lte; */
+    public $lastPriceChange_COUNT_COLLECTIBLE_lte;
+
+    /* @var int lastPriceChange_COUNT_COLLECTIBLE_gte; */
+    public $lastPriceChange_COUNT_COLLECTIBLE_gte;
+
+    /* @var int lastPriceChange_RATING_lte; */
+    public $lastPriceChange_RATING_lte;
+
+    /* @var int lastPriceChange_RATING_gte; */
+    public $lastPriceChange_RATING_gte;
+
+    /* @var int lastPriceChange_COUNT_REVIEWS_lte; */
+    public $lastPriceChange_COUNT_REVIEWS_lte;
+
+    /* @var int lastPriceChange_COUNT_REVIEWS_gte; */
+    public $lastPriceChange_COUNT_REVIEWS_gte;
+
+    /* @var int lastPriceChange_BUY_BOX_SHIPPING_lte; */
+    public $lastPriceChange_BUY_BOX_SHIPPING_lte;
+
+    /* @var int lastPriceChange_BUY_BOX_SHIPPING_gte; */
+    public $lastPriceChange_BUY_BOX_SHIPPING_gte;
+
+    /* @var int lastPriceChange_USED_NEW_SHIPPING_lte; */
+    public $lastPriceChange_USED_NEW_SHIPPING_lte;
+
+    /* @var int lastPriceChange_USED_NEW_SHIPPING_gte; */
+    public $lastPriceChange_USED_NEW_SHIPPING_gte;
+
+    /* @var int lastPriceChange_USED_VERY_GOOD_SHIPPING_lte; */
+    public $lastPriceChange_USED_VERY_GOOD_SHIPPING_lte;
+
+    /* @var int lastPriceChange_USED_VERY_GOOD_SHIPPING_gte; */
+    public $lastPriceChange_USED_VERY_GOOD_SHIPPING_gte;
+
+    /* @var int lastPriceChange_USED_GOOD_SHIPPING_lte; */
+    public $lastPriceChange_USED_GOOD_SHIPPING_lte;
+
+    /* @var int lastPriceChange_USED_GOOD_SHIPPING_gte; */
+    public $lastPriceChange_USED_GOOD_SHIPPING_gte;
+
+    /* @var int lastPriceChange_USED_ACCEPTABLE_SHIPPING_lte; */
+    public $lastPriceChange_USED_ACCEPTABLE_SHIPPING_lte;
+
+    /* @var int lastPriceChange_USED_ACCEPTABLE_SHIPPING_gte; */
+    public $lastPriceChange_USED_ACCEPTABLE_SHIPPING_gte;
+
+    /* @var int lastPriceChange_REFURBISHED_SHIPPING_lte; */
+    public $lastPriceChange_REFURBISHED_SHIPPING_lte;
+
+    /* @var int lastPriceChange_REFURBISHED_SHIPPING_gte; */
+    public $lastPriceChange_REFURBISHED_SHIPPING_gte;
+
+    /* @var int lastPriceChange_EBAY_NEW_SHIPPING_lte; */
+    public $lastPriceChange_EBAY_NEW_SHIPPING_lte;
+
+    /* @var int lastPriceChange_EBAY_NEW_SHIPPING_gte; */
+    public $lastPriceChange_EBAY_NEW_SHIPPING_gte;
+
+    /* @var int lastPriceChange_EBAY_USED_SHIPPING_lte; */
+    public $lastPriceChange_EBAY_USED_SHIPPING_lte;
+
+    /* @var int lastPriceChange_EBAY_USED_SHIPPING_gte; */
+    public $lastPriceChange_EBAY_USED_SHIPPING_gte;
+
+    /* @var int lastPriceChange_TRADE_IN_lte; */
+    public $lastPriceChange_TRADE_IN_lte;
+
+    /* @var int lastPriceChange_TRADE_IN_gte; */
+    public $lastPriceChange_TRADE_IN_gte;
+
+    /* @var int lastPriceChange_RENT_lte; */
+    public $lastPriceChange_RENT_lte;
+
+    /* @var int lastPriceChange_RENT_gte; */
+    public $lastPriceChange_RENT_gte;
+
+    /* @var int lastPriceChange_BUY_BOX_USED_SHIPPING_lte; */
+    public $lastPriceChange_BUY_BOX_USED_SHIPPING_lte;
+
+    /* @var int lastPriceChange_BUY_BOX_USED_SHIPPING_gte; */
+    public $lastPriceChange_BUY_BOX_USED_SHIPPING_gte;
+
+    /* @var int lastPriceChange_PRIME_EXCL_lte; */
+    public $lastPriceChange_PRIME_EXCL_lte;
+
+    /* @var int lastPriceChange_PRIME_EXCL_gte; */
+    public $lastPriceChange_PRIME_EXCL_gte;
+
+    /* @var int outOfStockPercentage90_BB_lte; */
+    public $outOfStockPercentage90_BB_lte;
+
+    /* @var int outOfStockPercentage90_BB_gte; */
+    public $outOfStockPercentage90_BB_gte;
+
+    /* @var int outOfStockPercentage90_BB_USED_lte; */
+    public $outOfStockPercentage90_BB_USED_lte;
+
+    /* @var int outOfStockPercentage90_BB_USED_gte; */
+    public $outOfStockPercentage90_BB_USED_gte;
+
+    /* @var int outOfStockPercentage90_NEW_lte; */
+    public $outOfStockPercentage90_NEW_lte;
+
+    /* @var int outOfStockPercentage90_NEW_gte; */
+    public $outOfStockPercentage90_NEW_gte;
+
+    /* @var int outOfStockPercentage90_USED_lte; */
+    public $outOfStockPercentage90_USED_lte;
+
+    /* @var int outOfStockPercentage90_USED_gte; */
+    public $outOfStockPercentage90_USED_gte;
+
+    /* @var int buyBoxStandardDeviation30_lte; */
+    public $buyBoxStandardDeviation30_lte;
+
+    /* @var int buyBoxStandardDeviation30_gte; */
+    public $buyBoxStandardDeviation30_gte;
+
+    /* @var int buyBoxStandardDeviation90_lte; */
+    public $buyBoxStandardDeviation90_lte;
+
+    /* @var int buyBoxStandardDeviation90_gte; */
+    public $buyBoxStandardDeviation90_gte;
+
+    /* @var int buyBoxStandardDeviation365_lte; */
+    public $buyBoxStandardDeviation365_lte;
+
+    /* @var int buyBoxStandardDeviation365_gte; */
+    public $buyBoxStandardDeviation365_gte;
+
+    /* @var int  flipability30_lte; */
+    public $flipability30_lte;
+
+    /* @var int  flipability30_gte; */
+    public $flipability30_gte;
+
+    /* @var int  flipability90_lte; */
+    public $flipability90_lte;
+
+    /* @var int  flipability90_gte; */
+    public $flipability90_gte;
+
+    /* @var int  flipability365_lte; */
+    public $flipability365_lte;
+
+    /* @var int  flipability365_gte; */
+    public $flipability365_gte;
+
+    /* @var int deltaPercent90_monthlySold_lte; */
+    public $deltaPercent90_monthlySold_lte;
+
+    /* @var int deltaPercent90_monthlySold_gte; */
+    public $deltaPercent90_monthlySold_gte;
+
+    /* @var int outOfStockCountAmazon30_lte; */
+    public $outOfStockCountAmazon30_lte;
+
+    /* @var int outOfStockCountAmazon30_gte; */
+    public $outOfStockCountAmazon30_gte;
+
+    /* @var int outOfStockCountAmazon90_lte; */
+    public $outOfStockCountAmazon90_lte;
+
+    /* @var int outOfStockCountAmazon90_gte; */
+    public $outOfStockCountAmazon90_gte;
+
+    /* @var int variationReviewCount_lte; */
+    public $variationReviewCount_lte;
+
+    /* @var int variationReviewCou    te; */
+    public $variationReviewCount_gte;
+
+    /* @var int variationRatingCount_lte; */
+    public $variationRatingCount_lte;
+
+    /* @var int variationRatingCount_gte; */
+    public $variationRatingCount_gte;
+
+    /* @var string[] websiteDisplayGroupName; */
+    public $websiteDisplayGroupName;
+
+    /* @var string[] websiteDisplayGroup; */
+    public $websiteDisplayGroup;
+
+    /* @var int availabilityAmazonMinDelayInDa    te; */
+    public $availabilityAmazonMinDelayInDays_lte;
+
+    /* @var int availabilityAmazonMinDelayInDays_gte; */
+    public $availabilityAmazonMinDelayInDays_gte;
+
+    /* @var int[] blackList; */
+    public $blackList;
+
+    /* @var Boolean isDeal; */
+    public $isDeal;
+
+    /* @var Boolean launchpad; */
+    public $launchpad;
+
+    /* @var string[] historicalSellerIds; */
+    public $historicalSellerIds;
+
+    /* @var string[] buyBoxShippingCountry; */
+    public $buyBoxShippingCountry;
+
+    /* @var string[] sellerIdsFBA; */
+    public $sellerIdsFBA;
+
+    /* @var string[] sellerIdsFBM; */
+    public $sellerIdsFBM;
+
+    /* @var string[] buyBoxStatsTopSellerId30; */
+    public $buyBoxStatsTopSellerId30;
+
+    /* @var string[] buyBoxStatsTopSellerId90; */
+    public $buyBoxStatsTopSellerId90;
+
+    /* @var string[] buyBoxStatsTopSellerId180; */
+    public $buyBoxStatsTopSellerId180;
+
+    /* @var string[] buyBoxStatsTopSellerId365; */
+    public $buyBoxStatsTopSellerId365;
+
+    /* @var int buyBoxEligibleOfferCountsNewFBA_lte; */
+    public $buyBoxEligibleOfferCountsNewFBA_lte;
+
+    /* @var int buyBoxEligibleOfferCountsNewFBA_gte; */
+    public $buyBoxEligibleOfferCountsNewFBA_gte;
+
+    /* @var int buyBoxEligibleOfferCountsNewFBM_lte; */
+    public $buyBoxEligibleOfferCountsNewFBM_lte;
+
+    /* @var int buyBoxEligibleOfferCountsNewFBM_gte; */
+    public $buyBoxEligibleOfferCountsNewFBM_gte;
+
+    /* @var int buyBoxEligibleOfferCountsUsedFBA_lte; */
+    public $buyBoxEligibleOfferCountsUsedFBA_lte;
+
+    /* @var int buyBoxEligibleOfferCountsUsedFBA_gte; */
+    public $buyBoxEligibleOfferCountsUsedFBA_gte;
+
+    /* @var int buyBoxEligibleOfferCountsUsedFBM_lte; */
+    public $buyBoxEligibleOfferCountsUsedFBM_lte;
+
+    /* @var int buyBoxEligibleOfferCountsUsedFBM_gte; */
+    public $buyBoxEligibleOfferCountsUsedFBM_gte;
+
+    /* @var int srAvg000_gte; */
+    public $srAvg000_gte;
+
+    /* @var int srAvg001_gte; */
+    public $srAvg001_gte;
+
+    /* @var int srAvg002_gte; */
+    public $srAvg002_gte;
+
+    /* @var int srAvg003_gte; */
+    public $srAvg003_gte;
+
+    /* @var int srAvg004_gte; */
+    public $srAvg004_gte;
+
+    /* @var int srAvg005_gte; */
+    public $srAvg005_gte;
+
+    /* @var int srAvg006_gte; */
+    public $srAvg006_gte;
+
+    /* @var int srAvg007_gte; */
+    public $srAvg007_gte;
+
+    /* @var int srAvg008_gte; */
+    public $srAvg008_gte;
+
+    /* @var int srAvg009_gte; */
+    public $srAvg009_gte;
+
+    /* @var int srAvg010_gte; */
+    public $srAvg010_gte;
+
+    /* @var int srAvg011_gte; */
+    public $srAvg011_gte;
+
+    /* @var int srAvg100_gte; */
+    public $srAvg100_gte;
+
+    /* @var int srAvg    gte; */
+    public $srAvg101_gte;
+
+    /* @var int srAvg102_gte; */
+    public $srAvg102_gte;
+
+    /* @var int srAvg103_gte; */
+    public $srAvg103_gte;
+
+    /* @var int srAvg104_gte; */
+    public $srAvg104_gte;
+
+    /* @var int srAvg105_gte; */
+    public $srAvg105_gte;
+
+    /* @var int srAvg106_gte; */
+    public $srAvg106_gte;
+
+    /* @var int srAvg107_gte; */
+    public $srAvg107_gte;
+
+    /* @var int srAvg108_gte; */
+    public $srAvg108_gte;
+
+    /* @var int srAvg109_gte; */
+    public $srAvg109_gte;
+
+    /* @var int sr    10_gte; */
+    public $srAvg110_gte;
+
+    /* @var int srAvg111_gte; */
+    public $srAvg111_gte;
+
+    /* @var int srAvg200_gte; */
+    public $srAvg200_gte;
+
+    /* @var int srAvg201_gte; */
+    public $srAvg201_gte;
+
+    /* @var int srAvg202_gte; */
+    public $srAvg202_gte;
+
+    /* @var int srAvg203_gte; */
+    public $srAvg203_gte;
+
+    /* @var int srAvg204_gte; */
+    public $srAvg204_gte;
+
+    /* @var int srAvg205_gte; */
+    public $srAvg205_gte;
+
+    /* @var int srAvg206_gte; */
+    public $srAvg206_gte;
+
+    /* @var int srAvg207_gte; */
+    public $srAvg207_gte;
+
+    /* @var int srAvg208_gte; */
+    public $srAvg208_gte;
+
+    /* @var int srAvg209_gte; */
+    public $srAvg209_gte;
+
+    /* @var int srAvg210_gte; */
+    public $srAvg210_gte;
+
+    /* @var int srAvg211_gte; */
+    public $srAvg211_gte;
+
+    /* @var int srAvg000_lte; */
+    public $srAvg000_lte;
+
+    /* @var int srAvg001_lte; */
+    public $srAvg001_lte;
+
+    /* @var int srAvg002_lte; */
+    public $srAvg002_lte;
+
+    /* @var int srAvg003_lte; */
+    public $srAvg003_lte;
+
+    /* @var int srAvg004_lte; */
+    public $srAvg004_lte;
+
+    /* @var int srAvg005_lte; */
+    public $srAvg005_lte;
+
+    /* @var int srAvg006_lte; */
+    public $srAvg006_lte;
+
+    /* @var int srAvg007_lte; */
+    public $srAvg007_lte;
+
+    /* @var int srAvg008_lte; */
+    public $srAvg008_lte;
+
+    /* @var int srAvg009_lte; */
+    public $srAvg009_lte;
+
+    /* @var int srAvg010_lte; */
+    public $srAvg010_lte;
+
+    /* @var int srAvg011_lte; */
+    public $srAvg011_lte;
+
+    /* @var int srAvg100_lte; */
+    public $srAvg100_lte;
+
+    /* @var int srAvg101_lte; */
+    public $srAvg101_lte;
+
+    /* @var int srAvg102_lte; */
+    public $srAvg102_lte;
+
+    /* @var int srAvg103_lte; */
+    public $srAvg103_lte;
+
+    /* @var int srAvg104_lte; */
+    public $srAvg104_lte;
+
+    /* @var int srAvg105_lte; */
+    public $srAvg105_lte;
+
+    /* @var int srAvg106_lte; */
+    public $srAvg106_lte;
+
+    /* @var int srAvg107_lte; */
+    public $srAvg107_lte;
+
+    /* @var int srAvg108_lte; */
+    public $srAvg108_lte;
+
+    /* @var int srAvg109_lte; */
+    public $srAvg109_lte;
+
+    /* @var int srAvg110_lte; */
+    public $srAvg110_lte;
+
+    /* @var int srAvg111_lte; */
+    public $srAvg111_lte;
+
+    /* @var int srAvg200_lte; */
+    public $srAvg200_lte;
+
+    /* @var int srAvg201_lte; */
+    public $srAvg201_lte;
+
+    /* @var int sr02_lte; */
+    public $srAvg202_lte;
+
+    /* @var int srAvg203_lte; */
+    public $srAvg203_lte;
+
+    /* @var int srAvg204_lte; */
+    public $srAvg204_lte;
+
+    /* @var int srAvg205_lte; */
+    public $srAvg205_lte;
+
+    /* @var int srAvg206_lte; */
+    public $srAvg206_lte;
+
+    /* @var int srAvg207_lte; */
+    public $srAvg207_lte;
+
+    /* @var int srAvg208_lte; */
+    public $srAvg208_lte;
+
+    /* @var int srAvg209_lte; */
+    public $srAvg209_lte;
+
+    /* @var int srAvg210_lte; */
+    public $srAvg210_lte;
+
+    /* @var int srAvg211_lte; */
+    public $srAvg211_lte;
 
     /* @var string[][] $sort = null */
     public $sort = null;

@@ -147,9 +147,260 @@ class DealRequest
      * If true excludes all products with no reviews. If false the filter is inactive.
      */
     public $hasReviews;
-//
+
     /**
+     * Include only products flagged as Prime Exclusive.
+     * <p>Example: {@code true}</p>
      *
+     * @var bool|null
      */
-    public $categorySearch;
+    public $isPrimeExclusive;
+
+    /**
+     * Include only products that currently have an offer sold and fulfilled by Amazon.
+     * <p>Example: {@code true}</p>
+     *
+     * @var bool|null
+     */
+    public $mustHaveAmazonOffer;
+
+    /**
+     * Include only products that currently have no offer sold and fulfilled by Amazon.
+     * <p>Example: {@code true}</p>
+     *
+     * @var bool|null
+     */
+    public $mustNotHaveAmazonOffer;
+
+    /**
+     * Minimum product rating to include.
+     * <ul>
+     *   <li>Integer from 0 to 50 (e.g., 45 = 4.5 stars)</li>
+     *   <li>Use -1 to disable the filter</li>
+     * </ul>
+     * <p>Example: {@code 20} // ≥ 2.0 stars</p>
+     *
+     * @var int|null
+     */
+    public $minRating;
+
+    /**
+     * Include only Amazon Warehouse deals that match these condition codes.
+     * <p>Use integer-coded conditions such as:
+     * 1 = New, 2 = Used - Like New, 3 = Used - Very Good, 24 = Used - Good, 5 = Used - Acceptable.</p>
+     * <p>Example: {@code [1, 2]}</p>
+     * <p>Note: API expects integers; choose a numeric type that fits your model.</p>
+     *
+     * @var int[]|null
+     */
+    public $warehouseConditions;
+
+    /**
+     * If multiple variations match, return only a single (random) variation.
+     * <p>Example: {@code true}</p>
+     *
+     * @var bool|null
+     */
+    public $singleVariation;
+
+    /**
+     * Include only products made of the specified materials (e.g., "cotton").
+     * <p>Example: {@code ["cotton", "polyester"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $material;
+
+    /**
+     * Include only products matching the specified type (e.g., "shirt", "dress").
+     * <p>Example: {@code ["shirt"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $type;
+
+    /**
+     * Include only products from the specified manufacturer.
+     * <p>Example: {@code ["Sony"]}</p>
+     *
+     * @var string[]
+     */
+    public $manufacturer;
+
+    /**
+     * Include only products from the specified brand.
+     * <p>Example: {@code ["Apple", "Samsung"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $brand;
+
+    /**
+     * Include only products in the specified Amazon product group (e.g., "home", "book").
+     * <p>Example: {@code ["book"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $productGroup;
+
+    /**
+     * Include only products matching the specified model identifier.
+     * <p>Example: {@code ["A2179"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $model;
+
+    /**
+     * Include only products matching the specified color attribute.
+     * <p>Example: {@code ["black", "navy"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $color;
+
+    /**
+     * Include only products matching the specified size (e.g., "small", "one size").
+     * <p>Example: {@code ["M", "L"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $size;
+
+    /**
+     * Include only products with the specified unit type (e.g., "count", "ounce").
+     * <p>Example: {@code ["count"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $unitType;
+
+    /**
+     * Include only products with the specified scent (e.g., "lavender", "citrus").
+     * <p>Example: {@code ["lavender"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $scent;
+
+    /**
+     * Include only products matching the specified item form (e.g., "liquid", "sheet").
+     * <p>Example: {@code ["liquid"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $itemForm;
+
+    /**
+     * Include only products matching the specified pattern (e.g., "striped", "solid").
+     * <p>Example: {@code ["striped"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $pattern;
+
+    /**
+     * Include only products matching the specified style attribute (e.g., "modern", "vintage").
+     * <p>Example: {@code ["modern"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $style;
+
+    /**
+     * Include only products matching the specified item type keyword (custom search term).
+     * <p>Example: {@code ["books", "prints"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $itemTypeKeyword;
+
+    /**
+     * Include only products targeting the specified audience (e.g., "kids", "professional").
+     * <p>Example: {@code ["kids"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $targetAudienceKeyword;
+
+    /**
+     * Include only products matching the specified edition (e.g., "first edition", "standard edition").
+     * <p>Example: {@code ["first edition"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $edition;
+
+    /**
+     * Include only products in the specified format (e.g., "kindle ebook", "import", "dvd").
+     * <p>Example: {@code ["paperback"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $format;
+
+    /**
+     * Include only products by the specified author (applicable to books, music, etc.).
+     * <p>Example: {@code ["Neil Gaiman"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $author;
+
+    /**
+     * Include only products with the specified binding type (e.g., "paperback").
+     * <p>Example: {@code ["hardcover"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $binding;
+
+    /**
+     * Include only products available in the specified languages (use language names).
+     * <p>Example: {@code ["English", "German"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $languages;
+
+    /**
+     * Include only products sold under the specified Brand Store name on Amazon.
+     * <p>Example: {@code ["Amazon Basics"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $brandStoreName;
+
+    /**
+     * Include only products sold under the specified URL-friendly Brand Store identifier.
+     * <p>Example: {@code ["amazonbasics"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $brandStoreUrlName;
+
+    /**
+     * Include only products in the specified website display group.
+     * <p>Example: {@code ["fashion_display_on_website"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $websiteDisplayGroup;
+
+    /**
+     * Include only products in the specified website display group name (user-friendly label).
+     * <p>Example: {@code ["Fashion"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $websiteDisplayGroupName;
+
+    /**
+     * Include only products belonging to the specified sales rank display group
+     * (e.g., "fashion_display_on_website").
+     * <p>Example: {@code ["fashion_display_on_website"]}</p>
+     *
+     * @var string[]|null
+     */
+    public $salesRankDisplayGroup;
 }
