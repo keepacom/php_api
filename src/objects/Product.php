@@ -926,4 +926,10 @@ class Product
      * @var string[]|null
      */
     public $specialFeatures = null;
+
+    /**
+     * Provides metadata for active deals associated with the product’s buy box. undefined if unavailable.
+     * @var \Keepa\helper\DealDetails[]|null
+     */
+    public $deals = null;
 }
