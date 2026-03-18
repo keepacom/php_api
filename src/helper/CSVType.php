@@ -42,6 +42,16 @@ class CSVType
     const PRIME_EXCL = 33;
 
     /**
+     * New FBA offer count history (includes Amazon offer)
+     */
+    const COUNT_NEW_FBA = 34;
+
+    /**
+     * New FBM offer count history
+     */
+    const COUNT_NEW_FBM = 35;
+
+    /**
      * @var $index int
      */
     public $index;
