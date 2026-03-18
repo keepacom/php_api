@@ -479,6 +479,20 @@ class Request
         return $r;
     }
 
+    /**
+     * Retrieve a Seller ID list of the most rated Amazon marketplace sellers.
+     *
+     * @param int $domainID Amazon locale of the product {@link AmazonLocale}. China is not supported.
+     * @return Request ready to send request.
+     */
+    public static function getTopSellerRequest($domainID)
+    {
+        $r = new Request();
+        $r->path = "topseller";
+        $r->parameter["domain"] = $domainID;
+        return $r;
+    }
+
 
     public function query()
     {

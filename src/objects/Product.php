@@ -50,6 +50,12 @@ class Product
     public $imagesCSV = null;
 
     /**
+     * Provides metadata for images associated with the product.
+     * @var \Keepa\helper\ImageObject[]|null
+     */
+    public $images = null;
+
+    /**
      * Array of category node ids
      * @var int[]|null
      */
@@ -673,6 +679,13 @@ class Product
     public $coupon = null;
 
     /**
+     * Historical values for the coupon field. Format: [ keepaTime, one-time coupon, subscribe and save coupon, keepaTime, … ].
+     * We started tracking coupon history on June 15th 2024.
+     * @var int[]|null
+     */
+    public $couponHistory = null;
+
+    /**
      * Whether or not the current new price is MAP restricted. Can be used to differentiate out of stock vs. MAP restricted prices (as in both cases the current price is -1).
      * @var bool|null
      */
@@ -828,6 +841,23 @@ class Product
      */
     public $aPlus = null;
 
+    /**
+     * A categorization name of products that behave similarly (e.g. "apparel", "kitchen").
+     * @var string|null
+     */
+    public $websiteDisplayGroupName = null;
+
+    /**
+     * A categorization of products that behave similarly (e.g. "apparel_display_on_website").
+     * @var string|null
+     */
+    public $websiteDisplayGroup = null;
+
+    /**
+     * For books only: An array listing other available formats or bindings of a book, excluding the current format.
+     * @var \Keepa\helper\FormatObject[]|null
+     */
+    public $formats = null;
 
     /**
      * Specific uses for the product, providing detailed applications.
