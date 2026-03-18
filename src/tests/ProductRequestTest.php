@@ -647,4 +647,164 @@ class ProductRequestTest extends AbstractTest
         self::assertNotNull($response->products[0]->stats->buyBoxUsedCondition);
 
     }
+
+    /**
+     * @throws \Exception
+     */
+    public function testImages()
+    {
+        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B001G73S50']);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products[0]->images);
+        self::assertGreaterThan(0, count($response->products[0]->images));
+        self::assertNotNull($response->products[0]->images[0]->l);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testCouponHistory()
+    {
+        $fr = new ProductFinderRequest();
+        $fr->couponOneTimeAbsolute_gte = 1;
+
+        $finderResp = $this->api->sendRequestWithRetry(Request::getFinderRequest(AmazonLocale::DE, $fr));
+        self::assertEquals($finderResp->status, "OK");
+        self::assertGreaterThan(0, count($finderResp->asinList));
+
+        $response = null;
+        foreach ($finderResp->asinList as $asin) {
+            $r = $this->api->sendRequestWithRetry(
+                Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, [$asin])
+            );
+            if ($r->status === "OK" && !empty($r->products) && !empty($r->products[0]->couponHistory)) {
+                $response = $r;
+                break;
+            }
+        }
+        self::assertNotNull($response, "No product with couponHistory found");
+        self::assertNotNull($response->products[0]->couponHistory);
+        self::assertGreaterThan(0, count($response->products[0]->couponHistory));
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testWebsiteDisplayGroup()
+    {
+        $fr = new ProductFinderRequest();
+        $fr->avg1_AMAZON_gte = 100;
+        $fr->avg1_AMAZON_lte = 10000;
+
+        $finderResp = $this->api->sendRequestWithRetry(Request::getFinderRequest(AmazonLocale::DE, $fr));
+        self::assertEquals($finderResp->status, "OK");
+
+        $response = null;
+        foreach ($finderResp->asinList as $asin) {
+            $r = $this->api->sendRequestWithRetry(
+                Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, [$asin])
+            );
+            if ($r->status === "OK" && !empty($r->products) && !empty($r->products[0]->websiteDisplayGroup)) {
+                $response = $r;
+                break;
+            }
+        }
+        self::assertNotNull($response, "No product with websiteDisplayGroup found");
+        self::assertNotNull($response->products[0]->websiteDisplayGroup);
+        self::assertNotNull($response->products[0]->websiteDisplayGroupName);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testFormats()
+    {
+        $fr = new ProductFinderRequest();
+        $fr->numberOfPages_gte = 1;
+
+        $finderResp = $this->api->sendRequestWithRetry(Request::getFinderRequest(AmazonLocale::US, $fr));
+        self::assertEquals($finderResp->status, "OK");
+
+        $response = null;
+        foreach ($finderResp->asinList as $asin) {
+            $r = $this->api->sendRequestWithRetry(
+                Request::getProductRequest(AmazonLocale::US, 0, null, null, 0, true, [$asin])
+            );
+            if ($r->status === "OK" && !empty($r->products) && !empty($r->products[0]->formats)) {
+                $response = $r;
+                break;
+            }
+        }
+        self::assertNotNull($response, "No book product with formats found");
+        self::assertNotNull($response->products[0]->formats);
+        self::assertGreaterThan(0, count($response->products[0]->formats));
+        self::assertNotNull($response->products[0]->formats[0]->asin);
+        self::assertNotNull($response->products[0]->formats[0]->format);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testBuyBoxSavingBasis()
+    {
+        $fr = new ProductFinderRequest();
+        $fr->avg1_AMAZON_gte = 100;
+        $fr->avg1_AMAZON_lte = 50000;
+
+        $finderResp = $this->api->sendRequestWithRetry(Request::getFinderRequest(AmazonLocale::DE, $fr));
+        self::assertEquals($finderResp->status, "OK");
+
+        $response = null;
+        foreach ($finderResp->asinList as $asin) {
+            $r = $this->api->sendRequestWithRetry(
+                Request::getProductRequest(AmazonLocale::DE, 20, "2015-12-31", "2026-01-01", 0, true, [$asin], ["buybox" => 1])
+            );
+            if ($r->status === "OK" && !empty($r->products)
+                && !empty($r->products[0]->stats)
+                && $r->products[0]->stats->buyBoxSavingBasisType !== null) {
+                $response = $r;
+                break;
+            }
+        }
+        self::assertNotNull($response, "No product with buyBoxSavingBasisType found");
+        self::assertNotNull($response->products[0]->stats->buyBoxSavingBasisType);
+        self::assertNotNull($response->products[0]->stats->buyBoxSavingPercentage);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testSalesRankDrops365()
+    {
+        $fr = new ProductFinderRequest();
+        $fr->salesRankDrops360_gte = 1;
+
+        $finderResp = $this->api->sendRequestWithRetry(Request::getFinderRequest(AmazonLocale::DE, $fr));
+        self::assertEquals($finderResp->status, "OK");
+        self::assertGreaterThan(0, count($finderResp->asinList));
+
+        $response = $this->api->sendRequestWithRetry(
+            Request::getProductRequest(AmazonLocale::DE, 0, "2015-12-31", "2026-01-01", 0, true, [$finderResp->asinList[0]])
+        );
+        self::assertEquals($response->status, "OK");
+        self::assertEquals(1, count($response->products));
+        self::assertNotNull($response->products[0]->stats);
+        self::assertGreaterThan(0, $response->products[0]->stats->salesRankDrops365);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testStatusCode()
+    {
+        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, false, ['B001G73S50']);
+
+        $response = $this->api->sendRequestWithRetry($request);
+        self::assertEquals($response->status, "OK");
+        self::assertNotNull($response->statusCode);
+        self::assertGreaterThan(0, $response->statusCode);
+    }
 }
