@@ -44,8 +44,8 @@ composer require keepa/php_api:*
 <a name="examples"></a>Examples
 ==============
 
-<a name="examples-keepa-api"></a>Product lookup with price history
----------------------------
+<details>
+<summary><strong>Product lookup with price history</strong></summary>
 
 ```php
 <?php
@@ -111,8 +111,10 @@ switch ($response->status) {
 }
 ```
 
-Product lookup with offers and buy box stats
----------------------------
+</details>
+
+<details>
+<summary><strong>Product lookup with offers and buy box stats</strong></summary>
 
 ```php
 <?php
@@ -124,7 +126,7 @@ use Keepa\objects\AmazonLocale;
 
 $api = new KeepaAPI("YOUR_API_KEY");
 
-// request with 20 offers and buy box stats for the last 180 days
+// request with 20 offers and buy box stats for the last year
 $r = Request::getProductRequest(
     AmazonLocale::DE,
     20,               // number of offers to retrieve
@@ -168,8 +170,10 @@ if ($response->status === "OK") {
 }
 ```
 
-Product Finder
----------------------------
+</details>
+
+<details>
+<summary><strong>Product Finder</strong></summary>
 
 ```php
 <?php
@@ -212,8 +216,10 @@ if ($response->status === "OK") {
 }
 ```
 
-Seller lookup
----------------------------
+</details>
+
+<details>
+<summary><strong>Seller lookup</strong></summary>
 
 ```php
 <?php
@@ -249,8 +255,10 @@ if ($response->status === "OK") {
 }
 ```
 
-Top sellers
----------------------------
+</details>
+
+<details>
+<summary><strong>Top sellers</strong></summary>
 
 ```php
 <?php
@@ -272,8 +280,10 @@ if ($response->status === "OK") {
 }
 ```
 
-Category lookup with statistics
----------------------------
+</details>
+
+<details>
+<summary><strong>Category lookup with statistics</strong></summary>
 
 ```php
 <?php
@@ -304,8 +314,10 @@ if ($response->status === "OK") {
 }
 ```
 
-Tracking notifications
----------------------------
+</details>
+
+<details>
+<summary><strong>Tracking notifications</strong></summary>
 
 ```php
 <?php
@@ -338,3 +350,5 @@ if ($response->status === "OK" && !empty($response->notifications)) {
     echo "No new notifications." . PHP_EOL;
 }
 ```
+
+</details>
