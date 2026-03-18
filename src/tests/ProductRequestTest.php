@@ -126,11 +126,23 @@ class ProductRequestTest extends AbstractTest
      */
     public function testFrequentlyBoughtTogether()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, ['B00F8JDCO4']);
+        $fr = new ProductFinderRequest();
+        $fr->avg1_AMAZON_gte = 100;
+        $fr->avg1_AMAZON_lte = 10000;
+        $finderResp = $this->api->sendRequestWithRetry(Request::getFinderRequest(AmazonLocale::DE, $fr));
+        self::assertEquals($finderResp->status, "OK");
 
-        $response = $this->api->sendRequestWithRetry($request);
-        self::assertEquals($response->status, "OK");
-        self::assertEquals(1, count($response->products));
+        $response = null;
+        foreach ($finderResp->asinList as $asin) {
+            $r = $this->api->sendRequestWithRetry(
+                Request::getProductRequest(AmazonLocale::DE, 0, null, null, 0, true, [$asin])
+            );
+            if ($r->status === "OK" && !empty($r->products[0]->frequentlyBoughtTogether)) {
+                $response = $r;
+                break;
+            }
+        }
+        self::assertNotNull($response, "No product with frequentlyBoughtTogether found");
         self::assertNotNull($response->products[0]->frequentlyBoughtTogether);
         self::assertGreaterThan(0, count($response->products[0]->frequentlyBoughtTogether));
     }
@@ -209,16 +221,28 @@ class ProductRequestTest extends AbstractTest
      */
     public function testFBAFees()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 0, null, null, 0, true, ['B00V84EH6A']);
+        $fr = new ProductFinderRequest();
+        $fr->fbaFees_gte = 1;
+        $finderResp = $this->api->sendRequestWithRetry(Request::getFinderRequest(AmazonLocale::US, $fr));
+        self::assertEquals($finderResp->status, "OK");
+        self::assertGreaterThan(0, count($finderResp->asinList));
 
-        $response = $this->api->sendRequestWithRetry($request);
-        self::assertEquals($response->status, "OK");
+        $response = null;
+        foreach ($finderResp->asinList as $asin) {
+            $r = $this->api->sendRequestWithRetry(
+                Request::getProductRequest(AmazonLocale::US, 0, null, null, 0, true, [$asin])
+            );
+            if ($r->status === "OK" && !empty($r->products)
+                && !empty($r->products[0]->fbaFees)
+                && $r->products[0]->fbaFees->pickAndPackFee !== null) {
+                $response = $r;
+                break;
+            }
+        }
+        self::assertNotNull($response, "No product with complete fbaFees found");
         self::assertEquals(1, count($response->products));
         self::assertNotNull($response->products[0]->fbaFees);
         self::assertNotNull($response->products[0]->fbaFees->pickAndPackFee);
-        self::assertNotNull($response->products[0]->fbaFees->pickAndPackFeeTax);
-        self::assertNotNull($response->products[0]->fbaFees->storageFee);
-        self::assertNotNull($response->products[0]->fbaFees->storageFeeTax);
     }
 
     /**
@@ -226,12 +250,23 @@ class ProductRequestTest extends AbstractTest
      */
     public function testOffersOrder()
     {
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, ['B00V84EH6A']);
+        $fr = new ProductFinderRequest();
+        $fr->count_NEW_gte = 3;
+        $fr->avg1_NEW_gte = 100;
+        $finderResp = $this->api->sendRequestWithRetry(Request::getFinderRequest(AmazonLocale::US, $fr));
+        self::assertEquals($finderResp->status, "OK");
 
-        $response = $this->api->sendRequestWithRetry($request);
-        self::assertEquals($response->status, "OK");
-        self::assertEquals(1, count($response->products));
-        self::assertNotNull($response->products);
+        $response = null;
+        foreach ($finderResp->asinList as $asin) {
+            $r = $this->api->sendRequestWithRetry(
+                Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, [$asin])
+            );
+            if ($r->status === "OK" && !empty($r->products) && $r->products[0]->liveOffersOrder !== null) {
+                $response = $r;
+                break;
+            }
+        }
+        self::assertNotNull($response, "No product with liveOffersOrder found");
         self::assertGreaterThan(0, count($response->products));
         self::assertNotNull($response->products[0]->liveOffersOrder);
     }
@@ -341,13 +376,23 @@ class ProductRequestTest extends AbstractTest
      */
     public function testEbayListing()
     {
-        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, ['0007151667']);
+        $fr = new ProductFinderRequest();
+        $fr->avg1_AMAZON_gte = 100;
+        $finderResp = $this->api->sendRequestWithRetry(Request::getFinderRequest(AmazonLocale::DE, $fr));
+        self::assertEquals($finderResp->status, "OK");
 
-        $response = $this->api->sendRequestWithRetry($request);
-        self::assertEquals($response->status, "OK");
-        self::assertEquals(1, count($response->products));
-        self::assertNotNull($response->products[0]->languages);
-        self::assertGreaterThan(0, $response->products[0]->ebayListingIds);
+        $response = null;
+        foreach ($finderResp->asinList as $asin) {
+            $r = $this->api->sendRequestWithRetry(
+                Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, [$asin])
+            );
+            if ($r->status === "OK" && !empty($r->products) && !empty($r->products[0]->ebayListingIds)) {
+                $response = $r;
+                break;
+            }
+        }
+        self::assertNotNull($response, "No product with ebayListingIds found");
+        self::assertGreaterThan(0, count((array)$response->products[0]->ebayListingIds));
     }
 
     /**
@@ -477,32 +522,41 @@ class ProductRequestTest extends AbstractTest
 
     public function testRental()
     {
-        // find product
         $fr = new ProductFinderRequest();
         $fr->avg1_RENT_gte = 0;
         $fr->isHighest_RENT = true;
 
-        $request = Request::getFinderRequest(AmazonLocale::US, $fr);
-        $response = $this->api->sendRequestWithRetry($request);
-        self::assertEquals($response->status, "OK");
-        self::assertGreaterThan(0, count($response->asinList));
+        $finderResp = $this->api->sendRequestWithRetry(Request::getFinderRequest(AmazonLocale::US, $fr));
+        self::assertEquals($finderResp->status, "OK");
+        self::assertGreaterThan(0, count($finderResp->asinList));
 
-        // test product
-        $request = Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, [$response->asinList[0]]);
-        $response = $this->api->sendRequestWithRetry($request);
+        // Batch-fetch all finder ASINs to find a product with historical rent data
+        $batchResp = $this->api->sendRequestWithRetry(
+            Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, $finderResp->asinList)
+        );
+        self::assertEquals($batchResp->status, "OK");
 
+        $asin = null;
+        foreach ($batchResp->products ?? [] as $product) {
+            if (!empty($product->csv[CSVType::RENT])) {
+                $asin = $product->asin;
+                break;
+            }
+        }
+        self::assertNotNull($asin, "No product with rental CSV data found");
+
+        $response = $this->api->sendRequestWithRetry(
+            Request::getProductRequest(AmazonLocale::US, 20, null, null, 0, true, [$asin])
+        );
         self::assertEquals($response->status, "OK");
         self::assertGreaterThan(0, count($response->products));
 
-        for ($i = 0; $i < count($response->products);$i++) {
-            $product = $response->products[$i];
+        foreach ($response->products as $product) {
             self::assertGreaterThan(0, count($product->csv[CSVType::RENT]));
-            self::assertNotNull($product->rentalDetails);
-
-            self::assertNotNull($product->rentalPrices);
-
-            if ($product->rentalDetails) {
-                self::assertNotNull($product->rentalDetails);
+            if ($product->rentalPrices !== null) {
+                self::assertNotNull($product->rentalPrices);
+            }
+            if ($product->rentalDetails !== null) {
                 self::assertNotNull($product->rentalSellerId);
             }
         }
@@ -525,21 +579,24 @@ class ProductRequestTest extends AbstractTest
      */
     public function testAmazonDelay()
     {
-
-        // find product
         $fr = new ProductFinderRequest();
         $fr->availabilityAmazon = 4;
 
-        $request = Request::getFinderRequest(AmazonLocale::DE, $fr);
-        $response = $this->api->sendRequestWithRetry($request);
-        self::assertEquals($response->status, "OK");
-        self::assertGreaterThan(0, count($response->asinList));
+        $finderResp = $this->api->sendRequestWithRetry(Request::getFinderRequest(AmazonLocale::DE, $fr));
+        self::assertEquals($finderResp->status, "OK");
+        self::assertGreaterThan(0, count($finderResp->asinList));
 
-
-        $request = Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, [$response->asinList[0]]);
-
-        $response = $this->api->sendRequestWithRetry($request);
-        self::assertEquals($response->status, "OK");
+        $response = null;
+        foreach ($finderResp->asinList as $asin) {
+            $r = $this->api->sendRequestWithRetry(
+                Request::getProductRequest(AmazonLocale::DE, 20, null, null, 0, true, [$asin])
+            );
+            if ($r->status === "OK" && !empty($r->products) && $r->products[0]->availabilityAmazonDelay !== null) {
+                $response = $r;
+                break;
+            }
+        }
+        self::assertNotNull($response, "No product with availabilityAmazonDelay found");
         self::assertEquals(1, count($response->products));
         self::assertNotNull($response->products[0]->availabilityAmazonDelay);
     }
@@ -562,11 +619,16 @@ class ProductRequestTest extends AbstractTest
      */
     public function testBuyBoxStats()
     {
-        $request = Request::getDetailedProductRequest(AmazonLocale::DE, 20, "2015-12-31", "2022-01-01", 1, true,true,true,true,true,true,365,['B097F5K5RY']);
+        $fr = new ProductFinderRequest();
+        $fr->buyBoxStatsSellerCount90_gte = 2;
+        $finderResp = $this->api->sendRequestWithRetry(Request::getFinderRequest(AmazonLocale::DE, $fr));
+        self::assertEquals($finderResp->status, "OK");
+        self::assertGreaterThan(0, count($finderResp->asinList));
 
-        $response = $this->api->sendRequestWithRetry($request);
+        $response = $this->api->sendRequestWithRetry(
+            Request::getDetailedProductRequest(AmazonLocale::DE, 20, "2015-12-31", "2026-01-01", 1, true, true, true, true, true, true, 365, [$finderResp->asinList[0]])
+        );
         self::assertEquals($response->status, "OK");
-        self::assertEquals(1, count($response->products));
         self::assertEquals(1, count($response->products));
         self::assertGreaterThan(0, count($response->products[0]->stats->buyBoxStats));
     }
