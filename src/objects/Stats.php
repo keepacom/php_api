@@ -363,6 +363,18 @@ class Stats
     public $buyBoxSavingBasis = null;
 
     /**
+     * The buy box new strikethrough price's reference type (either LIST_PRICE or WAS_PRICE) if it exists. null if unavailable.
+     * @var string|null
+     */
+    public $buyBoxSavingBasisType = null;
+
+    /**
+     * The buy box new price's stated percentage discount, if it exists. null if unavailable.
+     * @var int|null
+     */
+    public $buyBoxSavingPercentage = null;
+
+    /**
      * Only set when the offers parameter was used. Price of the used buy box, if existent. Otherwise "-1" or null
      * @var int|null
      */
@@ -458,6 +470,6 @@ class Stats
      * The count of sales rank drops (from high value to low value) within the last 365 days which are considered to indicate sales.
      * @var int|null
      */
-    public $salesRankDrops360 = -1;
+    public $salesRankDrops365 = -1;
 
 }

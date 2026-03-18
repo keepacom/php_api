@@ -72,4 +72,82 @@ final class Category
      * @var bool|null
      */
     public $isBrowseNode;
+
+    /**
+     * Average current buy box price of all products in this category.
+     * @var int|null
+     */
+    public $avgBuyBox = null;
+
+    /**
+     * Average 90 day buy box price.
+     * @var int|null
+     */
+    public $avgBuyBox90 = null;
+
+    /**
+     * Average 365 day buy box price.
+     * @var int|null
+     */
+    public $avgBuyBox365 = null;
+
+    /**
+     * Average 30 day buy box deviation (standard deviation).
+     * @var int|null
+     */
+    public $avgBuyBoxDeviation = null;
+
+    /**
+     * Average number of reviews.
+     * @var int|null
+     */
+    public $avgReviewCount = null;
+
+    /**
+     * Average rating, multiplied by 10 (e.g. 45 = 4.5 stars).
+     * @var int|null
+     */
+    public $avgRating = null;
+
+    /**
+     * Percentage of products fulfilled by Amazon (FBA).
+     * @var float|null
+     */
+    public $isFBAPercent = null;
+
+    /**
+     * Percentage of products sold directly by Amazon.
+     * @var float|null
+     */
+    public $soldByAmazonPercent = null;
+
+    /**
+     * Percentage of products that have an active coupon.
+     * @var float|null
+     */
+    public $hasCouponPercent = null;
+
+    /**
+     * Average number of new offers.
+     * @var float|null
+     */
+    public $avgOfferCountNew = null;
+
+    /**
+     * Average number of used offers.
+     * @var float|null
+     */
+    public $avgOfferCountUsed = null;
+
+    /**
+     * Number of distinct sellers with at least one active offer.
+     * @var int|null
+     */
+    public $sellerCount = null;
+
+    /**
+     * Number of distinct brands present in this category.
+     * @var int|null
+     */
+    public $brandCount = null;
 }

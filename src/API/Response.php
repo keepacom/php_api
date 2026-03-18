@@ -62,6 +62,12 @@ class Response
     public $tokensConsumed = 0;
 
     /**
+     * HTTP Status code of the response.
+     * @var int
+     */
+    public $statusCode = 0;
+
+    /**
      * Status of the request.
      * @var int
      */
@@ -120,6 +126,12 @@ class Response
      * @var \Keepa\objects\Tracking[]
      */
     public $trackings = null;
+
+    /**
+     * Results of notification requests.
+     * @var \Keepa\objects\Notification[]|null
+     */
+    public $notifications = null;
 
     /**
      * Contains information about any error that might have occurred.

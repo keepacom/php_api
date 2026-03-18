@@ -27,4 +27,38 @@ class CategorieLookupRequestTest extends AbstractTest
         self::assertNotNull($response->categoryParents);
         self::assertGreaterThan(0, count($response->categoryParents));
     }
+
+    public function testCategoryStats()
+    {
+        // Use a well-known category with products: "Computers & Accessories" on DE
+        $request = Request::getCategoryLookupRequest(AmazonLocale::DE, false, "528966011");
+
+        $response = $this->api->sendRequestWithRetry($request);
+
+        self::assertEquals($response->status, "OK");
+        self::assertNotNull($response->categories);
+        $category = reset($response->categories);
+        self::assertNotNull($category->avgBuyBox);
+        self::assertNotNull($category->avgBuyBox90);
+        self::assertNotNull($category->avgBuyBox365);
+        self::assertNotNull($category->avgReviewCount);
+        self::assertNotNull($category->avgRating);
+        self::assertNotNull($category->sellerCount);
+        self::assertNotNull($category->brandCount);
+    }
+
+    public function testCategoryPercentageFields()
+    {
+        $request = Request::getCategoryLookupRequest(AmazonLocale::DE, false, "528966011");
+
+        $response = $this->api->sendRequestWithRetry($request);
+
+        self::assertEquals($response->status, "OK");
+        self::assertNotNull($response->categories);
+        $category = reset($response->categories);
+        self::assertNotNull($category->isFBAPercent);
+        self::assertNotNull($category->soldByAmazonPercent);
+        self::assertNotNull($category->avgOfferCountNew);
+        self::assertNotNull($category->avgOfferCountUsed);
+    }
 }
