@@ -36,4 +36,9 @@ class PromotionObject
      * @var int|null
      */
     public $discountPercent = -1;
+
+    /**
+     * @var string|null
+     */
+    public $sellerId = null;
 }

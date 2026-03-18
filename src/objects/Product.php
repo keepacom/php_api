@@ -439,24 +439,6 @@ class Product
     public $launchpad = false;
 
     /**
-     * Rental details
-     * @var string|null
-     */
-    public $rentalDetails = false;
-
-    /**
-     * Rental details
-     * @var \Keepa\helper\RentalObject|null
-     */
-    public $rentalPrices = false;
-
-    /**
-     * Rental seller id
-     * @var string|null
-     */
-    public $rentalSellerId = null;
-
-    /**
      * Amazon offer shipping delay. Integer array with 2 entries, indicating min and max shipping delay in hours.
      * @var int[]|null
      */
@@ -500,6 +482,17 @@ class Product
      * @var bool
      */
     public $hasReviews = false;
+
+    /**
+     * Contains variation specific review and rating counts histories as well as a last update timestamp.
+     * null if not available.
+     * It is not possible to force an update to the reviews object data.
+     * For non-variation specific ratings and review data access the csv field.
+     * Accessible only if the rating parameter was used in the Product Request.
+     * The ratingCount history has not been updated since April 9th 2025 as that data point was removed by Amazon.
+     * @var \Keepa\helper\ReviewObject|null
+     */
+    public $reviews = null;
 
     /**
      * Optional field. Only set if the <i>stats</i> parameter was used in the Product Request. Contains statistic values.
