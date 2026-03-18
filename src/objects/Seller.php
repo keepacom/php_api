@@ -58,12 +58,6 @@ class Seller
     public $lastUpdate = null;
 
     /**
-     * Indicating whether or not our system identified that this seller attempts to scam users.
-     * @var bool|null
-     */
-    public $isScammer = null;
-
-    /**
      * Indicating whether or not the offer ships from China.
      * @var bool|null
      */

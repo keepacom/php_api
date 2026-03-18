@@ -275,7 +275,6 @@ class Request
      * @param $buybox bool If specified and true the product and statistics object will include all available buy box related data
      * @param $update int If the product's last refresh is older than <i>update</i>-hours force a refresh. Use this to speed up requests if up-to-date data is not required. Might cost an extra token if 0 (= live data). Default 1.
      * @param $history bool Whether or not to include the product's history data (csv field). If you do not evaluate the csv field set to false to speed up the request and reduce traffic.
-     * @param $rental bool If true the rental price will be collected when available. <b>Can only be used in conjunction with the offers parameter.  Not available for Amazon China.
      * @param $rating bool If true the product object will include our existing RATING and COUNT_REVIEWS history of the csv field, regardless if the offers parameter is used <b>Not available for Amazon China.
      * @param $fbafees bool If true fbaFees will be retrieved. <b>Can only be used in conjunction with the offers parameter. Not available for Amazon China, India and Brazil.
      * @param $onlyLiveOffers bool
@@ -284,7 +283,7 @@ class Request
      * @param array $params Array of additional request parameters
      * @return Request ready to send request.
      */
-    public static function getDetailedProductRequest($domainID, $offers, $statsStartDate, $statsEndDate, $buybox, $update, $history, $rental, $rating, $fbafees, $onlyLiveOffers, int $days, array $asins, $params = null)
+    public static function getDetailedProductRequest($domainID, $offers, $statsStartDate, $statsEndDate, $buybox, $update, $history, $placeholder, $rating, $fbafees, $onlyLiveOffers, int $days, array $asins, $params = null)
     {
         $r = new Request();
         $r->path = "product";
@@ -295,7 +294,6 @@ class Request
         $r->parameter["domain"] = $domainID;
         $r->parameter["buybox"] = $buybox ? "1" : "0";
         $r->parameter["update"] = $update;
-        $r->parameter["rental"] = $rental ? "1" : "0";
         $r->parameter["rating"] = $rating ? "1" : "0";
         $r->parameter["fbafees"] = $fbafees ? "1" : "0";
         $r->parameter["only-live-offers"] = $onlyLiveOffers ? "1" : "0";
