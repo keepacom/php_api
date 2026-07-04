@@ -29,12 +29,12 @@ class VideoObject
     public $creator = null;
 
     /**
-     * @var int|null
+     * @var string|null
      */
     public $name = null;
 
     /**
-     * @var int|null
+     * @var string|null
      */
     public $url = null;
 }
